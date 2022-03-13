@@ -1,0 +1,26 @@
+services:
+  client:
+    image: client-img
+    build:
+      context: ./Client
+      dockerfile: dev.dockerfile
+    ports:
+      - "80:4200"
+    volumes:
+      - type: bind
+        source: ./Client/src/
+        target: /client/src/
+
+  server:
+    image: server-img
+    build:
+      context: ./Server
+      dockerfile: dev.dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    volumes:
+      - type: bind
+        source: ./Server/src/
+        target: /server/src/
