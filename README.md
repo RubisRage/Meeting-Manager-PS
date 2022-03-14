@@ -16,6 +16,9 @@ how to install it
 - On Linux: 
   - Ubuntu: [Docker installation guide for ubuntu](https://docs.docker.com/engine/install/ubuntu)
   - Archlinux: `# pacman -S docker`, more information [Docker - ArchWiki](https://wiki.archlinux.org/title/docker)
+  
+  The docker command can only be run as root unless your user is on the docker group. To add yourself to the 
+  docker group use this command `# gpasswd -a <your_username> docker`
 
 #### Docker Compose
 
@@ -38,11 +41,12 @@ To manage versions of Node and npm is recommended to install nvm ( Node Version 
 After installing all needed development dependencies these are the steps required to start developing.
 
 1. `nvm install v16.14.0`
-2. `cd Client`
-3. `npm install`
-4. `cd ../Server`
-5. `npm install`
-6. `cd ..`
+2. `npm install -g @angular/cli`
+3. `cd Client`
+4. `npm install`
+5. `cd ../Server`
+6. `npm install`
+7. `cd ..`
 
 This commands will install all the node modules needed for the Angular app and the Node REST API
 
