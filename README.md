@@ -38,6 +38,8 @@ To manage versions of Node and npm is recommended to install nvm ( Node Version 
 
 ### Developing
 
+#### Installing node dependencies
+
 After installing all needed development dependencies these are the steps required to start developing.
 
 1. `nvm install v16.14.0`
@@ -50,9 +52,21 @@ After installing all needed development dependencies these are the steps require
 
 This commands will install all the node modules needed for the Angular app and the Node REST API
 
+#### Setting up the docker environment
+
 Now you can run `docker compose up` to set up all needed containers. This is the only command you need to use each session to start working.
 
 By doing so everything is set up so that you can edit the Angular application or the Node server and all changes
 will be updated to the corresponding running container immediately without using any command. 
 
-To shut down all containers all you have to do is press `Ctrl + C` on the terminal where you invoked `docker compose up`
+To shut down all containers all you have to do is press `Ctrl + C` on the terminal where you invoked `docker compose up` or use docker compose down from the root of the project.
+
+#### Accessing the database
+
+To be able to access the database you only need to follow three steps:
+
+1. First, change the values in the file named .env
+   - Change USER_ID's value to the output of `# id -u`
+   - Change GROUP_ID's value to the output of `# id -g`
+2. Second, use this command after **setting up the docker environment** `docker exec -it postgres psql -U admin`
+3. Introduce the password (1234) and you are good to go!

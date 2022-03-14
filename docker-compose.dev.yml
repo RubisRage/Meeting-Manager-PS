@@ -1,6 +1,7 @@
 services:
   client:
     image: client-img
+    container_name: client
     build:
       context: ./Client
       dockerfile: dev.dockerfile
@@ -13,14 +14,33 @@ services:
 
   server:
     image: server-img
+    container_name: server
     build:
       context: ./Server
       dockerfile: dev.dockerfile
     ports:
       - "8080:8080"
     environment:
-      - PORT=8080
+      PORT: 8080
     volumes:
       - type: bind
         source: ./Server/src/
         target: /server/src/
+
+
+  db:
+    container_name: postgres
+    user: ${USER_ID}:${GROUP_ID}
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+      PGDATA: /pg-data
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - type: bind
+        source: ./DB
+        target: /pg-data
