@@ -35,14 +35,10 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 1234
       PG_DATA: /pg-data
-    expose:
-      - 5432
-    ports:
-      - "5432:5432"
     volumes:
       - db-volume:/pg-data
       - type: bind
-        source: db-init-scripts
+        source: ./db-init-scripts
         target: /docker-entrypoint-initdb.d
 
 volumes:
