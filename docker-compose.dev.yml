@@ -30,17 +30,20 @@ services:
 
   db:
     container_name: postgres
-    user: ${USER_ID}:${GROUP_ID}
     image: postgres:latest
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 1234
-      PGDATA: /pg-data
+      PG_DATA: /pg-data
     expose:
       - 5432
     ports:
       - "5432:5432"
     volumes:
+      - db-volume:/pg-data
       - type: bind
-        source: ./DB
-        target: /pg-data
+        source: db-init-scripts
+        target: /docker-entrypoint-initdb.d
+
+volumes:
+  db-volume:
