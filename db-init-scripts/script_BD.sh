@@ -17,7 +17,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
 			img						bytea
 		);
 
-		CREATE TABLE comission(
+		CREATE TABLE commissions (
 			id						int PRIMARY KEY,
 			name					text NOT NULL,
 			inf						text

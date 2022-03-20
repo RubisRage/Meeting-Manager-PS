@@ -38,10 +38,10 @@ services:
     volumes:
       - db-volume:/pg-data
       - type: bind
-        source: db-init-scripts
+        source: ./db-init-scripts
         target: /docker-entrypoint-initdb.d
       - type: bind
-        source: db-images
+        source: ./db-images
         target: /db-images
 
 volumes:
