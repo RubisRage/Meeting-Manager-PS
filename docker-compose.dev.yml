@@ -4,7 +4,7 @@ services:
     container_name: client
     build:
       context: ./Client
-      dockerfile: dev.dockerfile
+      dockerfile: dev.dockerfiledo
     ports:
       - "80:4200"
     volumes:
@@ -40,6 +40,9 @@ services:
       - type: bind
         source: db-init-scripts
         target: /docker-entrypoint-initdb.d
+      - type: bind
+        source: db-images
+        target: /db-images
 
 volumes:
   db-volume:
