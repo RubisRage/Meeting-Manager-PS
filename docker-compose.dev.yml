@@ -4,7 +4,7 @@ services:
     container_name: client
     build:
       context: ./Client
-      dockerfile: dev.dockerfiledo
+      dockerfile: dev.dockerfile
     ports:
       - "80:4200"
     volumes:
