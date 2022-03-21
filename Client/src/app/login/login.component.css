@@ -1,0 +1,41 @@
+.background {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: lightblue;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  padding: 2em;
+  background-color: white;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form > h4 {
+  margin-top: 0;
+  margin-bottom: .5em;
+  font-size: 1.5em;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.buttonGroup {
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.buttonGroup > button {
+  width: 40%;
+}
+

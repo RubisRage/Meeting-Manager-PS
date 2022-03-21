@@ -1,8 +1,10 @@
+
 import express, {Request, Response} from 'express';
 import UserController from "./controllers/UserController";
 import OrganizationController from "./controllers/OrganizationController";
 import CommissionController from "./controllers/CommissionController";
 
+const cors = require("cors");
 
 class Server{
     private app: express.Application;
@@ -13,6 +15,7 @@ class Server{
 
     constructor(){
         this.app = express();
+        this.app.use(cors());
         this.PORT = process.env.PORT || 8080;
         this.userController = new UserController();
         this.organizationController = new OrganizationController();
