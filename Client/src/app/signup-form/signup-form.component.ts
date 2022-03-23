@@ -12,12 +12,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./signup-form.component.css']
 })
 export class TemplateFormComponent{
-
-  APIRoute = "localhost:8080/users/";
+ 
+  //Direccion a la que se redirigirá 
+  APIRoute = "localhost:8080/api/users/";
 
   register: User = {
     username:"",
-    fullname:"",
+    realName:"",
     password:""
   }
 
@@ -25,11 +26,6 @@ export class TemplateFormComponent{
   constructor( private http: HttpClient) {}
 
   submit(){
-    console.log('username = ' + this.register.username);
-    console.log('Fullname = ' + this.register.fullname);
-    console.log('Password = ' + this.register.password);
-    console.log(this.register);
-    return this.http.post(this.APIRoute + "", this.register);
-
+    return this.http.post(this.APIRoute, this.register);
   }
 }
