@@ -1,0 +1,25 @@
+<div class="background">
+  <form class="form" (ngSubmit)="submit()" #loginForm="ngForm">
+
+    <h4>Login</h4>
+
+    <div class="formGroup">
+      <label for="usernameInput">Username</label>
+      <input id="usernameInput" type="text" required [(ngModel)]="user.username" name="username">
+    </div>
+
+    <div class="formGroup">
+      <label for="passwdInput">Password</label>
+      <input id="passwdInput" type="password" [(ngModel)]="user.password" name="password"
+             required
+             pattern=".*">
+    </div>
+
+    <div class="formGroup buttonGroup">
+      <button [disabled]="!loginForm.valid" type="submit">Login</button>
+      <span>Or</span>
+      <button (click)="goToPage('/sign-up')">Sign Up</button>
+    </div>
+
+  </form>
+</div>

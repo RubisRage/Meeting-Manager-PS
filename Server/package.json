@@ -12,6 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^17.0.21",
@@ -21,9 +22,11 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.0"
   }
 }
