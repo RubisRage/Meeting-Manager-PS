@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'signup-form',
   templateUrl: './signup-form.component.html',
-  styleUrls: ['./signup-form.component.css']
+  styleUrls: ['../../styles.css']
 })
 export class TemplateFormComponent{
  
