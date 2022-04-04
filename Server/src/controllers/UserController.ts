@@ -1,6 +1,9 @@
 import express, { Router, Request, Response } from "express";
 import User from "../models/User";
 import appDataSource from "../utils/connect";
+import bcrypt from 'bcrypt';
+import generateToken from "../utils/jwt";
+import AuthMiddleware from "../middlewares/AuthMiddleware";
 
 class UserController{
     private router: Router;
@@ -29,18 +32,20 @@ class UserController{
     private async postUser(req: Request, res: Response){
         console.log(req.body)
 
-        const user_name = req.body.user_name;
-        const pwhash = req.body.pwhash;
-        const real_name = req.body.real_name;
+        const {username, password, realName} = req.body;
+
+        const saltRounds: number = 10;
+        const salt: string = bcrypt.genSaltSync(saltRounds);
+        const hashedPassword = bcrypt.hashSync(password, salt);
 
         await appDataSource.then(async () => (await appDataSource)
             .createQueryBuilder()
             .insert()
             .into(User)
             .values({
-                user_name: user_name,
-                pwhash: pwhash,
-                real_name: real_name 
+                user_name: username,
+                pwhash: hashedPassword,
+                real_name: realName 
             })
             .execute()
         );
@@ -48,11 +53,29 @@ class UserController{
         res.status(200).json({ message: 'Usuario creado'});
     }
 
+    public async loginUser(req: Request, res: Response){
+        const {username, password} = req.body;
+
+        const user = await appDataSource.then(async () => (await appDataSource)
+            .manager.findBy(User, {
+                user_name: username
+            })
+        );
+
+        if(user[0].user_name && (password === user[0].pwhash)){
+            res.status(201).json({
+                username: user[0].user_name,
+                realName: user[0].real_name,
+                token: generateToken(user[0].user_name)
+            });
+        }
+    }
+
     private async updateUser(req: Request, res: Response){
         await appDataSource.then(async () => (await appDataSource)
             .createQueryBuilder()
             .update(User)
-            .set({ user_name: "tttt"})
+            .set({ user_name: "nombre"})
             .where("user_name = :user_name", {user_name: req.params.username})
             .execute()
         );
@@ -77,8 +100,9 @@ class UserController{
             .get(this.getUsers)
             .post(this.postUser);
         this.router.route('/:username')
-            .put(this.updateUser)
-            .delete(this.deleteUser);
+            .put(AuthMiddleware.check, this.updateUser)
+            .delete(AuthMiddleware.check, this.deleteUser);
+        this.router.post("/login", this.loginUser);
     }
 }
 
