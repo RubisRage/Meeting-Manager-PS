@@ -5,7 +5,7 @@ export class User{
     @PrimaryColumn()
     user_name!: string;
 
-    @Column()
+    @Column() 
     pwhash!: string;
 
     @Column()
@@ -13,13 +13,6 @@ export class User{
 
     /*@Column({ type: "bytea"})
     img: string;*/
-
-    /*constructor(user_name: string, pwhash: string, real_name: string, img: any){
-        this.user_name = user_name;
-        this.pwhash = pwhash;
-        this.real_name = real_name;
-        this.img = img;
-    }*/
 }
 
 export default User
