@@ -9,7 +9,7 @@ import * as CryptoJS from "crypto-js";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../../styles.css']
+  styleUrls: ['../styles.css']
 })
 export class LoginComponent implements OnInit {
 

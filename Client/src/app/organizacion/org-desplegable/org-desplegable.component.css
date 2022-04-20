@@ -1,0 +1,94 @@
+.select-org select{
+    appearance: none;
+}
+.select-org select::-ms-expand{
+    display: none;
+}
+
+.select-org {
+    max-width: 250px;
+    width: 250px;
+    height: 100%;
+}
+
+.select-org select{
+    width: 100%;
+    cursor: pointer;
+    padding: 5px 10px;
+    outline: 0;
+    border: 0;
+    border-radius: 0;
+    background: #0000;
+    color: whitesmoke;
+    border: 3px solid #222;
+    transition: all 0.5s ease;
+}
+
+.select-org select:hover{
+    background-color: 22222295;
+}
+
+.content-select i{
+	position: absolute;
+	right: 20px;
+	top: calc(50% - 13px);
+	width: 16px;
+	height: 16px;
+	display: block;
+	border-left:4px solid #2AC176;
+	border-bottom:4px solid #2AC176;
+	transform: rotate(-45deg); /* Giramos el cuadrado */
+	transition: all 0.25s ease;
+}
+ 
+.content-select:hover i{
+	margin-top: 3px;
+}
+
+.select {
+    border: 1px solid #ccc;
+    width: 140px;
+    overflow: hidden;
+  }
+  
+  .select select {
+      padding: 5px 8px;
+      width: 130%;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+      background-image: none;
+      appearance: none;
+  }
+
+.select {
+    position: relative;
+    border: 1px solid #ccc;
+    width: 120px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+    
+  .select:before {
+      content: '';
+      position: absolute;
+      right: 5px;
+      top: 7px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 7px 5px 0 5px;
+      border-color: #000000 transparent transparent transparent;
+      z-index: 5;
+      pointer-events: none;
+  }
+    
+  .select select {
+      padding: 5px 8px;
+      width: 130%;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+      background-image: none;
+      appearance: none;
+  }

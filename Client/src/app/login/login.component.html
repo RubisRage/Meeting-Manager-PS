@@ -1,33 +1,36 @@
-<h1 class="title">Inicia Sesión</h1>
-<div class="cont">
-  <form class="form" (ngSubmit)="submit()" #loginForm="ngForm">
+<div>
+  <h1 class="title">Inicia Sesión</h1>
+  <div class="cont">
+    <form class="form" (ngSubmit)="submit()" #loginForm="ngForm">
 
-    <div class="cent">
-        <label for="usernameInput">Username</label><br/>
-        <input 
-            id="usernameInput" 
-            type="text" 
-            required [(ngModel)]="user.username" 
-            placeholder="GuilemTheGolem" 
-            name="username">
-    </div>
-    <div class="cent">
-        <label for="passwdInput">Password</label><br/>
-        <input 
-            id="passwdInput" 
-            type="password" 
-            [(ngModel)]="user.password" 
-            placeholder="password" 
-            name="password"
-            required
-            pattern=".*"/>
-    </div>
-    <div class="cent">
-      <div class="formGroup buttonGroup">
-        <button [disabled]="!loginForm.valid" type="submit">Login</button>
-        <br/><span class="space">Or</span><br/>
-        <button (click)="goToPage('/sign-up')">Sign Up</button>
+      <div class="cent">
+          <label for="usernameInput">Username</label><br/>
+          <input 
+              id="usernameInput" 
+              type="text" 
+              required [(ngModel)]="user.username" 
+              placeholder="GuilemTheGolem" 
+              name="username">
       </div>
-    </div>
-  </form>
+      <div class="cent">
+          <label for="passwdInput">Password</label><br/>
+          <input 
+              id="passwdInput" 
+              type="password" 
+              [(ngModel)]="user.password" 
+              placeholder="password" 
+              name="password"
+              required
+              pattern=".*"/>
+      </div>
+      <div class="cent">
+        <div class="formGroup buttonGroup">
+          <button [disabled]="!loginForm.valid" type="submit">Login</button>
+          <br/><span class="space">Or</span><br/>
+          <button (click)="goToPage('/signup')">Sign Up</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+<a [routerLink]="['/organizaciones']">Página de organizaciones</a>
