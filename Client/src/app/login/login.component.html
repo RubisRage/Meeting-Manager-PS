@@ -1,25 +1,36 @@
-<div class="background">
-  <form class="form" (ngSubmit)="submit()" #loginForm="ngForm">
+<div>
+  <div class="cont">
+    <h1 class="title">Inicia Sesión</h1>
+    <form class="form" (ngSubmit)="submit()" #loginForm="ngForm">
 
-    <h4>Login</h4>
+      <div class="cent">
+          <label for="usernameInput">Username</label><br/>
+          <input 
+              id="usernameInput" 
+              type="text" 
+              required [(ngModel)]="user.username" 
+              placeholder="GuilemTheGolem" 
+              name="username">
+      </div>
+      <div class="cent">
+          <label for="passwdInput">Password</label><br/>
+          <input 
+              id="passwdInput" 
+              type="password" 
+              [(ngModel)]="user.password" 
+              placeholder="password" 
+              name="password"
+              required
+              pattern=".*"/>
+      </div>
+      <div class="cent">
+        <div class="formGroup buttonGroup">
+          <button [disabled]="!loginForm.valid" type="submit">Login</button>
+          <br/><span class="space">Or</span><br/>
+          <button (click)="goToPage('/signup')">Sign Up</button>
+        </div>
+      </div>
+    </form>
+  </div>
 
-    <div class="formGroup">
-      <label for="usernameInput">Username</label>
-      <input id="usernameInput" type="text" required [(ngModel)]="loginInformation.username" name="username">
-    </div>
-
-    <div class="formGroup">
-      <label for="passwdInput">Password</label>
-      <input id="passwdInput" type="password" [(ngModel)]="loginInformation.password" name="password"
-             required
-             pattern=".*">
-    </div>
-
-    <div class="formGroup buttonGroup">
-      <button [disabled]="!loginForm.valid" type="submit">Login</button>
-      <span>Or</span>
-      <button (click)="goToPage('/sign-up')">Sign Up</button>
-    </div>
-
-  </form>
 </div>

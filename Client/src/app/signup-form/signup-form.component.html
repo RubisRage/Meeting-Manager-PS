@@ -1,78 +1,87 @@
-<h1 class="title">Registrarse</h1>
-<div class="cont">
-    <form (ngSubmit)="submit()" #forma="ngForm">
-        <!-- Username -->
-        <div class="cent">
-            <label for="username">Nombre de Usuario</label><br/>
-            <input type="text"
-                #username="ngModel"
-                [(ngModel)]="register.username"
-                placeholder="TitoJuan"
-                pattern="[ A-Za-z0-9_ ]+"
-                maxlength="25"
-                class="form-control"
-                name="username"
-                required
-                [ngClass]="{'is-valid': !username.invalid, 'is-invalid': username.invalid}"
-            />
-            <div class="invalid-feedback" *ngIf="username.invalid && (username.dirty || username.touched)">
-                <div *ngIf="username.errors?.['maxlength']">
-                    El nombre de usuario debe tener como máximo 25 caracteres.
-                </div>
-                <div *ngIf="username.errors?.['required']">
-                    El nombre de usuario es obligatorio.
-                </div> 
-        
-                <div *ngIf="username.errors?.['pattern']">
-                    El nombre de usuario solo puede tener letras, números y "_".
-                </div> 
-            </div>
-        </div>
+<div class="full">
     
-        <!-- Fullname -->
-        <div class="cent">
-            <label for="fullname">Nombre Completo</label><br/>
-            <input type="text"
-                #fullname="ngModel"
-                [(ngModel)]="register.realName"
-                placeholder="Juan Alberto García"
-                class="form-control"
-                name="fullname"
-                pattern="[A-Za-zÑñáéíóúáéíóúÁÉÍÓÚ\s ]+"
-                required
-                [ngClass]="{'is-valid': !fullname.invalid, 'is-invalid':fullname.invalid}"
-            />
-            <div class="invalid-feedback" *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)">
-                <div *ngIf="fullname.errors?.['required']">
-                    Es obligatorio que escribas tu nombre completo.
-                </div>
-                <div *ngIf="fullname.errors?.['pattern']">
-                    Solo se pueden escribir letras.
-                </div>
-            </div>
-        </div>
-            
-        <!-- Contraseña -->
-        <div class="cent">
-            <label for="password">Contraseña</label><br/>
-            <input type="password"
-                #password="ngModel"
-                [(ngModel)]="register.password"
-                placeholder="password"
-                class="form-control"
-                name="password"
-                required
-                [ngClass]="{'is-valid': !password.invalid, 'is-invalid':password.invalid}"
-            />
-            <div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
-                <div *ngIf="password.errors?.['required']">
-                    El nombre de usuario es obligatorio.
-                </div>
-            </div>
-        </div>
+    <div class="cont">
+        <h1 class="title">Registrarse</h1>
 
-        <div class="cent">
-            <button type="submit" [disabled]="forma.invalid">Registrarse</button>
-        </div>
-    </form>
+        <form (ngSubmit)="submit()" #forma="ngForm">
+            <!-- Username -->
+            <div class="cent">
+                <label for="username">Nombre de Usuario</label><br/>
+                <input type="text"
+                    #username="ngModel"
+                    [(ngModel)]="register.username"
+                    placeholder="TitoJuan"
+                    pattern="[ A-Za-z0-9_ ]+"
+                    maxlength="25"
+                    class="form-control"
+                    name="username"
+                    required
+                    [ngClass]="{'is-valid': !username.invalid, 'is-invalid': username.invalid}"
+                />
+                <div class="invalid-feedback" *ngIf="username.invalid && (username.dirty || username.touched)">
+                    <div *ngIf="username.errors?.['maxlength']">
+                        El nombre de usuario debe tener como máximo 25 caracteres.
+                    </div>
+                    <div *ngIf="username.errors?.['required']">
+                        El nombre de usuario es obligatorio.
+                    </div> 
+            
+                    <div *ngIf="username.errors?.['pattern']">
+                        El nombre de usuario solo puede tener letras, números y "_".
+                    </div> 
+                </div>
+            </div>
+        
+            <!-- Fullname -->
+            <div class="cent">
+                <label for="fullname">Nombre Completo</label><br/>
+                <input type="text"
+                    #fullname="ngModel"
+                    [(ngModel)]="register.realName"
+                    placeholder="Juan Alberto García"
+                    class="form-control"
+                    name="fullname"
+                    pattern="[A-Za-zÑñáéíóúáéíóúÁÉÍÓÚ\s ]+"
+                    required
+                    [ngClass]="{'is-valid': !fullname.invalid, 'is-invalid':fullname.invalid}"
+                />
+                <div class="invalid-feedback" *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)">
+                    <div *ngIf="fullname.errors?.['required']">
+                        Es obligatorio que escribas tu nombre completo.
+                    </div>
+                    <div *ngIf="fullname.errors?.['pattern']">
+                        Solo se pueden escribir letras.
+                    </div>
+                </div>
+            </div>
+                
+            <!-- Contraseña -->
+            <div class="cent">
+                <label for="password">Contraseña</label><br/>
+                <input type="password"
+                    #password="ngModel"
+                    [(ngModel)]="register.password"
+                    placeholder="password"
+                    class="form-control"
+                    name="password"
+                    required
+                    [ngClass]="{'is-valid': !password.invalid, 'is-invalid':password.invalid}"
+                />
+                <div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <div *ngIf="password.errors?.['required']">
+                        El nombre de usuario es obligatorio.
+                    </div>
+                </div>
+            </div>
+            <div class="cent pad-bot">
+                <div class="formGroup buttonGroup">
+                    <button type="submit" [disabled]="forma.invalid">Registrarse</button>
+                    <br/><span class="space">Or</span><br/>
+                    <button type="submit" (click)="goToPage('/login')">LogIn</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+<a [routerLink]="['/organizaciones']">Página de organizaciones</a>
+

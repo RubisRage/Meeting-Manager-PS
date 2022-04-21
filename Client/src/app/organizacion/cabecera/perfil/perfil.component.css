@@ -1,0 +1,33 @@
+a.profile-cont{
+    background-color: #22768C;
+    margin: 0;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    border: 3px solid #22768C;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+p.username{
+    color: whitesmoke;
+    margin-right: 5px;
+}
+
+img.profile-img{
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    margin-left: 5px;
+    border-radius: 100%;
+    border: whitesmoke 2px solid;
+}
+
+a.profile-cont:hover{
+    /*border-color: #1976d2;*/
+    border-color: whitesmoke;
+    background-color: #22768C95;
+}
