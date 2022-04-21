@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { AuthHelperService } from "../services/auth-helper.service";
-import {HttpHelperService} from "../http-helper.service";
+import {AuthHelperService} from "../services/auth-helper.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -16,8 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(public router: Router,
-              private auth: AuthHelperService,
-              private http: HttpHelperService) { }
+              private auth: AuthHelperService) { }
 
   ngOnInit(): void {
     if(this.auth.logged) {
@@ -26,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    this.auth.login( "https://virtserver.swaggerhub.com/RubisRage/Meeting-Manager/1.0.0/users/login",
+    this.auth.login( environment.backend,
       this.loginInformation)
       .subscribe({
         next: () => {
