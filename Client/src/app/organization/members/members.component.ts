@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MembersComponent implements OnInit {
 
-  members = ["NanoJJG", "Sonic", "Tails", "Knucles", 
+  members = ["Sonic", "Tails", "Knucles", 
       "Shadow", "Eggman", "Amy", "Luffy",
       "Jaime", "Antonio", "Romeo", "Julieta"]
 
