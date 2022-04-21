@@ -6,13 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from "@angular/forms";
-import { TemplateFormComponent } from './signup-form/signup-form.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import {AuthHelperService} from "./services/auth-helper.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TemplateFormComponent
+    SignupFormComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +21,9 @@ import { TemplateFormComponent } from './signup-form/signup-form.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

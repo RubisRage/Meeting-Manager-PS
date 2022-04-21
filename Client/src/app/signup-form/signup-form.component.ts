@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { User } from '../interface/User';
+import { User } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -11,9 +11,8 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.css']
 })
-export class TemplateFormComponent{
- 
-  //Direccion a la que se redirigirá 
+export class SignupFormComponent{
+
   APIRoute = "localhost:8080/api/users/";
 
   register: User = {

@@ -5,12 +5,12 @@
 
     <div class="formGroup">
       <label for="usernameInput">Username</label>
-      <input id="usernameInput" type="text" required [(ngModel)]="user.username" name="username">
+      <input id="usernameInput" type="text" required [(ngModel)]="loginInformation.username" name="username">
     </div>
 
     <div class="formGroup">
       <label for="passwdInput">Password</label>
-      <input id="passwdInput" type="password" [(ngModel)]="user.password" name="password"
+      <input id="passwdInput" type="password" [(ngModel)]="loginInformation.password" name="password"
              required
              pattern=".*">
     </div>
