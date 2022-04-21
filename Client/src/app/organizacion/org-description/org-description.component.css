@@ -1,5 +1,5 @@
 .green-bg{
-    width: 450px;
+    width: 350px;
     height: 100vh;
     background-color: #104F5B;
     margin: 0px;
@@ -19,13 +19,14 @@ p#description{
 }
 
 p#organization{
-    padding-top: 40px;
+    padding-top: 50px;
     font-size: x-large;
     font-weight: bold;
 }
 
 p#description{
-    padding: 30px;
+    text-align: justify;
+    padding: 25px;
     font-size: large;
     font-weight: normal;
 }
