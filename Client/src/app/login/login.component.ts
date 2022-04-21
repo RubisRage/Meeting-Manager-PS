@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       this.loginInformation)
       .subscribe({
         next: () => {
-          this.router.navigate(["/sign-up"]);
+          this.router.navigate(["/organization"]);
         },
         error: err => {
           console.log("error");
