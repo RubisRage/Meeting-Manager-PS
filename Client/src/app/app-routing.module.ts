@@ -5,11 +5,11 @@ import { MainOrganizacionComponent } from './organizacion/main-organizacion/main
 import { SignUpComponent } from './signup-form/signup-form.component';
 
 const routes: Routes = [
-  {path: "", component: LoginComponent},
+  {path: "", component: LoginComponent, pathMatch: 'full'},
   {path: "login", component: LoginComponent},
   {path: "signup", component:SignUpComponent},
-  {path: "organizaciones", component:MainOrganizacionComponent}
-];
+  {path: "organization", component:MainOrganizacionComponent}
+ ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
