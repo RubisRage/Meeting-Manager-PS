@@ -1,5 +1,5 @@
 a.profile-cont{
-    background-color: #222;
+    background-color: #22768C;
     margin: 0;
     padding: 5px 10px;
     display: flex;
@@ -7,7 +7,7 @@ a.profile-cont{
     justify-content: center;
     align-items: center;
     width: auto;
-    border: 3px solid #222;
+    border: 3px solid #22768C;
     cursor: pointer;
     transition: 0.5s;
 }
@@ -29,5 +29,5 @@ img.profile-img{
 a.profile-cont:hover{
     /*border-color: #1976d2;*/
     border-color: whitesmoke;
-    background-color: #22222295;
+    background-color: #22768C95;
 }

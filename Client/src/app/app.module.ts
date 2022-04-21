@@ -10,7 +10,7 @@ import { SignUpComponent } from './signup-form/signup-form.component';
 import { MainOrganizacionComponent } from './organizacion/main-organizacion/main-organizacion.component';
 import { CabeceraComponent } from './organizacion/cabecera/cabecera.component';
 import { PerfilComponent } from './organizacion/cabecera/perfil/perfil.component';
-import { OrgDesplegableComponent } from './organizacion/org-desplegable/org-desplegable.component';
+import { OrgDesplegableComponent } from './organizacion/cabecera/org-desplegable/org-desplegable.component';
 
 @NgModule({
   declarations: [

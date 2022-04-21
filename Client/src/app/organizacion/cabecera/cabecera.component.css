@@ -1,13 +1,12 @@
-
-
 div.head-back{
     display: flex;
-    background-color: #4d4b4b;
+    background-color: #104F5B;
     justify-content: space-between;
 }
 
 app-org-desplegable{
     display: flex;
+    height: 100%;
     justify-content: flex-start;
 }
 

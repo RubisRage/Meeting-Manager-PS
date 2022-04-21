@@ -1,6 +1,8 @@
 <div class="full">
-    <h1 class="title">Registrarse</h1>
+    
     <div class="cont">
+        <h1 class="title">Registrarse</h1>
+
         <form (ngSubmit)="submit()" #forma="ngForm">
             <!-- Username -->
             <div class="cent">
@@ -71,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cent">
+            <div class="cent pad-bot">
                 <div class="formGroup buttonGroup">
                     <button type="submit" [disabled]="forma.invalid">Registrarse</button>
                     <br/><span class="space">Or</span><br/>
