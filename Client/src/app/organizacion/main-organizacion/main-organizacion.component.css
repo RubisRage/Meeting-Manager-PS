@@ -12,3 +12,8 @@ div.body-back{
     display:flex;
     flex-direction: column-reverse;
 }
+
+.members{
+    position: fixed;
+    right: 0; 
+}

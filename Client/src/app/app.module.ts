@@ -13,6 +13,7 @@ import { OrgDesplegableComponent } from './organizacion/cabecera/org-desplegable
 import { FormsModule } from "@angular/forms";
 import {AuthHelperService} from "./services/auth-helper.service";
 import { OrgDescriptionComponent } from './organizacion/org-description/org-description.component';
+import { MembersComponent } from './organizacion/members/members.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { OrgDescriptionComponent } from './organizacion/org-description/org-desc
     PerfilComponent,
     OrgDesplegableComponent,
     OrgDescriptionComponent,
+    MembersComponent,
   ],
   imports: [
     BrowserModule,
