@@ -27,7 +27,7 @@
         <div class="formGroup buttonGroup">
           <button [disabled]="!loginForm.valid" type="submit">Login</button>
           <br/><span class="space">Or</span><br/>
-          <button (click)="goToPage('/signup')">Sign Up</button>
+          <button (click)="router.navigate(['/signup'])">Sign Up</button>
         </div>
       </div>
     </form>
