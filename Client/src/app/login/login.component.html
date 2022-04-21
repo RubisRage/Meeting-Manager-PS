@@ -5,20 +5,20 @@
 
       <div class="cent">
           <label for="usernameInput">Username</label><br/>
-          <input 
-              id="usernameInput" 
-              type="text" 
-              required [(ngModel)]="user.username" 
-              placeholder="GuilemTheGolem" 
+          <input
+              id="usernameInput"
+              type="text"
+              required [(ngModel)]="loginInformation.username"
+              placeholder="GuilemTheGolem"
               name="username">
       </div>
       <div class="cent">
           <label for="passwdInput">Password</label><br/>
-          <input 
-              id="passwdInput" 
-              type="password" 
-              [(ngModel)]="user.password" 
-              placeholder="password" 
+          <input
+              id="passwdInput"
+              type="password"
+              [(ngModel)]="loginInformation.password"
+              placeholder="password"
               name="password"
               required
               pattern=".*"/>
@@ -32,5 +32,5 @@
       </div>
     </form>
   </div>
+
 </div>
-<a [routerLink]="['/organizaciones']">Página de organizaciones</a>

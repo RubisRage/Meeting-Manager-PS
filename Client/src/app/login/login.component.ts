@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http"
-import {Observable} from "rxjs";
-import * as CryptoJS from "crypto-js";
-
-
+import {AuthHelperService} from "../services/auth-helper.service";
 
 @Component({
   selector: 'app-login',
@@ -13,29 +10,33 @@ import * as CryptoJS from "crypto-js";
 })
 export class LoginComponent implements OnInit {
 
-  user = {
+
+
+  loginInformation = {
     username: "",
     password: ""
   }
 
   constructor(private router: Router,
-              private http: HttpClient) { }
+              private auth: AuthHelperService) { }
 
   ngOnInit(): void {
   }
 
   submit(): void {
-    let preparedUser = {
-      username: this.user.username,
-      password: CryptoJS.SHA256(this.user.password).toString()
-    }
 
-    this.http.get('http://localhost:8080', {responseType: 'text'})
-      .subscribe(response => {
-        console.log(response)
+    this.auth.login( "https://virtserver.swaggerhub.com/RubisRage/Meeting-Manager/1.0.0/users/login",
+      this.loginInformation)
+      .subscribe({
+        next: () => {
+          this.router.navigate(["/organization"]);
+        },
+        error: err => {
+          console.log("error");
+        }
       });
 
-    console.log(preparedUser.password);
+
   }
 
   goToPage(route: string): void {
@@ -43,7 +44,6 @@ export class LoginComponent implements OnInit {
   }
 
 }
-
 
 
 

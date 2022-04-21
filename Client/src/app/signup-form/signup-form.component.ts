@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { User } from '../interface/User';
+import { User } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
   templateUrl: './signup-form.component.html',
   styleUrls: ['../styles.css']
 })
-
 export class SignUpComponent{
  
   //Direccion a la que se redirigirá 
