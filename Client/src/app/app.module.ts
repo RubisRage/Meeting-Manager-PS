@@ -13,7 +13,6 @@ import { MembersComponent } from './organization/members/members.component';
 import { HeaderComponent } from './organization/header/header.component';
 import { MainOrganizationComponent } from './organization/main-organization/main-organization.component';
 import { ProfileComponent } from './organization/header/profile/profile.component';
-import { OrgDropdownComponent } from './organization/header/org-dropdown/org-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { OrgDropdownComponent } from './organization/header/org-dropdown/org-dro
     HeaderComponent,
     MainOrganizationComponent,
     ProfileComponent,
-    OrgDropdownComponent,
   ],
   imports: [
     BrowserModule,
