@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TokenResponse} from "../types/token-response";
 import {Observable} from "rxjs";
@@ -13,7 +13,7 @@ export class AuthHelperService {
   constructor(private http: HttpClient) {}
 
   public login(url: string, loginInformation: {username: string, password: string}): Observable<void> {
-    let result = new Observable<void>(subscriber => {
+    return new Observable<void>(subscriber => {
       this.http.post<TokenResponse>(url, loginInformation).subscribe({
         next: tokenResponse => {
           this._token = tokenResponse.token;
@@ -24,8 +24,13 @@ export class AuthHelperService {
         }
       });
     });
+  }
 
-    return result;
+  public logout(): boolean {
+    if(!this.logged) return false;
+
+    this._token = null;
+    return true;
   }
 
 
