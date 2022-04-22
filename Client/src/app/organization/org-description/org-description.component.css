@@ -3,7 +3,7 @@
     height: 100vh;
     background-color: #104F5B;
     margin: 0px;
-    display: flex;
+    transition: all 0.5s ease;
 }
 
 .content{
@@ -15,6 +15,7 @@
 p#organization, 
 p#description{
     color: whitesmoke;
+    transition: all 0.5s ease;
     margin: 0;
 }
 
@@ -29,4 +30,24 @@ p#description{
     padding: 25px;
     font-size: large;
     font-weight: normal;
+}
+
+@media screen and (max-width: 900px) {
+    .green-bg{
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .green-bg{
+        width: 200px;
+    }
+    p#organization{
+        font-size: large;
+        padding-top: 25px;
+    }
+    
+    p#description{
+        font-size: medium;
+    }
 }
