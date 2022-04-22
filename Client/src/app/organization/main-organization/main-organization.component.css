@@ -1,0 +1,27 @@
+div.body-back{
+    background-color: whitesmoke;
+    width: 100vw;
+    height: 100vh;
+}
+
+.desc{
+    position: fixed;
+    left: 0;
+}
+
+.members{
+    position: fixed;
+    right: 0; 
+}
+
+.bg-image{
+    width: 100%;
+    text-align: center;
+    position:absolute;
+    bottom: 0;
+}
+
+img{
+    width: 1080px;
+    height: 601px;
+}

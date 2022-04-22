@@ -4,13 +4,13 @@ div.head-back{
     justify-content: space-between;
 }
 
-app-org-desplegable{
+org-dropdown{
     display: flex;
     height: 100%;
     justify-content: flex-start;
 }
 
-perfil{
+profile{
     display: flex;
     justify-content: flex-end;
     height: fit-content;
