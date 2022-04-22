@@ -12,6 +12,8 @@ import { PerfilComponent } from './organizacion/cabecera/perfil/perfil.component
 import { OrgDesplegableComponent } from './organizacion/cabecera/org-desplegable/org-desplegable.component';
 import { FormsModule } from "@angular/forms";
 import {AuthHelperService} from "./services/auth-helper.service";
+import { CreateOrganizationComponent } from './create-organization/create-organization.component';
+import { CreateOrganizationDialogComponent } from './create-organization-dialog/create-organization-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {AuthHelperService} from "./services/auth-helper.service";
     MainOrganizacionComponent,
     CabeceraComponent,
     PerfilComponent,
-    OrgDesplegableComponent
+    OrgDesplegableComponent,
+    CreateOrganizationComponent,
+    CreateOrganizationDialogComponent
   ],
   imports: [
     BrowserModule,
