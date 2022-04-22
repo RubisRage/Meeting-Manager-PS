@@ -17,4 +17,19 @@ signup-form{
     align-items: center;
     background-color: #4d4b4b;
     padding-top: 10%;
+
+}
+
+.vertical-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.horizontal-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }

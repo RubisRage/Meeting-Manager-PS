@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './signup-form/signup-form.component';
 import { FormsModule } from "@angular/forms";
 import {AuthHelperService} from "./services/auth-helper.service";
+import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import { OrgDescriptionComponent } from './organization/org-description/org-description.component';
 import { MembersComponent } from './organization/members/members.component';
 import { HeaderComponent } from './organization/header/header.component';
@@ -19,6 +20,7 @@ import { ProfileComponent } from './organization/header/profile/profile.componen
     AppComponent,
     LoginComponent,
     SignUpComponent,
+    EditProfileComponent,
     OrgDescriptionComponent,
     MembersComponent,
     HeaderComponent,

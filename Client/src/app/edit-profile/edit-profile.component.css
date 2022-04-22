@@ -1,0 +1,30 @@
+div {
+  border-radius: 2em;
+}
+
+input {
+  border-radius: 2em;
+  border: 0;
+}
+
+.main-content {
+  background-color: #C4C4C4;
+  margin: 5em;
+  padding: 5em;
+}
+
+.img-container {
+   background-color: #104F5B;
+   padding: 2em;
+}
+
+.horizontal-flex > * {
+  margin: .5em;
+}
+
+.warning-button {
+  background-color: #900020;
+  color: white;
+  margin-left: auto !important;
+  margin-right: 3em;
+}
