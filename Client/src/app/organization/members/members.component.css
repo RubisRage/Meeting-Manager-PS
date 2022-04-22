@@ -2,6 +2,7 @@
     width: 175px;
     height: 100vh;
     transition: all 0.5s ease;
+    overflow-y: auto;
 }
 
 .head{
@@ -19,7 +20,6 @@ h2.title{
 
 div.bg-members{
     background-color: #FCE5BA;
-    height: 100%;
 }
 
 p.padding{
@@ -48,7 +48,8 @@ p.padding:hover{
 
 @media screen and (max-width: 500px) {
     .content{
-        width: 100px;
+        width: 100vw;
+        height: 45vh;
     }
     h2.title{
         font-size: medium;

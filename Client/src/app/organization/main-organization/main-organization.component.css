@@ -4,6 +4,10 @@ div.body-back{
     height: 100vh;
 }
 
+.header{
+    max-height: 50px;
+}
+
 .desc{
     position: fixed;
     left: 0;
@@ -24,4 +28,31 @@ div.body-back{
 img{
     width: 1080px;
     height: 601px;
+}
+
+@media screen and (max-width: 500px) {
+    div.flex{
+        display: flex;
+        flex-direction:  column;
+    }
+    .bg-image{
+        display: none;
+    }
+    .members, .desc{
+        position: inherit;
+    }
+}
+
+@media screen and (max-width: 900px){
+    img{
+        width: 810px;
+        height: 450px;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    img{
+        width: 540px;
+        height: 300px;
+    }
 }

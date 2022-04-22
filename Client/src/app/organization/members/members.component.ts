@@ -9,7 +9,9 @@ export class MembersComponent implements OnInit {
 
   members = ["Sonic", "Tails", "Knucles", 
       "Shadow", "Eggman", "Amy", "Luffy",
-      "Jaime", "Antonio", "Romeo", "Julieta"]
+      "Jaime", "Antonio", "Romeo", "Julieta",
+      "Ale", "Alejo", "Jose", "Fran", "Rubén",
+      "NanoJJG"]
 
   constructor() { }
 
