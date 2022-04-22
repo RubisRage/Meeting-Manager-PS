@@ -1,0 +1,38 @@
+.content{
+    width: 175px;
+    height: 100vh;
+}
+
+.head{
+    background-color: #53A4BD;
+    padding: 5px;
+    color: whitesmoke;
+}
+
+.title{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+div.bg-members{
+    background-color: #FCE5BA;
+    height: 100%;
+}
+
+.padding{
+    margin: 0;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+p{
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+}
+
+p.padding:hover{
+    font-size: x-large;
+    background-color: #fff5;
+    border-radius: 30px;
+}

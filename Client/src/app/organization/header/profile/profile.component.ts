@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  selector: 'user-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class PerfilComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   username = "NanoJJG";
   profileImg = '../../../assets/pictures/profile.jpeg';
