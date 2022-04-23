@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './signup-form/signup-form.component';
 import { FormsModule } from "@angular/forms";
 import {AuthHelperService} from "./services/auth-helper.service";
-import { CreateOrganizationDialogComponent } from './create-organization-dialog/create-organization-dialog.component';
+import { CreateOrganizationComponent } from './create-organization/create-organization.component';
 import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import { OrgDescriptionComponent } from './organization/org-description/org-description.component';
 import { MembersComponent } from './organization/members/members.component';
@@ -25,7 +25,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     LoginComponent,
     SignUpComponent,
     MainOrganizationComponent,
-    CreateOrganizationDialogComponent,
+    CreateOrganizationComponent,
     EditProfileComponent,
     OrgDescriptionComponent,
     MembersComponent,

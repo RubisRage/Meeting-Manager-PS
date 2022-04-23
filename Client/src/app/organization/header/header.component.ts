@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CreateOrganizationDialogComponent} from "../../create-organization-dialog/create-organization-dialog.component";
+import {CreateOrganizationComponent} from "../../create-organization/create-organization.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openCreateOrganizationDialog() {
-    this.dialog.open(CreateOrganizationDialogComponent, {
+    this.dialog.open(CreateOrganizationComponent, {
       height: '80vh',
       width: '80vw'
     });
