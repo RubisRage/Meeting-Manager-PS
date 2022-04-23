@@ -1,0 +1,21 @@
+<div class="create-organization-grid">
+  <form id="create-organization-form" style="display: none"></form>
+
+  <div class="name-element form-element">
+    <label for="organization-name">Nombre de tu organización</label>
+    <input id="organization-name">
+  </div>
+
+  <div class="description-element form-element">
+    <label for="organization-desc">Descripción de tu organización</label>
+    <textarea id="organization-desc"></textarea>
+  </div>
+
+  <button class="create-organization-button">Crear organización</button>
+
+  <div class="image-element">
+    <img alt="Proposed organization image" [src]="imgURL">
+    <button>Cambiar imagen</button>
+    <input type="file" style="display: none">
+  </div>
+</div>
