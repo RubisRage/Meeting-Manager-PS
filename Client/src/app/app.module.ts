@@ -11,9 +11,7 @@ import {AuthHelperService} from "./services/auth-helper.service";
 import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import { OrgDescriptionComponent } from './organization/org-description/org-description.component';
 import { MembersComponent } from './organization/members/members.component';
-import { HeaderComponent } from './organization/header/header.component';
 import { MainOrganizationComponent } from './organization/main-organization/main-organization.component';
-import { ProfileComponent } from './organization/header/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +21,7 @@ import { ProfileComponent } from './organization/header/profile/profile.componen
     EditProfileComponent,
     OrgDescriptionComponent,
     MembersComponent,
-    HeaderComponent,
     MainOrganizationComponent,
-    ProfileComponent,
   ],
   imports: [
     BrowserModule,
