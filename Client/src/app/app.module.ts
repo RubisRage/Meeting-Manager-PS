@@ -12,6 +12,8 @@ import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import { OrgDescriptionComponent } from './organization/org-description/org-description.component';
 import { MembersComponent } from './organization/members/members.component';
 import { MainOrganizationComponent } from './organization/main-organization/main-organization.component';
+import { HeaderDisplayComponent } from './organization/header-display/header-display.component';
+import { OrganizationDisplayComponent } from './organization/header-display/organization-display/organization-display.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { MainOrganizationComponent } from './organization/main-organization/main
     OrgDescriptionComponent,
     MembersComponent,
     MainOrganizationComponent,
+    HeaderDisplayComponent,
+    OrganizationDisplayComponent,
   ],
   imports: [
     BrowserModule,

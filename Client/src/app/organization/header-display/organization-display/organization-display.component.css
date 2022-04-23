@@ -1,0 +1,13 @@
+.organization-display{
+    background-color: #CFD8DC;
+    position:absolute;
+}
+
+.vertical-flex{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.vertical-flex > button{
+    margin: 5px;
+}
