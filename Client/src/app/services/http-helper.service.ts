@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AuthHelperService} from "./services/auth-helper.service";
+import {AuthHelperService} from "./auth-helper.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
