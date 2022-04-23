@@ -15,6 +15,9 @@ import { MembersComponent } from './organization/members/members.component';
 import { HeaderComponent } from './organization/header/header.component';
 import { MainOrganizationComponent } from './organization/main-organization/main-organization.component';
 import { ProfileComponent } from './organization/header/profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { ProfileComponent } from './organization/header/profile/profile.componen
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     AuthHelperService
