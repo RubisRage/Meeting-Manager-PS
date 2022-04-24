@@ -12,7 +12,6 @@ const routes: Routes = [
   {path: "signup", component:SignUpComponent},
   {path: "edit-profile", component: EditProfileComponent},
   {path: "organization", component:MainOrganizationComponent},
-  {path: "create-organization", component:CreateOrganizationComponent}
  ];
 
 @NgModule({
