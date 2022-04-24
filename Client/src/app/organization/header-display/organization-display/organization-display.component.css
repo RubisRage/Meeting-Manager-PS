@@ -5,8 +5,10 @@
 
 .select-one{
     background-color: #22768C;
+    border-style: solid;
+    border-color: #22768C;
     color: white;
-    height: 100px;
+    height: 93px;
     width: 200px;
     line-height: 100px;
     text-align: center;
@@ -31,8 +33,9 @@
 }
 
 .select-organization{
-    display: none;
     background-color: #CFD8DC;
     position: absolute;
     width: 200px;
+    border-style: solid;
+    border-color: #CFD8DC;
 }

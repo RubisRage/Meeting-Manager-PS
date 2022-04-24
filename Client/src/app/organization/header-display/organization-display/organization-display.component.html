@@ -1,13 +1,10 @@
 
 <div class="organization-display" (mouseenter)="displayOrganization()" (mouseleave)="closeOrganization()">
     <p class="select-one">Selecciona tu Organización</p>
-    <div class="select-organization" id="display" (mouseleave)="closeOrganization()">
-        <div class="vertical-flex">
-            <button>Organización 1</button>
-            <button>Organización 2</button>
-            <button>Organización 3</button>
-            <button>Organización 4</button>
-            <img src="../../../../assets/pictures/MAS.png" alt="Añadir Organización">
+    <div class="select-organization" (mouseleave)="closeOrganization()" *ngIf="show">
+        <div class="vertical-flex" *ngIf="show">
+            <a *ngFor="let o of organizations">{{o.name}}</a>
+            <img src="../../../../assets/pictures/MAS.png" alt="Añadir Orga0nización">
         </div>
     </div>
 </div>

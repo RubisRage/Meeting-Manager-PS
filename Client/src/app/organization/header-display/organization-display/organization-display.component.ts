@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { AuthHelperService } from "../../../services/auth-helper.service";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-organization-display',
@@ -7,20 +10,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizationDisplayComponent implements OnInit {
 
-  constructor() { 
+  username: string;
+  organizations!: {id:number, name:string}[];
+  show: boolean;
+
+  constructor(private auth: AuthHelperService) { 
+    this.username = "";
+    this.show = false;
   }
 
   ngOnInit(): void {
+    this.auth.getOrganizations(environment.backend + "/users/" + this.username + "/organizations")
+      .subscribe(
+        (data) => {
+          this.organizations = data;
+          console.log(data);
+        }
+      );
   }
 
   displayOrganization(){
-    var element = document.getElementById('display')!;
-    element.setAttribute("style","display: block;");
+    this.show = true;
+    console.log(this.show);
   }
 
   closeOrganization(){
-    var element = document.getElementById('display')!;
-    element.setAttribute("style","display: none;");
+    this.show = false;
+    console.log(this.show);
+  }
+
+  errorm(){
+    console.log("error")
+    return "error";
   }
 
 }

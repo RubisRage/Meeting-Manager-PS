@@ -26,6 +26,10 @@ export class AuthHelperService {
     });
   }
 
+  public getOrganizations(url: string): Observable<{id:number, name:string}[]> {
+    return this.http.get<{id:number, name:string}[]>(url);
+  }
+
   public logout(): boolean {
     if(!this.logged) return false;
 
