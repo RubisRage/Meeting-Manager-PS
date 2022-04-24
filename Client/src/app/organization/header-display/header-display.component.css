@@ -1,0 +1,10 @@
+.header-display{
+    background-color: #104F5B;
+    height: 100px;
+}
+
+ul, ol {
+    margin: 0%;
+    padding: 0%;
+    list-style: none;
+}

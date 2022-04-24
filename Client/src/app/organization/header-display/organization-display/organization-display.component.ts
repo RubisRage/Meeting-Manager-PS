@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizationDisplayComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit(): void {
+  }
+
+  displayOrganization(){
+    var element = document.getElementById('display')!;
+    element.setAttribute("style","display: block;");
+  }
+
+  closeOrganization(){
+    var element = document.getElementById('display')!;
+    element.setAttribute("style","display: none;");
   }
 
 }

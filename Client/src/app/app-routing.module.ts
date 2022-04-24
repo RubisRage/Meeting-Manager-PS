@@ -4,7 +4,7 @@ import {LoginComponent} from "./login/login.component";
 import { MainOrganizationComponent } from './organization/main-organization/main-organization.component';
 import { SignUpComponent } from './signup-form/signup-form.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component'
-import { OrganizationDisplayComponent } from './organization/header-display/organization-display/organization-display.component';
+import { HeaderDisplayComponent } from './organization/header-display/header-display.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent, pathMatch: 'full'},
@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: "signup", component:SignUpComponent},
   {path: "edit-profile", component: EditProfileComponent},
   {path: "organization", component:MainOrganizationComponent},
-  {path: "organization-display", component:OrganizationDisplayComponent}
+  {path: "header-display", component:HeaderDisplayComponent}
  ];
 
 @NgModule({

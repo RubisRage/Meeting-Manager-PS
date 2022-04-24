@@ -1,6 +1,19 @@
-.organization-display{
-    background-color: #CFD8DC;
-    position:absolute;
+.select-one{
+    background-color: #22768C;
+    color: white;
+    height: 100px;
+    width: 200px;
+    line-height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0%;
+    padding: 0%;
+}
+
+.select-one:hover{
+    padding: 0px;
+    border-style: solid;
+    border-color: white;
 }
 
 .vertical-flex{
@@ -10,4 +23,11 @@
 
 .vertical-flex > button{
     margin: 5px;
+}
+
+.select-organization{
+    display: none;
+    background-color: #CFD8DC;
+    position: absolute;
+    width: 200px;
 }

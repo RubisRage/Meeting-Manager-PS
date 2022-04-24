@@ -1,7 +1,11 @@
-<div class="vertical-flex organization-display">
-    <button>Organización 1</button>
-    <button>Organización 2</button>
-    <button>Organización 3</button>
-    <button>Organización 4</button>
-    <img src="../../../../assets/pictures/MAS.png" alt="Añadir Organización">
+<p class="select-one" (mouseenter)="displayOrganization()">Selecciona tu Organización</p>
+
+<div class="select-organization" id="display" (mouseleave)="closeOrganization()">
+    <div class="vertical-flex">
+        <button>Organización 1</button>
+        <button>Organización 2</button>
+        <button>Organización 3</button>
+        <button>Organización 4</button>
+        <img src="../../../../assets/pictures/MAS.png" alt="Añadir Organización">
+    </div>
 </div>
