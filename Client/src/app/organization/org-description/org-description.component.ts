@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthHelperService } from 'src/app/services/auth-helper.service';
+import { organizationInfo } from 'src/app/types/organizationInfo';
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'org-description',
@@ -7,12 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrgDescriptionComponent implements OnInit {
 
-  organization = "Delegación EII"
-  description = "Organización de la delegación de estudiantes de informática. Luchamos por el progreso, la evolución, el avance, la mejoría, el crecimiento, el desarrollo y la autonomía del alumnado frente a la facultad, por que somos fuertes he independientes."
+  id = 2;
+  organization!:organizationInfo;
 
-  constructor() { }
+  constructor(private auth:AuthHelperService) { }
 
   ngOnInit(): void {
+    this.auth.getOrganizationInfoById(environment.backend + "/organizations/" + this.id)
+      .subscribe((data => {
+        this.organization = data;
+      }));
   }
 
 }
