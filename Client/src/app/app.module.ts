@@ -14,6 +14,7 @@ import { MembersComponent } from './organization/members/members.component';
 import { MainOrganizationComponent } from './organization/main-organization/main-organization.component';
 import { HeaderDisplayComponent } from './organization/header-display/header-display.component';
 import { OrganizationDisplayComponent } from './organization/header-display/organization-display/organization-display.component';
+import { ProfileDisplayComponent } from './organization/header-display/profile-display/profile-display.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { OrganizationDisplayComponent } from './organization/header-display/orga
     MainOrganizationComponent,
     HeaderDisplayComponent,
     OrganizationDisplayComponent,
+    ProfileDisplayComponent,
   ],
   imports: [
     BrowserModule,
