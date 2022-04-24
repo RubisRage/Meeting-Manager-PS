@@ -19,6 +19,7 @@ textarea {
     'xxx xxx xxx xxx xxx xxx btn btn img img img img';
 
   --primary-color: #104F5B;
+  --disabled-color: #7cd7e9;/* #beebf4; */
 }
 
 .form-element {
@@ -34,6 +35,10 @@ textarea {
 
 .name-element {
   grid-area: nam;
+}
+
+.name-element > input {
+  margin-bottom: .5rem;
 }
 
 .description-element {
@@ -75,4 +80,8 @@ textarea {
   color: white;
   border-radius: .5rem;
   border: 0;
+}
+
+.create-organization-button:disabled {
+  background-color: var(--disabled-color);
 }
