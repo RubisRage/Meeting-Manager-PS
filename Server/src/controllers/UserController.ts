@@ -43,9 +43,9 @@ class UserController{
             .insert()
             .into(User)
             .values({
-                user_name: username,
+                username: username,
                 pwhash: hashedPassword,
-                real_name: realName 
+                fullname: realName
             })
             .execute()
         );
@@ -58,15 +58,15 @@ class UserController{
 
         const user = await appDataSource.then(async () => (await appDataSource)
             .manager.findBy(User, {
-                user_name: username
+                username: username
             })
         );
 
-        if(user[0].user_name && (password === user[0].pwhash)){
+        if(user[0].username && (password === user[0].pwhash)){
             res.status(201).json({
-                username: user[0].user_name,
-                realName: user[0].real_name,
-                token: generateToken(user[0].user_name)
+                username: user[0].username,
+                realName: user[0].fullname,
+                token: generateToken(user[0].username)
             });
         }
     }
@@ -75,8 +75,8 @@ class UserController{
         await appDataSource.then(async () => (await appDataSource)
             .createQueryBuilder()
             .update(User)
-            .set({ user_name: "nombre"})
-            .where("user_name = :user_name", {user_name: req.params.username})
+            .set({ username: "nombre"})
+            .where("username = :username", {username: req.params.username})
             .execute()
         );
         
@@ -88,7 +88,7 @@ class UserController{
             .createQueryBuilder()
             .delete()
             .from(User)
-            .where("user_name = :user_name", {user_name: req.params.username})
+            .where("username = :username", {username: req.params.username})
             .execute()
         );
 

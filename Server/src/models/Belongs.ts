@@ -1,0 +1,31 @@
+import {Entity, PrimaryColumn, Column, ManyToMany, JoinTable, ManyToOne, JoinColumn} from "typeorm";
+import Organization from "./Organization";
+import User from "./User";
+
+@Entity({ name: "belongs" })
+export class Belongs{
+    @PrimaryColumn()
+    username!: string
+
+    @PrimaryColumn()
+    id!: string
+
+    @Column({
+        nullable: false
+    })
+    isAdmin!: boolean
+
+    @ManyToOne(() => User, (user) => user.organizations, {
+        createForeignKeyConstraints: true
+    })
+    @JoinColumn({name: 'username'})
+    user!: User
+
+    @ManyToOne(() => Organization, (organization) => organization.users, {
+        createForeignKeyConstraints: true
+    })
+    @JoinColumn({name: 'id'})
+    organization!: Organization
+}
+
+export default Belongs
