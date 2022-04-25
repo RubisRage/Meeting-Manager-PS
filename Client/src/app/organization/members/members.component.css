@@ -1,6 +1,8 @@
 .content{
     width: 175px;
     height: 100vh;
+    transition: all 0.5s ease;
+    overflow-y: auto;
 }
 
 .head{
@@ -9,23 +11,22 @@
     color: whitesmoke;
 }
 
-.title{
+h2.title{
     font-size: x-large;
     font-weight: bold;
+    transition: all 0.5s ease;
+    text-align: center;
 }
 
 div.bg-members{
     background-color: #FCE5BA;
-    height: 100%;
+    height: 85vh;
 }
 
-.padding{
+p.padding{
     margin: 0;
     padding: 10px 0;
     margin-bottom: 10px;
-}
-
-p{
     text-align: center;
     font-size: large;
     transition: all 0.5s ease;
@@ -35,4 +36,29 @@ p.padding:hover{
     font-size: x-large;
     background-color: #fff5;
     border-radius: 30px;
+}
+
+@media screen and (max-width: 900px) {
+    .content{
+        width: 150px;
+    }
+    p.padding{
+        padding: 5px 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .content{
+        width: 100vw;
+        height: 45vh;
+    }
+    h2.title{
+        font-size: medium;
+    }
+    p.padding{
+        font-size: medium;
+    }
+    p.padding:hover{
+        font-size: large;
+    }
 }
