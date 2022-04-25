@@ -1,0 +1,20 @@
+.header-display{
+    background: #104F5B;
+    height: 87px;
+    padding: 0%;
+    margin: 0%;
+}
+
+.header-display > ul{
+    display: flex;
+    list-style: none;
+    padding: 0%;
+    margin: 0%;
+}
+.header-display > li {
+    margin: 0 10px;
+}
+.push-right {
+    margin-left: auto;
+}
+

@@ -1,0 +1,52 @@
+.organization-display{
+    height: 100px;
+    width: 200px;
+}
+
+.select-one{
+    background: #22768C;
+    color: white;
+    border: 3px solid #22768C;
+    cursor: pointer;
+    transition: 0.5s;
+    height: 81px;
+    width: 245px;
+    line-height: 80px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0%;
+    padding: 0%;
+}
+
+.select-one:hover{
+    padding: 0px;
+
+    border-color: whitesmoke;
+    background-color: #22768C95;
+}
+
+.vertical-flex{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.vertical-flex > a{
+    margin: 5px;
+    background-color: #C4C4C4;
+    width: 197.59px;
+    height: 47px;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+
+}
+
+.select-organization{
+    background-color: #CFD8DC;
+    position: absolute;
+    width: 245px;
+    border-style: solid;
+    border-color: #CFD8DC;
+    z-index: 2;
+}

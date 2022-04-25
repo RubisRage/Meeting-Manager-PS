@@ -12,9 +12,10 @@ import { CreateOrganizationComponent } from './create-organization/create-organi
 import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import { OrgDescriptionComponent } from './organization/org-description/org-description.component';
 import { MembersComponent } from './organization/members/members.component';
-import { HeaderComponent } from './organization/header/header.component';
 import { MainOrganizationComponent } from './organization/main-organization/main-organization.component';
-import { ProfileComponent } from './organization/header/profile/profile.component';
+import { HeaderDisplayComponent } from './organization/header-display/header-display.component';
+import { OrganizationDisplayComponent } from './organization/header-display/organization-display/organization-display.component';
+import { ProfileDisplayComponent } from './organization/header-display/profile-display/profile-display.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -29,9 +30,10 @@ import { MatDialogModule } from "@angular/material/dialog";
     EditProfileComponent,
     OrgDescriptionComponent,
     MembersComponent,
-    HeaderComponent,
     MainOrganizationComponent,
-    ProfileComponent
+    HeaderDisplayComponent,
+    OrganizationDisplayComponent,
+    ProfileDisplayComponent,
   ],
   imports: [
     BrowserModule,
