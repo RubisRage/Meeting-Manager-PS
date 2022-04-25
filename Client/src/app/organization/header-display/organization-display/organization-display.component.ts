@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from "../../../../environments/environment";
 import { HttpHelperService } from 'src/app/services/http-helper.service';
+import { CreateOrganizationComponent } from 'src/app/create-organization/create-organization.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-organization-display',
@@ -13,7 +15,7 @@ export class OrganizationDisplayComponent implements OnInit {
   organizations!: {id:number, name:string}[];
   show: boolean;
 
-  constructor(private http: HttpHelperService) { 
+  constructor(private http: HttpHelperService, private dialog: MatDialog) { 
     this.username = "";
     this.show = false;
   }
@@ -41,6 +43,13 @@ export class OrganizationDisplayComponent implements OnInit {
   errorm(){
     console.log("error")
     return "error";
+  }
+
+  openCreateOrganizationDialog(){
+    this.dialog.open(CreateOrganizationComponent, {
+      height: '80vh',
+      width: '80vw'
+    })
   }
 
 }

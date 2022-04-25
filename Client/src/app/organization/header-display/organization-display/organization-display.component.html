@@ -4,7 +4,7 @@
     <div class="select-organization" (mouseleave)="closeOrganization()" *ngIf="show">
         <div class="vertical-flex" *ngIf="show">
             <a *ngFor="let o of organizations">{{o.name}}</a>
-            <img src="../../../../assets/pictures/MAS.png" alt="Añadir Orga0nización">
+            <img src="../../../../assets/pictures/MAS.png" alt="Añadir Orga0nización" (click)="openCreateOrganizationDialog()" style="cursor: pointer;">
         </div>
     </div>
 </div>
