@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthHelperService } from "../../../services/auth-helper.service";
 import { environment } from "../../../../environments/environment";
+import { HttpHelperService } from 'src/app/services/http-helper.service';
 
 @Component({
   selector: 'app-organization-display',
@@ -13,13 +13,13 @@ export class OrganizationDisplayComponent implements OnInit {
   organizations!: {id:number, name:string}[];
   show: boolean;
 
-  constructor(private auth: AuthHelperService) { 
+  constructor(private http: HttpHelperService) { 
     this.username = "";
     this.show = false;
   }
 
   ngOnInit(): void {
-    this.auth.getOrganizations(environment.backend + "/users/" + this.username + "/organizations")
+    this.http.get(environment.backend + "/users/" + this.username + "/organizations")
       .subscribe(
         (data) => {
           this.organizations = data;

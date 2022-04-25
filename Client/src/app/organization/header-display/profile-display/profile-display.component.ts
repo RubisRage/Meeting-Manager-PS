@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthHelperService } from "../../../services/auth-helper.service";
+import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { environment } from "../../../../environments/environment";
 
 @Component({
@@ -15,14 +15,14 @@ export class ProfileDisplayComponent implements OnInit {
   fullname: string;
   imgURL: string;
 
-  constructor(private auth: AuthHelperService) { 
+  constructor(private http: HttpHelperService) { 
     this.username = "";
     this.fullname = "";
     this.imgURL = "";
   }
 
   ngOnInit(): void {
-    this.auth.getNmaeUser(environment.backend + "/users/" + this.userToken)
+    this.http.get(environment.backend + "/users/" + this.userToken)
     .subscribe(
       (data) => {
         this.userlogin = data;
