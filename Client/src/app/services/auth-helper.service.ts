@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TokenResponse} from "../types/token-response";
 import {Observable} from "rxjs";
+import { userInfo } from '../types/userInfo';
+import { organizationInfo } from '../types/organizationInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,14 @@ export class AuthHelperService {
         }
       });
     });
+  }
+
+  public getMembersOfOrganizationById(url: string): Observable<userInfo[]> {
+    return this.http.get<userInfo[]>(url);
+  }
+
+  public getOrganizationInfoById(url: string): Observable<organizationInfo> {
+    return this.http.get<organizationInfo>(url);
   }
 
   public logout(): boolean {
