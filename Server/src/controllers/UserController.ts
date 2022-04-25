@@ -20,13 +20,12 @@ class UserController{
     }
 
     private async getUsers(req: Request, res: Response){
-        const users = await appDataSource.then(async () => (await appDataSource)
+        const users = await ((await appDataSource)
             .getRepository(User)
             .createQueryBuilder("users")
-            .getMany()
-        );
-       
-        res.status(200).json(users);
+            .getMany());
+
+        res.status(200).json(users)
     }
 
     private async postUser(req: Request, res: Response){

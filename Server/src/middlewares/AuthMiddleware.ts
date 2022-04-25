@@ -24,7 +24,7 @@ class AuthMiddleware{
 
             const decoded: any = jwt.verify(token, 'secretHarcoded');
 
-            console.log(decoded.id);
+            console.log(decoded.username);
 
             const user = await appDataSource.then(async () => (await appDataSource)
                 .createQueryBuilder()
