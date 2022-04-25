@@ -24,15 +24,14 @@ class Server{
     }
 
     private routes(){
-        this.app.use('/api/users/', this.userController.getRouter());
-        //this.app.use('/api/organizations/', this.organizationController.getRouter());
+        this.app.use('/users/', this.userController.getRouter());
+        //this.app.use('/organizations/', this.organizationController.getRouter());
         //this.app.use('/api/commissions/', this.commissionController.getRouter());
         this.app.get('/', (req: Request, res: Response) => res.sendStatus(200));
     }
 
     public start(){
         this.app.listen(this.PORT, () =>{
-            //AppDataSource.then(async (manager) => console.log(await manager.query(`SELECT * FROM users`)));
             console.log(`Application listening on port ${this.PORT}`);
         });
     }
