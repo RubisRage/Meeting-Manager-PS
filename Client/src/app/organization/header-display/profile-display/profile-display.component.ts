@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthHelperService } from "../../../services/auth-helper.service";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-profile-display',
@@ -7,13 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileDisplayComponent implements OnInit {
 
-  username = "NanoJJG";
-  profileImg = '../../../assets/pictures/profile.jpeg';
+  userToken = "MasterJoseph";
+  username: string;
+  userlogin!: {username:string, fullname:string, imgURL:string};
+  fullname: string;
+  imgURL: string;
 
-  constructor() { }
+  constructor(private auth: AuthHelperService) { 
+    this.username = "";
+    this.fullname = "";
+    this.imgURL = "";
+  }
 
   ngOnInit(): void {
-    document.getElementById('profile-img')?.setAttribute('src', this.profileImg);
+    this.auth.getNmaeUser(environment.backend + "/users/" + this.userToken)
+    .subscribe(
+      (data) => {
+        this.userlogin = data;
+        this.username = this.userlogin.username;
+        this.imgURL = this.userlogin.imgURL;
+      }
+    );
   }
 
 }

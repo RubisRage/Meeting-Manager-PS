@@ -48,4 +48,5 @@
     width: 245px;
     border-style: solid;
     border-color: #CFD8DC;
+    z-index: 2;
 }
