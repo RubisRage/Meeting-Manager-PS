@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthHelperService } from 'src/app/services/auth-helper.service';
+import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { userInfo } from 'src/app/types/userInfo';
 import {environment} from "../../../environments/environment";
 
@@ -20,10 +20,10 @@ export class MembersComponent implements OnInit {
   members:userInfo[] = [];
   id = 2;
 
-  constructor(private auth:AuthHelperService) { }
+  constructor(private http:HttpHelperService) { }
 
   ngOnInit(): void {
-    this.auth.getMembersOfOrganizationById(environment.backend + "/organizations/" + this.id + "/users")
+    this.http.get<userInfo[]>(environment.backend + "/organizations/" + this.id + "/users")
       .subscribe((data => {
         this.members = data;
       }));
