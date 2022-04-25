@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './signup-form/signup-form.component';
 import { FormsModule } from "@angular/forms";
 import {AuthHelperService} from "./services/auth-helper.service";
+import { CreateOrganizationComponent } from './create-organization/create-organization.component';
 import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import { OrgDescriptionComponent } from './organization/org-description/org-description.component';
 import { MembersComponent } from './organization/members/members.component';
@@ -15,12 +16,17 @@ import { MainOrganizationComponent } from './organization/main-organization/main
 import { HeaderDisplayComponent } from './organization/header-display/header-display.component';
 import { OrganizationDisplayComponent } from './organization/header-display/organization-display/organization-display.component';
 import { ProfileDisplayComponent } from './organization/header-display/profile-display/profile-display.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignUpComponent,
+    MainOrganizationComponent,
+    CreateOrganizationComponent,
     EditProfileComponent,
     OrgDescriptionComponent,
     MembersComponent,
@@ -33,7 +39,10 @@ import { ProfileDisplayComponent } from './organization/header-display/profile-d
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     AuthHelperService

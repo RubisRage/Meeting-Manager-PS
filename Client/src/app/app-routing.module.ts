@@ -6,6 +6,7 @@ import { SignUpComponent } from './signup-form/signup-form.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component'
 import { HeaderDisplayComponent } from './organization/header-display/header-display.component';
 
+
 const routes: Routes = [
   {path: "", component: LoginComponent, pathMatch: 'full'},
   {path: "login" , component: LoginComponent},

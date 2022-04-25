@@ -1,0 +1,46 @@
+  <form (ngSubmit)="onSubmit()"
+        id="create-organization-form"
+        #createOrganizationForm="ngForm"
+        class="create-organization-grid">
+
+    <div class="name-element form-element">
+      <label for="organization-name">Nombre de tu organización</label>
+      <input #name="ngModel"
+             [(ngModel)]="model.name"
+             name="name"
+             id="organization-name"
+             required
+             pattern="\w*"
+             minlength="3"
+             maxlength="30"
+             form="create-organization-form">
+      <div *ngIf="name.touched && name.errors?.['pattern']" class="mat-error">
+        ¡El nombre de usuario no es válido!
+      </div>
+      <div *ngIf="name.touched && name.errors?.['minlength']" class="mat-error ">
+        ¡El nombre de usuario es demasiado corto!
+      </div>
+      <div *ngIf="name.touched && name.errors?.['required']" class="mat-error">
+        ¡El nombre de usuario no puede estar ausente!
+      </div>
+    </div>
+
+    <div class="description-element form-element">
+      <label for="organization-desc">Descripción de tu organización</label>
+      <textarea [(ngModel)]="model.description" name="desc" id="organization-desc"></textarea>
+    </div>
+
+    <button type="submit"
+            form="create-organization-form"
+            [disabled]="!createOrganizationForm.form.valid"
+            class="create-organization-button mat-button-disabled">
+      Crear organización
+    </button>
+
+    <div class="image-element">
+      <img alt="Proposed organization image" [src]="model.imgURL">
+      <input type="file" (change)="onSelectedFile($event)" style="display: none" #fileUpload>
+      <button (click)="fileUpload.click()">Cambiar imagen</button>
+    </div>
+  </form>
+
