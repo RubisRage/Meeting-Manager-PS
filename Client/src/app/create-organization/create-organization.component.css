@@ -85,3 +85,35 @@ textarea {
 .create-organization-button:disabled {
   background-color: var(--disabled-color);
 }
+
+#organization-name,
+textarea{
+    border-radius: 10px;
+    border: 2px solid #4D4B4B;
+    padding: 5px;
+    text-align: center;
+}
+
+button,
+button[type="submit"]{
+    color: #4D4B4B;
+    border: 2px solid #4D4B4B;
+    padding: 5px 20px;
+}
+
+button:hover,
+button[type="submit"]:hover {
+    color: #EEE;
+    background-color: #22768C;
+}
+
+textarea{
+  font-family: sans-serif;
+  font-size: medium;
+}
+
+.image-element,
+textarea,
+#organization-display{
+  box-shadow: 0px 10px 5px #22222275;
+}

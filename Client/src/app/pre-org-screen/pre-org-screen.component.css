@@ -61,3 +61,7 @@
 a{
     text-decoration: none;
 }
+
+form{
+    box-shadow: 0px 10px 5px #22222275;
+}
