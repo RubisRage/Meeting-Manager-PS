@@ -3,25 +3,47 @@
 
 
   <div class="vertical-flex" style="height:100px">
+
     <div class="horizontal-flex">
-      <input>
-      <button> Guardar </button>
+      <p>Username</p>
+      <input [placeholder]="userService.user?.username"
+      required [(ngModel)]="user.username">
+      <button (click)="ChangeUsername()"> Guardar </button>
     </div>
 
 
 
     <div class="horizontal-flex">
-      <input>
-      <button> Guardar </button>
+      <p>Fullname</p>
+      <input [placeholder]="userService.user?.realName"
+      required [(ngModel)]="user.fullname">
+
+
+
+    </div>
+
+    <div class="horizontal-flex">
+      <p>Password</p>
+      <input type="password"
+      required [(ngModel)]="user.oldPassword">
+
+
 
 
     </div>
     <div class="horizontal-flex">
-      <input type="password">
-      <button> Guardar </button>
+      <p>New Pass</p>
+      <input type="password"
+             required [(ngModel)]="user.newPassword">
+      <button (click)="ChangePassword()"> Change </button>
+
 
 
     </div>
+
+
+
+
   </div>
 
   <div class="vertical-flex img-container">
@@ -31,5 +53,5 @@
   </div>
 </div>
 <div class="horizontal-flex">
-  <button  class="warning-button"> Eliminar Cuenta </button>
+  <button (click)="Delete()" [routerLink]="['/login']" class="warning-button"> Eliminar Cuenta </button>
 </div>
