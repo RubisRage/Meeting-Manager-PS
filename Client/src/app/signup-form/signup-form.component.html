@@ -1,5 +1,5 @@
 <div class="full">
-    
+
     <div class="cont">
         <h1 class="title">Registrarse</h1>
 
@@ -24,22 +24,22 @@
                     </div>
                     <div *ngIf="username.errors?.['required']">
                         El nombre de usuario es obligatorio.
-                    </div> 
-            
+                    </div>
+
                     <div *ngIf="username.errors?.['pattern']">
                         El nombre de usuario solo puede tener letras, números y "_".
-                    </div> 
+                    </div>
                 </div>
             </div>
-        
+
             <!-- Fullname -->
             <div class="cent">
                 <label for="fullname">Nombre Completo</label><br/>
                 <input type="text"
                     #fullname="ngModel"
-                    [(ngModel)]="register.realName"
+                    [(ngModel)]="register.fullname"
                     placeholder="Juan Alberto García"
-                    class="form-control"
+                    class="form-control" id="fullname"
                     name="fullname"
                     pattern="[A-Za-zÑñáéíóúáéíóúÁÉÍÓÚ\s ]+"
                     required
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-                
+
             <!-- Contraseña -->
             <div class="cent">
                 <label for="password">Contraseña</label><br/>
@@ -62,7 +62,7 @@
                     #password="ngModel"
                     [(ngModel)]="register.password"
                     placeholder="password"
-                    class="form-control"
+                    class="form-control" id="password"
                     name="password"
                     required
                     [ngClass]="{'is-valid': !password.invalid, 'is-invalid':password.invalid}"
