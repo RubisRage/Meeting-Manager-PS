@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { environment } from "../../../../environments/environment";
 
@@ -14,6 +14,7 @@ export class ProfileDisplayComponent implements OnInit {
   userlogin!: {username:string, fullname:string, imgURL:string};
   fullname: string;
   imgURL: string;
+  @Input() showAdd: boolean= true;
 
   constructor(private http: HttpHelperService) { 
     this.username = "";
@@ -30,6 +31,14 @@ export class ProfileDisplayComponent implements OnInit {
         this.imgURL = this.userlogin.imgURL;
       }
     );
+  }
+
+  changeShowAdd(): void {
+    if (this.showAdd == true){
+      this.showAdd = false;
+    }else if (this.showAdd == false){
+      this.showAdd = true;
+    }
   }
 
 }

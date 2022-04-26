@@ -10,12 +10,14 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./organization-display.component.css']
 })
 export class OrganizationDisplayComponent implements OnInit {
-
+  organizationSelection = "Selecciona tu Organización";
   username: string;
   organizations!: {id:number, name:string}[];
   show: boolean;
+  
 
   constructor(private http: HttpHelperService, private dialog: MatDialog) { 
+    this.organizationSelection ;
     this.username = "";
     this.show = false;
   }
@@ -32,12 +34,11 @@ export class OrganizationDisplayComponent implements OnInit {
 
   displayOrganization(){
     this.show = true;
-    console.log(this.show);
+
   }
 
   closeOrganization(){
     this.show = false;
-    console.log(this.show);
   }
 
   errorm(){
