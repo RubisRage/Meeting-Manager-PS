@@ -1,5 +1,5 @@
-<div class="conteiner-profile">
-    <a [routerLink]="['/edit-profile']">
+<div (mouseenter)="displayOrganization()" (mouseleave)="closeOrganization()">
+    <a class="conteiner-profile" (click)="changeShowAdd()" [routerLink]='["/edit-profile"]' >
         <div class="style-letter">
             <p>{{username}}</p>
         </div>
@@ -7,4 +7,9 @@
             <img id="profile-img" class="profile-img" src="{{imgURL}}">
         </div>
     </a>
-</div>    
+    <div class="select-organization" (mouseleave)="closeOrganization()" *ngIf="show">
+        <div class="vertical-flex" *ngIf="show">
+            <a class="horizontal-flex" (click)="closeSession()" [routerLink]="['/login']">Cerrar Session</a>
+        </div>
+    </div>
+</div>

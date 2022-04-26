@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    this.auth.login(environment.backend + "/users/login", this.loginInformation)
+    this.auth.login(this.loginInformation)
       .subscribe({
         next: () => {
           this.router.navigate(["/organization"]);

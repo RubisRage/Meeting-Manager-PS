@@ -1,13 +1,12 @@
 import {Request, Response, NextFunction} from 'express';
 import jwt from 'jsonwebtoken';
-import { json } from 'stream/consumers';
-import User from '../models/User';
-import appDataSource from '../utils/connect';
+import appDataSource from "../utils/connect";
+import User from "../models/User";
 
 declare global {
     namespace Express {
         interface Request {
-            user: any
+            username: any
         }
     }
 }
@@ -15,32 +14,49 @@ declare global {
 class AuthMiddleware{
 
     public static async check(req: Request, res: Response, next: NextFunction){
+        const user = await ((await appDataSource)
+            .manager
+            .findOneBy(User, {
+                username: req.params.username
+            }));
+
+        if(!user) {
+            res.status(400).json({
+                message: "Bad request."
+            })
+
+            return;
+        }
+
         const authHeader = req.headers.authorization;
+
         if(authHeader && authHeader.startsWith('Bearer')){
+
             const token = authHeader.split(' ')[1];
-            if(token == null){
-                res.sendStatus(401);
+            if(token === undefined){
+                res.status(400).json({message: "Bad request, missing token!"});
+
+                return;
             }
 
-            const decoded: any = jwt.verify(token, 'secretHarcoded');
+            let decoded: any;
 
-            console.log(decoded.id);
 
-            const user = await appDataSource.then(async () => (await appDataSource)
-                .createQueryBuilder()
-                .select(["u.user_name", "u.real_name"])
-                .from("users", "u")
-                .where("user_name = :user_name", {user_name: decoded.id})
-                .getOne()
-            );
+            try {
+                decoded = jwt.verify(token, process.env.SECRET as jwt.Secret);
+            } catch(err) {
+                console.log(err);
+                res.status(400).json({message: "Bad request, invalid token!"})
 
-            console.log(user);
-            req.user = user;
+                return;
+            }
 
-            res.sendStatus(200);
-            next()
+
+            req.username = decoded.username;
+
+            next();
         }else{
-            res.status(401).json({error : "Sin privilegios"})
+            res.status(401).json({message: "Unauthorized"})
         }
     }
 }

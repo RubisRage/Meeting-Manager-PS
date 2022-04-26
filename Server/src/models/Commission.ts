@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity({ synchronize: false })
+@Entity()
 class Commission{
     @PrimaryGeneratedColumn()
     id!: number;

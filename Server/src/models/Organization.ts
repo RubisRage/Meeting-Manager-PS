@@ -1,19 +1,27 @@
-import internal from "stream";
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany} from "typeorm";
+import User from "./User";
+import Belongs from "./Belongs";
 
-@Entity({ synchronize: false })
+@Entity()
 class Organization {
-    @PrimaryGeneratedColumn()
-    id!: number;
+    @PrimaryGeneratedColumn("uuid")
+    id!: string;
 
     @Column()
     name!: string;
 
-    @Column()
-    inf!: string;
+    @Column({
+        nullable: true
+    })
+    description!: string;
 
-    @Column({ type: "bytea"})
-    img: any;
+    @Column({
+        nullable: true
+    })
+    imgURL!: string;
+
+    @OneToMany(() => Belongs, belongsToOrganizations => belongsToOrganizations.user)
+    belongsToOrganizations!: Belongs[];
 }
 
 export default Organization;

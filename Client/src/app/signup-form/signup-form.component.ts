@@ -2,6 +2,7 @@ import { Component, Injectable } from '@angular/core';
 import { User } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,10 @@ import { Router } from '@angular/router';
 export class SignUpComponent{
  
   //Direccion a la que se redirigirá 
-  APIRoute = "localhost:8080/api/users/";
 
-  register: User = {
+  register = {
     username:"",
-    realName:"",
+    fullname:"",
     password:""
   }
 
@@ -32,6 +32,10 @@ export class SignUpComponent{
   }
 
   submit(){
-    return this.http.post(this.APIRoute, this.register);
+    this.http.post(environment.backend + "/users/register", 
+    {username: this.register.username, 
+     fullname: this.register.fullname,
+     imgURL: "assets/pictures/profile.jpeg",
+     password: this.register.password});
   }
 }
