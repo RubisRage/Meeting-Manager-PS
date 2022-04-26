@@ -34,7 +34,7 @@ export class EditProfileComponent implements OnInit{
   ChangeUsername(){
   this.http.put(environment.backend +"/users/" + this.userService.user!.username ,
     {username: this.user.username,
-      fullname: this.userService.user!.realName,  //change
+      fullname: this.userService.user!.fullname,  //change
       imgURL: this.userService.user!.imgURL,
       token:this.AuthHelper.token
 
