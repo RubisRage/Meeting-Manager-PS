@@ -19,18 +19,9 @@ class UserController{
         this.routes();
     }
 
-    private async findUser(username: string) {
-        return (await appDataSource)
-            .manager.findOneBy(User, {
-                username: username
-            });
-    }
-
     public getRouter(){
         return this.router;
     }
-
-
 
     public async login(req: Request, res: Response){
         const {username, password} = req.body;
@@ -43,7 +34,6 @@ class UserController{
             return;
         }
 
-        // const user = await this.findUser(username);
         const user = await (await appDataSource)
             .manager.findOneBy(User, {
                 username: username
@@ -82,7 +72,6 @@ class UserController{
             return;
         }
 
-        // const user = await this.findUser(username);
         const user = await (await appDataSource)
             .manager.findOneBy(User, {
                 username: username
@@ -155,9 +144,6 @@ class UserController{
                 .where("username = :username", {username: req.params.username})
                 .execute()
         );
-
-        console.log(result.affected);
-
 
         if(username !== req.username) {
             res.status(200).json({
@@ -240,7 +226,6 @@ class UserController{
                 .getMany()
         );
 
-        console.log(organizations);
         res.status(200).json(organizations);
     }
 

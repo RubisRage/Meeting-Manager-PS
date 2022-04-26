@@ -85,8 +85,17 @@ class OrganizationController{
 
     }
 
-    private addMember() {
+    private async addMember(req: Request, res: Response) {
+        const belongs = new Belongs();
+        belongs.username = req.params.username;
+        belongs.id = req.params.id;
+        belongs.isAdmin = false;
 
+        await ((await appDataSource)
+            .manager.save(belongs)
+        );
+
+        res.status(200).json({message: "User added to organization successfully!"});
     }
 
     private removeMember() {
