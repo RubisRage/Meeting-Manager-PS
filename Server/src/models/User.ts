@@ -18,9 +18,6 @@ export class User{
     })
     imgURL!: string;
 
-    // @ManyToMany(() => Organization, (organization) => organization.users )
-    // organizations!: Organization[];
-
     @OneToMany(() => Belongs, belongsToOrganizations => belongsToOrganizations.user)
     belongsToOrganizations!: Belongs[]
 }

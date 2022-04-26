@@ -230,49 +230,18 @@ class UserController{
     }
 
     private async getOrganizations(req: Request, res: Response) {
-        // const user = await ((await appDataSource)
-        //         .getRepository(User)
-        //         .createQueryBuilder()
-        //         .innerJoinAndSelect("user.organizations", "organization")
-        //         .where("username = :username", {username: req.params.username})
-        //         .getOne()
-        // );
 
-        // const user = await ((await appDataSource)
-        //         .getRepository(User)
-        //         .findOne({
-        //             relations: {
-        //                 organizations: true
-        //             },
-        //             where: {
-        //                 username: req.params.username
-        //             }
-        //         })
-        // );
-        //
-        // console.log(user!.organizations);
-        //
-        // res.status(200).json(user!.organizations.map(org => {
-        //     return {
-        //         id: org.id,
-        //         name: org.name
-        //     }
-        // }))
-
-        const user = await ((await appDataSource)
-                .getRepository(User)
-                .findOne({
-                    relations: {
-                        belongsToOrganizations: true
-                    },
-                    where: {
-                        username: req.params.username
-                    }
-                })
+        const organizations = await ((await appDataSource)
+                .getRepository(Organization)
+                .createQueryBuilder('organization')
+                .leftJoin('belongs', 'b', 'b.id = organization.id')
+                .where("b.username = :username", {username: req.params.username})
+                .leftJoinAndSelect('users', 'user', 'user.username = b.username')
+                .getMany()
         );
 
-        console.log(user);
-        res.status(200).json(user);
+        console.log(organizations);
+        res.status(200).json(organizations);
     }
 
     private routes(){
