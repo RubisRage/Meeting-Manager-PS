@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { PreOrgScreenComponent } from './pre-org-screen/pre-org-screen.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PreOrgScreenComponent } from './pre-org-screen/pre-org-screen.component
     OrganizationDisplayComponent,
     ProfileDisplayComponent,
     PreOrgScreenComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
