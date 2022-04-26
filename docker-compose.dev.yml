@@ -22,6 +22,8 @@ services:
       - "8080:8080"
     environment:
       PORT: 8080
+      SALT_ROUNDS: 10
+      SECRET: meeting-manager-ps
     volumes:
       - type: bind
         source: ./Server/src/
@@ -37,12 +39,12 @@ services:
       PG_DATA: /pg-data
     volumes:
       - db-volume:/pg-data
-      - type: bind
-        source: ./db-init-scripts
-        target: /docker-entrypoint-initdb.d
-      - type: bind
-        source: ./db-images
-        target: /db-images
+#      - type: bind
+#        source: ./db-init-scripts
+#        target: /docker-entrypoint-initdb.d
+#      - type: bind
+#        source: ./db-images
+#        target: /db-images
 
 volumes:
   db-volume:

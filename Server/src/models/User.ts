@@ -1,18 +1,25 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import {Entity, PrimaryColumn, Column, OneToMany, ManyToMany} from "typeorm";
+import Organization from "./Organization";
+import Belongs from "./Belongs";
 
-@Entity({ name: "users", synchronize: false})
+@Entity({ name: "users", synchronize: true})
 export class User{
     @PrimaryColumn()
-    user_name!: string;
+    username!: string;
 
     @Column() 
     pwhash!: string;
 
     @Column()
-    real_name!: string;
+    fullname!: string;
 
-    /*@Column({ type: "bytea"})
-    img: string;*/
+    @Column({
+        nullable: true
+    })
+    imgURL!: string;
+
+    @OneToMany(() => Belongs, belongsToOrganizations => belongsToOrganizations.user)
+    belongsToOrganizations!: Belongs[]
 }
 
 export default User
