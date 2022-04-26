@@ -32,23 +32,27 @@ export class EditProfileComponent implements OnInit{
               private AuthHelper:AuthHelperService) { }
 
   ChangeUsername(){
-  this.http.put(environment.backend +"/users/" + this.userService.user!.username ,
-    {username: this.user.username,
-      fullname: this.userService.user!.fullname,  //change
-      imgURL: this.userService.user!.imgURL,
-      token:this.AuthHelper.token
-
-
-    } )
+    // this.http.put(environment.backend +"/users/" + this.userService.user!.username , {
+    //   username: this.user.username,
+    //   fullname: this.userService.user!.fullname,  //change
+    //   imgURL: this.userService.user!.imgURL,
+    //   token:this.AuthHelper.token
+    // }).subscribe(() => {
+    //   this.http.get<User>(environment.backend + `/users/${this.userService}`)
+    //     .subscribe(user => {
+    //       this.userService.user = user;
+    //     })
+    // });
 
 }
   ChangePassword(){
     this.http.put(environment.backend+"/users/"+this.userService.user!.username +"/password",{
       oldPassword:this.user.oldPassword,
       newPassword:this.user.newPassword
-    })
-
+    }).subscribe();
   }
+
+
   Delete(){
     this.http.delete(environment.backend+"/users/" + this.userService.user!.username)
   }
