@@ -9,7 +9,7 @@
     </a>
     <div class="select-organization" (mouseleave)="closeOrganization()" *ngIf="show">
         <div class="vertical-flex" *ngIf="show">
-            <a class="horizontal-flex">Cerrar Session</a>
+            <a class="horizontal-flex" (click)="closeSession()" [routerLink]="['/login']">Cerrar Session</a>
         </div>
     </div>
 </div>

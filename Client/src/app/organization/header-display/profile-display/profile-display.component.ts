@@ -58,4 +58,8 @@ export class ProfileDisplayComponent implements OnInit {
     this.show = false;
   }
 
+  closeSession(){
+    this.auth.logout();
+  }
+
 }

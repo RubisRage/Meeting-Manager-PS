@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { environment } from "../../../../environments/environment";
 import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { CreateOrganizationComponent } from 'src/app/create-organization/create-organization.component';
@@ -12,7 +12,7 @@ import { LoggedUserService } from 'src/app/services/logged-user.service';
   styleUrls: ['./organization-display.component.css']
 })
 export class OrganizationDisplayComponent implements OnInit {
-  organizationSelection = "Selecciona tu Organización";
+  @Input () organizationSelection = "Selecciona tu Organización";
   orgs: any;
   organizations!: {id:number, name:string}[];
   show: boolean;
@@ -25,11 +25,10 @@ export class OrganizationDisplayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get(environment.backend + "/users/" + this.loggedUser.user!.username + "/organizations")
+    this.http.get(environment.backend + "/users/" + this.loggedUser.user?.username + "/organizations")
       .subscribe(
         (data) => {
           this.organizations = data;
-          console.log(data);
         }
       );
   }
