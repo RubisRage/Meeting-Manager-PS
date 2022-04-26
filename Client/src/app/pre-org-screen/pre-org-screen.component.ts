@@ -30,7 +30,8 @@ export class PreOrgScreenComponent implements OnInit {
           this.organizations = data;
         }
       );
-
   }
+
+  
 
 }
