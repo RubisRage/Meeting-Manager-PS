@@ -42,3 +42,30 @@ a{
     margin-left: 27px;
     margin-right: 27px;
 }
+
+.select-organization{
+    background-color: #CFD8DC;
+    position: absolute;
+    width: 245px;
+    border-style: solid;
+    border-color: #CFD8DC;
+    z-index: 2;
+}
+
+.vertical-flex{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.horizontal-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 5px;
+    background-color: #ff0000;
+    width: 197.59px;
+    height: 47px;
+    border-radius: 10px;
+    
+  }
+  

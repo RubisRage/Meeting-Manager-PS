@@ -1,10 +1,17 @@
-<div class="conteiner-profile">
-    <a (click)="changeShowAdd()" [routerLink]='["/edit-profile"]' >
-        <div class="style-letter">
-            <p>{{username}}</p>
+<div (mouseenter)="displayOrganization()" (mouseleave)="closeOrganization()">
+    <div class="conteiner-profile">
+        <a (click)="changeShowAdd()" [routerLink]='["/edit-profile"]' >
+            <div class="style-letter">
+                <p>{{username}}</p>
+            </div>
+            <div>
+                <img id="profile-img" class="profile-img" src="{{imgURL}}">
+            </div>
+        </a>
+    </div> 
+    <div class="select-organization" (mouseleave)="closeOrganization()" *ngIf="show">
+        <div class="vertical-flex" *ngIf="show">
+            <a class="horizontal-flex">Cerrar Session</a>
         </div>
-        <div>
-            <img id="profile-img" class="profile-img" src="{{imgURL}}">
-        </div>
-    </a>
-</div>    
+    </div>
+</div>

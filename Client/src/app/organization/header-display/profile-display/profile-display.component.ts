@@ -14,12 +14,14 @@ export class ProfileDisplayComponent implements OnInit {
   userlogin!: {username:string, fullname:string, imgURL:string};
   fullname: string;
   imgURL: string;
-  @Input() showAdd: boolean= true;
+  @Input() showAdd!: boolean;
+  show: boolean;
 
   constructor(private http: HttpHelperService) { 
     this.username = "";
     this.fullname = "";
     this.imgURL = "";
+    this.show = false;
   }
 
   ngOnInit(): void {
@@ -39,6 +41,16 @@ export class ProfileDisplayComponent implements OnInit {
     }else if (this.showAdd == false){
       this.showAdd = true;
     }
+    console.log(this.showAdd);
+  }
+
+  displayOrganization(){
+    this.show = true;
+
+  }
+
+  closeOrganization(){
+    this.show = false;
   }
 
 }
