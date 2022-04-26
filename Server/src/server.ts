@@ -25,7 +25,7 @@ class Server{
 
     private routes(){
         this.app.use('/users/', this.userController.getRouter());
-        //this.app.use('/organizations/', this.organizationController.getRouter());
+        this.app.use('/organizations/', this.organizationController.getRouter());
         //this.app.use('/api/commissions/', this.commissionController.getRouter());
         this.app.get('/', (req: Request, res: Response) => res.sendStatus(200));
     }

@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany} from "typeorm";
 import User from "./User";
+import Belongs from "./Belongs";
 
 @Entity()
 class Organization {
@@ -19,8 +20,11 @@ class Organization {
     })
     imgURL!: string;
 
-    @OneToMany(() => User, (user) => user.organizations)
-    users!: User[];
+    // @ManyToMany(() => User, (user) => user.organizations)
+    // users!: User[];
+
+    @OneToMany(() => Belongs, belongsToOrganizations => belongsToOrganizations.user)
+    belongsToOrganizations!: Belongs[];
 }
 
 export default Organization;

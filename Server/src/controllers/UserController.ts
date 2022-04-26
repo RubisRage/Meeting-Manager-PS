@@ -7,6 +7,8 @@ import bcrypt from "bcrypt";
 import AuthMiddleware from "../middlewares/AuthMiddleware";
 import AccessMiddleware from "../middlewares/AcessMiddleware";
 import AcessMiddleware from "../middlewares/AcessMiddleware";
+import Organization from "../models/Organization";
+import Belongs from "../models/Belongs";
 
 class UserController{
     private router: Router;
@@ -14,7 +16,6 @@ class UserController{
     constructor(){
         this.router = Router();
         this.router.use(express.json())
-        this.router.use(express.urlencoded({extended: false}))
         this.routes();
     }
 
@@ -142,6 +143,7 @@ class UserController{
             return;
         }
 
+
         const result = await ((await appDataSource)
                 .createQueryBuilder()
                 .update(User)
@@ -157,11 +159,24 @@ class UserController{
         console.log(result.affected);
 
 
-        res.status(200).json({ message: 'User updated succesfully!'});
+        if(username !== req.username) {
+            res.status(200).json({
+                username: username,
+                fullname: fullname,
+                imgURL: imgURL,
+                token: generateToken(username)
+            });
+        } else {
+            res.status(200).json({
+                username: username,
+                fullname: fullname,
+                imgURL: imgURL
+            });
+        }
     }
 
     private async deleteUser(req: Request, res: Response){
-        await appDataSource.then(async () => (await appDataSource)
+        await ((await appDataSource)
             .createQueryBuilder()
             .delete()
             .from(User)
@@ -169,7 +184,7 @@ class UserController{
             .execute()
         );
 
-        res.status(200).json({ message: 'Usuario eliminado'});
+        res.status(200).json({ message: 'User deleted successfully!'});
     }
 
     private async updatePassword(req: Request, res: Response) {
@@ -214,8 +229,50 @@ class UserController{
         })
     }
 
-    private async getOrganizations() {
+    private async getOrganizations(req: Request, res: Response) {
+        // const user = await ((await appDataSource)
+        //         .getRepository(User)
+        //         .createQueryBuilder()
+        //         .innerJoinAndSelect("user.organizations", "organization")
+        //         .where("username = :username", {username: req.params.username})
+        //         .getOne()
+        // );
 
+        // const user = await ((await appDataSource)
+        //         .getRepository(User)
+        //         .findOne({
+        //             relations: {
+        //                 organizations: true
+        //             },
+        //             where: {
+        //                 username: req.params.username
+        //             }
+        //         })
+        // );
+        //
+        // console.log(user!.organizations);
+        //
+        // res.status(200).json(user!.organizations.map(org => {
+        //     return {
+        //         id: org.id,
+        //         name: org.name
+        //     }
+        // }))
+
+        const user = await ((await appDataSource)
+                .getRepository(User)
+                .findOne({
+                    relations: {
+                        belongsToOrganizations: true
+                    },
+                    where: {
+                        username: req.params.username
+                    }
+                })
+        );
+
+        console.log(user);
+        res.status(200).json(user);
     }
 
     private routes(){
@@ -229,10 +286,10 @@ class UserController{
             AuthMiddleware.check,
             AcessMiddleware.check,
             this.updatePassword);
-        this.router.put('/:username/organizations',
+        this.router.get('/:username/organizations',
             AuthMiddleware.check,
             AccessMiddleware.check,
-            this.updatePassword);
+            this.getOrganizations);
     }
 }
 

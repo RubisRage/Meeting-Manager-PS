@@ -1,5 +1,6 @@
-import {Entity, PrimaryColumn, Column, OneToMany} from "typeorm";
+import {Entity, PrimaryColumn, Column, OneToMany, ManyToMany} from "typeorm";
 import Organization from "./Organization";
+import Belongs from "./Belongs";
 
 @Entity({ name: "users", synchronize: true})
 export class User{
@@ -17,8 +18,11 @@ export class User{
     })
     imgURL!: string;
 
-    @OneToMany(() => Organization, (organization) => organization.users )
-    organizations!: Organization[];
+    // @ManyToMany(() => Organization, (organization) => organization.users )
+    // organizations!: Organization[];
+
+    @OneToMany(() => Belongs, belongsToOrganizations => belongsToOrganizations.user)
+    belongsToOrganizations!: Belongs[]
 }
 
 export default User

@@ -1,5 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 import jwt from 'jsonwebtoken';
+import appDataSource from "../utils/connect";
+import User from "../models/User";
 
 declare global {
     namespace Express {
@@ -12,6 +14,20 @@ declare global {
 class AuthMiddleware{
 
     public static async check(req: Request, res: Response, next: NextFunction){
+        const user = await ((await appDataSource)
+            .manager
+            .findOneBy(User, {
+                username: req.params.username
+            }));
+
+        if(!user) {
+            res.status(400).json({
+                message: "Bad request."
+            })
+
+            return;
+        }
+
         const authHeader = req.headers.authorization;
 
         if(authHeader && authHeader.startsWith('Bearer')){
@@ -34,6 +50,7 @@ class AuthMiddleware{
 
                 return;
             }
+
 
             req.username = decoded.username;
 

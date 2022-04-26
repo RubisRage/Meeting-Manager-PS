@@ -15,13 +15,13 @@ export class Belongs{
     })
     isAdmin!: boolean
 
-    @ManyToOne(() => User, (user: User) => user.organizations, {
+    @ManyToOne(() => User, (user: User) => user.belongsToOrganizations, {
         createForeignKeyConstraints: true
     })
     @JoinColumn({name: 'username'})
     user!: User
 
-    @ManyToOne(() => Organization, (organization: Organization) => organization.users, {
+    @ManyToOne(() => Organization, (organization: Organization) => organization.belongsToOrganizations, {
         createForeignKeyConstraints: true
     })
     @JoinColumn({name: 'id'})
