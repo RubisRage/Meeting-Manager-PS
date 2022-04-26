@@ -9,12 +9,20 @@ import {User} from "../types/user";
 })
 export class EditProfileComponent implements OnInit{
 
-  user!: User | null;
 
-  constructor(private userService: LoggedUserService) { }
+
+  user={
+    username:"",
+    fullname:"",
+    oldPassword:"",
+    newPassword:"",
+  }
+
+  constructor(public userService: LoggedUserService) { }
 
   ngOnInit(): void {
-    this.user = this.userService.user;
+
+
   }
 
 }
