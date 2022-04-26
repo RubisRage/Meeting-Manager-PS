@@ -28,14 +28,6 @@ export class AuthHelperService {
     });
   }
 
-  public getMembersOfOrganizationById(url: string): Observable<userInfo[]> {
-    return this.http.get<userInfo[]>(url);
-  }
-
-  public getOrganizationInfoById(url: string): Observable<organizationInfo> {
-    return this.http.get<organizationInfo>(url);
-  }
-
   public logout(): boolean {
     if(!this.logged) return false;
 

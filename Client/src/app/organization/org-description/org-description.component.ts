@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { organizationInfo } from 'src/app/types/organizationInfo';
 import { environment } from "../../../environments/environment";
@@ -11,20 +11,28 @@ import { environment } from "../../../environments/environment";
 })
 export class OrgDescriptionComponent implements OnInit {
 
-  id = 2;
-  organization!:organizationInfo;
+  organization!:any;
 
-  constructor(private http:HttpHelperService, private router: Router) { 
+  constructor(private http:HttpHelperService, 
+    private router: ActivatedRoute) { 
 
   }
 
   ngOnInit(): void {
-    let url = this.router.parseUrl(this.router.url);
-    this.id = url.queryParams['id'];
-    this.http.get<organizationInfo>(environment.backend + "/organizations/" + this.id)
-      .subscribe((data => {
-        this.organization = data;
-      }));
+    //let url = this.router.parseUrl(this.router.url);
+    //this.id = url.queryParams['id'];
+    this.router.params.subscribe(params => {
+      this.http.get(environment.backend + "/organizations/" + params['id'])
+        .subscribe((data => {
+          this.organization = {
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            imgURL: data.imgURL
+          };
+        }));
+    });
+    
   }
 
 }

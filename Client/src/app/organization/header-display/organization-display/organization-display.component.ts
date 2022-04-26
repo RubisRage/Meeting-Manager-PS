@@ -3,6 +3,8 @@ import { environment } from "../../../../environments/environment";
 import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { CreateOrganizationComponent } from 'src/app/create-organization/create-organization.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoggedUserService } from 'src/app/services/logged-user.service';
 
 @Component({
   selector: 'app-organization-display',
@@ -11,19 +13,19 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class OrganizationDisplayComponent implements OnInit {
   organizationSelection = "Selecciona tu Organización";
-  username: string;
+  orgs: any;
   organizations!: {id:number, name:string}[];
   show: boolean;
   
 
-  constructor(private http: HttpHelperService, private dialog: MatDialog) { 
-    this.organizationSelection ;
-    this.username = "";
+  constructor(private http: HttpHelperService, 
+    private dialog: MatDialog, private router: ActivatedRoute,
+    private loggedUser: LoggedUserService) { 
     this.show = false;
   }
 
   ngOnInit(): void {
-    this.http.get(environment.backend + "/users/" + this.username + "/organizations")
+    this.http.get(environment.backend + "/users/" + this.loggedUser.user!.username + "/organizations")
       .subscribe(
         (data) => {
           this.organizations = data;
@@ -34,7 +36,6 @@ export class OrganizationDisplayComponent implements OnInit {
 
   displayOrganization(){
     this.show = true;
-
   }
 
   closeOrganization(){

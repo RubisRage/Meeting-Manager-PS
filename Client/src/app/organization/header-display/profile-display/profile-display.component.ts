@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthHelperService } from 'src/app/services/auth-helper.service';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
+import { LoggedUserService } from 'src/app/services/logged-user.service';
 import { environment } from "../../../../environments/environment";
 
 @Component({
@@ -9,7 +11,6 @@ import { environment } from "../../../../environments/environment";
 })
 export class ProfileDisplayComponent implements OnInit {
 
-  userToken = "MasterJoseph";
   username: string;
   userlogin!: {username:string, fullname:string, imgURL:string};
   fullname: string;
@@ -17,7 +18,8 @@ export class ProfileDisplayComponent implements OnInit {
   @Input() showAdd!: boolean;
   show: boolean;
 
-  constructor(private http: HttpHelperService) { 
+  constructor(private http: HttpHelperService, 
+    public auth: AuthHelperService, private loggedUser:LoggedUserService) { 
     this.username = "";
     this.fullname = "";
     this.imgURL = "";
@@ -25,7 +27,7 @@ export class ProfileDisplayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get(environment.backend + "/users/" + this.userToken)
+    this.http.get(environment.backend + "/users/" + this.loggedUser.user?.username)
     .subscribe(
       (data) => {
         this.userlogin = data;
@@ -36,11 +38,14 @@ export class ProfileDisplayComponent implements OnInit {
   }
 
   changeShowAdd(): void {
+    this.showAdd = !this.showAdd;
+    /*
     if (this.showAdd == true){
       this.showAdd = false;
     }else if (this.showAdd == false){
       this.showAdd = true;
     }
+    */
     console.log(this.showAdd);
   }
 
