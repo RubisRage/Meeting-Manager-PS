@@ -3,6 +3,7 @@ import { DataSource } from "typeorm";
 import User from "../models/User";
 import Organization from "../models/Organization";
 import Commission from "../models/Commission";
+import Belongs from "../models/Belongs";
 
 const appDataSource =  new DataSource({
     type: "postgres",
@@ -11,10 +12,12 @@ const appDataSource =  new DataSource({
     username: "admin",
     password: "1234",
     database: "admin",
+    synchronize: true,
     entities: [
         User, 
         Organization,
-        Commission
+        Commission,
+        Belongs
     ]
 }).initialize();
 
