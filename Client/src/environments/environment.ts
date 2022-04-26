@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backend: "https://virtserver.swaggerhub.com/RubisRage/Meeting-Manager/1.0.0"
+  // backend: "https://virtserver.swaggerhub.com/RubisRage/Meeting-Manager/1.0.0"
+  backend: "http://localhost:8080"
 };
 
 /*
