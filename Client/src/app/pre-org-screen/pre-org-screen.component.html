@@ -3,6 +3,8 @@
     <div class="flex">
         <a *ngFor="let organization of organizations" class="card"
             [routerLink]="['/organization', organization.id]">
+            <div></div>
+            <!--<img src="getImageURL();">-->
             <p class="org-name">
                 {{organization.name}}
             </p>
