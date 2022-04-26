@@ -19,6 +19,7 @@ import { ProfileDisplayComponent } from './organization/header-display/profile-d
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
+import { PreOrgScreenComponent } from './pre-org-screen/pre-org-screen.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     HeaderDisplayComponent,
     OrganizationDisplayComponent,
     ProfileDisplayComponent,
+    PreOrgScreenComponent,
   ],
   imports: [
     BrowserModule,

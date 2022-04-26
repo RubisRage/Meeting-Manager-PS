@@ -50,3 +50,7 @@
     border-color: #CFD8DC;
     z-index: 2;
 }
+
+a{
+    text-decoration: none; color:black
+}

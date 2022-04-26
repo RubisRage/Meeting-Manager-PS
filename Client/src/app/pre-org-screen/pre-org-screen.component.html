@@ -1,0 +1,12 @@
+<app-header-display></app-header-display>
+<div class="cont">
+    <div class="flex">
+        <a *ngFor="let organization of organizations" class="card"
+            [routerLink]="['/organization', organization.id]">
+            <p class="org-name">
+                {{organization.name}}
+            </p>
+        </a>
+    </div>
+
+</div>
