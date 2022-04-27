@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['../styles.css']
 })
 export class SignUpComponent{
- 
-  //Direccion a la que se redirigirá 
+
+  //Direccion a la que se redirigirá
 
   register = {
     username:"",
@@ -32,10 +32,14 @@ export class SignUpComponent{
   }
 
   submit(){
-    this.http.post(environment.backend + "/users/register", 
-    {username: this.register.username, 
-     fullname: this.register.fullname,
-     imgURL: "assets/pictures/profile.jpeg",
-     password: this.register.password});
+    this.http.post(environment.backend + "/users/register",
+    {
+      username: this.register.username,
+      fullname: this.register.fullname,
+      imgURL: "assets/pictures/profile.jpeg",
+      password: this.register.password
+    }).subscribe(() => {
+      this.router.navigate(["/login"]);
+    });
   }
 }
