@@ -12,15 +12,18 @@ import { LoggedUserService } from 'src/app/services/logged-user.service';
   styleUrls: ['./organization-display.component.css']
 })
 export class OrganizationDisplayComponent implements OnInit {
-  @Input () organizationSelection = "Selecciona tu Organización";
+  organizationSelection: string ;
   orgs: any;
   organizations!: {id:number, name:string}[];
   show: boolean;
-  
+  @Input () id! : number;
+  organization!:any;
+
 
   constructor(private http: HttpHelperService, 
     private dialog: MatDialog, private router: ActivatedRoute,
     private loggedUser: LoggedUserService) { 
+    this.organizationSelection = this.chooseOrganization();
     this.show = false;
   }
 
@@ -31,6 +34,25 @@ export class OrganizationDisplayComponent implements OnInit {
           this.organizations = data;
         }
       );
+  }
+
+  chooseOrganization(): string {
+    if (this.id==null){
+      return "Seleciona tu Organización"
+    }else{
+      this.router.params.subscribe(params => {
+        this.http.get(environment.backend + "/organizations/" + params['id'])
+          .subscribe((data => {
+            this.organization = {
+              id: data.id,
+              name: data.name,
+              description: data.description,
+              imgURL: data.imgURL
+            };
+          }));
+      });
+      return this.organization.name;
+    }
   }
 
   displayOrganization(){
