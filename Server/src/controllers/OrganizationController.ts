@@ -73,16 +73,32 @@ class OrganizationController{
         res.status(200).json(newOrganization);
     }
 
-    private getOrganization() {
+    private async getOrganization(req: Request, res: Response) {
+        const org = await ((await appDataSource)
+            .manager
+            .findOneBy(Organization, {
+                id: req.params.id
+            })
+        );
 
+        res.status(200).json(org);
     }
 
     private deleteOrganization() {
 
     }
 
-    private getMembers() {
+    private async getMembers(req: Request, res: Response) {
+        const members = await ((await appDataSource)
+            .getRepository(User)
+            .createQueryBuilder('users')
+            .leftJoin('belongs', 'b', 'b.username = users.username')
+            .where("b.id = :id", {id: req.params.id})
+            .leftJoinAndSelect('organization', 'organization', 'organization.id = b.id')
+            .getMany()
+        );
 
+        res.status(200).json(members);
     }
 
     private async addMember(req: Request, res: Response) {
