@@ -7,12 +7,14 @@ import { EditProfileComponent } from './main/edit-profile/edit-profile.component
 import { HeaderDisplayComponent } from './reusable/header-display/header-display.component';
 import { PreOrgScreenComponent } from './main/pre-org-screen/pre-org-screen.component';
 import { ErrorPageComponent } from './main/error-page/error-page.component';
+import { MainComponent } from './main/main.component';
 
 
 const routes: Routes = [
   {path: "", component: LoginComponent, pathMatch: 'full'},
   {path: "login" , component: LoginComponent},
   {path: "signup", component:SignUpComponent},
+  {path: "main", component:MainComponent},
   {path: "edit-profile", component: EditProfileComponent},
   {path: "organization", component:PreOrgScreenComponent},
   {path: "organization/:id", component:MainOrganizationComponent},
