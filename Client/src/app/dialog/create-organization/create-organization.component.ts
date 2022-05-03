@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {HttpHelperService} from "../services/http-helper.service";
-import {environment} from "../../environments/environment";
+import {HttpHelperService} from "../../services/http-helper.service";
+import {environment} from "../../../environments/environment";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({

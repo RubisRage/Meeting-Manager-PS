@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import { MainOrganizationComponent } from './organization/main-organization/main-organization.component';
-import { SignUpComponent } from './signup-form/signup-form.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component'
-import { HeaderDisplayComponent } from './organization/header-display/header-display.component';
-import { PreOrgScreenComponent } from './pre-org-screen/pre-org-screen.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
+import {LoginComponent} from "./main/unlogged/login/login.component";
+import { MainOrganizationComponent } from './main/main-organization/main-organization.component';
+import { SignUpComponent } from './main/unlogged/signup-form/signup-form.component';
+import { EditProfileComponent } from './main/edit-profile/edit-profile.component'
+import { HeaderDisplayComponent } from './reusable/header-display/header-display.component';
+import { PreOrgScreenComponent } from './main/pre-org-screen/pre-org-screen.component';
+import { ErrorPageComponent } from './main/error-page/error-page.component';
 
 
 const routes: Routes = [
