@@ -14,11 +14,13 @@ const routes: Routes = [
   {path: "", component: LoginComponent, pathMatch: 'full'},
   {path: "login" , component: LoginComponent},
   {path: "signup", component:SignUpComponent},
-  {path: "main", component:MainComponent},
-  {path: "edit-profile", component: EditProfileComponent},
-  {path: "organization", component:PreOrgScreenComponent},
-  {path: "organization/:id", component:MainOrganizationComponent},
-  {path: "header-display", component:HeaderDisplayComponent},
+  {path: "main", component:MainComponent, children: [
+    {path: "pre-org", component: PreOrgScreenComponent},
+    {path: "edit-profile", component: EditProfileComponent},
+    {path: "organization", component:PreOrgScreenComponent},
+    {path: "organization/:id", component:MainOrganizationComponent},
+    {path: "header-display", component:HeaderDisplayComponent}
+  ]},
   {path: "**", component:ErrorPageComponent}
  ];
 

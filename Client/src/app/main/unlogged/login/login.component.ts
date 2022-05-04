@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.auth.logged) {
-      this.router.navigate(["/main"]);
+      this.router.navigate(["/main/pre-org"]);
     }
   }
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginInformation)
       .subscribe({
         next: () => {
-          this.router.navigate(["/main"]);
+          this.router.navigate(["/main/pre-org"]);
         },
         error: err => {
           console.log("error");
