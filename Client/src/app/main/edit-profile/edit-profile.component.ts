@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {LoggedUserService} from "../services/logged-user.service";
-import {User} from "../types/user";
-import {environment} from "../../environments/environment"
-import {HttpHelperService} from "../services/http-helper.service";
-import {AuthHelperService} from "../services/auth-helper.service";
+import {LoggedUserService} from "../../services/logged-user.service";
+import {User} from "../../types/user";
+import {environment} from "../../../environments/environment"
+import {HttpHelperService} from "../../services/http-helper.service";
+import {AuthHelperService} from "../../services/auth-helper.service";
 import {Router} from "@angular/router";
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import {AuthHelperService} from "../services/auth-helper.service";
-import {environment} from "../../environments/environment";
+import {AuthHelperService} from "../../../services/auth-helper.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.auth.logged) {
-      this.router.navigate(["/organizations"]);
+      this.router.navigate(["/main/pre-org"]);
     }
   }
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginInformation)
       .subscribe({
         next: () => {
-          this.router.navigate(["/organization"]);
+          this.router.navigate(["/main/pre-org"]);
         },
         error: err => {
           console.log("error");
