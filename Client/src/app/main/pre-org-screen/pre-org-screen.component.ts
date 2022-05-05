@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpHelperService } from '../services/http-helper.service';
-import { LoggedUserService } from '../services/logged-user.service';
+import { HttpHelperService } from '../../services/http-helper.service';
+import { LoggedUserService } from '../../services/logged-user.service';
 
 @Component({
   selector: 'app-pre-org-screen',

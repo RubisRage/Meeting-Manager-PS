@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from "../../../../environments/environment";
 import { HttpHelperService } from 'src/app/services/http-helper.service';
-import { CreateOrganizationComponent } from 'src/app/create-organization/create-organization.component';
+import { CreateOrganizationComponent } from 'src/app/dialog/create-organization/create-organization.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoggedUserService } from 'src/app/services/logged-user.service';
