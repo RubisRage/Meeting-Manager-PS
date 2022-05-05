@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
-import { LoggedUserService } from 'src/app/services/logged-user.service';
 import { environment } from "../../../../environments/environment";
 
 @Component({
@@ -19,7 +18,7 @@ export class ProfileDisplayComponent implements OnInit {
   show: boolean;
 
   constructor(private http: HttpHelperService, 
-    public auth: AuthHelperService, private loggedUser:LoggedUserService) { 
+    public auth: AuthHelperService, private authService:AuthHelperService) { 
     this.username = "";
     this.fullname = "";
     this.imgURL = "";
@@ -27,7 +26,7 @@ export class ProfileDisplayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get(environment.backend + "/users/" + this.loggedUser.user?.username)
+    this.http.get(environment.backend + "/users/" + this.authService.user?.username)
     .subscribe(
       (data) => {
         this.userlogin = data;
@@ -39,13 +38,6 @@ export class ProfileDisplayComponent implements OnInit {
 
   changeShowAdd(): void {
     this.showAdd = !this.showAdd;
-    /*
-    if (this.showAdd == true){
-      this.showAdd = false;
-    }else if (this.showAdd == false){
-      this.showAdd = true;
-    }
-    */
     console.log(this.showAdd);
   }
 

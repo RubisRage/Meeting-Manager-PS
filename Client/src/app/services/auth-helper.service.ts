@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {TokenResponse} from "../types/token-response";
 import {Observable, concat} from "rxjs";
 import {environment} from "../../environments/environment";
-import {LoggedUserService} from "./logged-user.service";
 import {User} from "../types/user";
 
 @Injectable({
@@ -17,8 +16,7 @@ export class AuthHelperService {
   private _token: string | null = null;
   private _user!: User;
 
-  constructor(private http: HttpClient,
-              private loggedUser: LoggedUserService) {
+  constructor(private http: HttpClient) {
 
     this._token = localStorage.getItem(this.TOKEN_ID);
 
