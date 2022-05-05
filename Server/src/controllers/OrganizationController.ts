@@ -103,7 +103,7 @@ class OrganizationController{
 
     private async addMember(req: Request, res: Response) {
         const belongs = new Belongs();
-        belongs.username = req.params.username;
+        belongs.userId = req.params.username;
         belongs.id = req.params.id;
         belongs.isAdmin = false;
 
