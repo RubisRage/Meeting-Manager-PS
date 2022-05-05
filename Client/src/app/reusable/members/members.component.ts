@@ -21,7 +21,8 @@ export class MembersComponent implements OnInit {
   members:userInfo[] = [];
   id!: string;
 
-  constructor(private http:HttpHelperService, private router: ActivatedRoute) {}
+  constructor(private http:HttpHelperService, 
+    private router: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.router.params.subscribe(params => {
