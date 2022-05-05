@@ -11,51 +11,54 @@ import {User} from "../types/user";
 })
 export class AuthHelperService {
 
+  private readonly USER_ID = "user"
+  private readonly TOKEN_ID = "token"
+
   private _token: string | null = null;
+  private _user!: User;
 
   constructor(private http: HttpClient,
-              private loggedUser: LoggedUserService) {}
+              private loggedUser: LoggedUserService) {
+
+    this._token = localStorage.getItem(this.TOKEN_ID);
+
+    const userJson = localStorage.getItem(this.USER_ID);
+    if(userJson !== null) {
+      this._user = JSON.parse(userJson);
+    }
+
+  }
 
   public login(loginInformation: {username: string, password: string}): Observable<void> {
-    return concat(new Observable<void>(subscriber => {
+    return new Observable<void>(subscriber => {
       this.http.post<TokenResponse>(environment.backend + "/users/login", loginInformation).subscribe({
         next: tokenResponse => {
           this._token = tokenResponse.token;
+          localStorage.setItem(this.TOKEN_ID, this._token);
+
           this.http.get<User>(environment.backend + `/users/${loginInformation.username}`, {
-            headers: new HttpHeaders({
-              "Authorization": `Bearer ${this._token}`
-            })
-          }).subscribe(
-            user => {
-              this.loggedUser.user = user
-              subscriber.next();
-            }
-          );
+            headers: new HttpHeaders({"Authorization": `Bearer ${this._token}`})
+          }).subscribe((user) => {
+            this._user = user;
+            localStorage.setItem(this.USER_ID, JSON.stringify(this._user));
+            subscriber.next();
+          });
         },
         error: err => {
           subscriber.error(err);
         }
       });
-    })
-    );
+    });
   }
 
-//   this.http.get<User>(environment.backend + `/users/${loginInformation.username}`, {
-// headers: new HttpHeaders({
-// "Authorization": `Bearer ${this._token}`
-// })
-// }).subscribe(
-// user => {
-// this.loggedUser.user = user
-// }
-// );
-public logout(): boolean {
-if(!this.logged) return false;
+  public logout(): boolean {
+    if(!this.logged) return false;
 
-this._token = null;
-return true;
+    localStorage.clear();
+    this._token = null;
+
+    return true;
   }
-
 
   get token(): string | null {
     return this._token;
@@ -63,5 +66,9 @@ return true;
 
   get logged(): boolean {
     return this.token !== null;
+  }
+
+  get user(): User {
+    return this._user;
   }
 }

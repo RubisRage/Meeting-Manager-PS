@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/main/pre-org"]);
         },
         error: err => {
-          console.log("error");
+          console.log(err);
         }
       });
   }
