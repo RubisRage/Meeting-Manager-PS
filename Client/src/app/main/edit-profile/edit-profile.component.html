@@ -5,48 +5,30 @@
 
     <div class="horizontal-flex">
       <p>Username</p>
-      <input [placeholder]="userService.user?.username"
+      <input [placeholder]="authService.user?.username"
       required [(ngModel)]="user.username">
       <button (click)="ChangeUsername()"> Guardar </button>
     </div>
-
-
-
     <div class="horizontal-flex">
       <p>Fullname</p>
-      <input [placeholder]="userService.user?.fullname"
+      <input [placeholder]="authService.user?.fullname"
       required [(ngModel)]="user.fullname">
-
-
-
     </div>
-
     <div class="horizontal-flex">
       <p>Password</p>
       <input type="password"
       required [(ngModel)]="user.oldPassword">
-
-
-
-
     </div>
     <div class="horizontal-flex">
       <p>New Pass</p>
       <input type="password"
              required [(ngModel)]="user.newPassword">
       <button (click)="ChangePassword()"> Change </button>
-
-
-
     </div>
-
-
-
-
   </div>
 
   <div class="vertical-flex img-container">
-    <img [src]="userService.user?.imgURL" >
+    <img [src]="authService.user?.imgURL" >
     <input style="display:none" type="file">
     <button>Cambiar imagen</button>
   </div>
