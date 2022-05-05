@@ -1,39 +1,44 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { environment } from "../../../../environments/environment";
+import { environment } from '../../../../environments/environment';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { CreateOrganizationComponent } from 'src/app/dialog/create-organization/create-organization.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LoggedUserService } from 'src/app/services/logged-user.service';
+import { AuthHelperService } from 'src/app/services/auth-helper.service';
 
 @Component({
   selector: 'app-organization-display',
   templateUrl: './organization-display.component.html',
-  styleUrls: ['./organization-display.component.css']
+  styleUrls: ['./organization-display.component.css'],
 })
 export class OrganizationDisplayComponent implements OnInit {
-  organizationSelection: string ;
+  @Input() organizationSelection = 'Selecciona tu Organización';
   orgs: any;
-  organizations!: {id:number, name:string}[];
+  organizations!: { id: number; name: string }[];
   show: boolean;
   @Input () id! : number;
   organization!:any;
 
-
-  constructor(private http: HttpHelperService, 
-    private dialog: MatDialog, private router: ActivatedRoute,
-    private loggedUser: LoggedUserService) { 
+  constructor(
+    private http: HttpHelperService,
+    private dialog: MatDialog,
+    private router: ActivatedRoute,
+    private authService: AuthHelperService
+  ) {
     this.organizationSelection = this.chooseOrganization();
     this.show = false;
   }
 
   ngOnInit(): void {
-    this.http.get(environment.backend + "/users/" + this.loggedUser.user?.username + "/organizations")
-      .subscribe(
-        (data) => {
-          this.organizations = data;
-        }
-      );
+    this.http
+      .get(
+        environment.backend +
+          '/users/' +
+          this.authService.user?.username +
+          '/organizations'
+      )
+      .subscribe((data) => {
+        this.organizations = data;
+      });
   }
 
   chooseOrganization(): string {
@@ -55,24 +60,23 @@ export class OrganizationDisplayComponent implements OnInit {
     }
   }
 
-  displayOrganization(){
+  displayOrganization() {
     this.show = true;
   }
 
-  closeOrganization(){
+  closeOrganization() {
     this.show = false;
   }
 
-  errorm(){
-    console.log("error")
-    return "error";
+  errorm() {
+    console.log('error');
+    return 'error';
   }
 
-  openCreateOrganizationDialog(){
+  openCreateOrganizationDialog() {
     this.dialog.open(CreateOrganizationComponent, {
       height: '80vh',
-      width: '80vw'
-    })
+      width: '80vw',
+    });
   }
-
 }
