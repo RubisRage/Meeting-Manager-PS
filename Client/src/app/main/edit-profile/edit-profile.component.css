@@ -12,6 +12,9 @@ input {
   margin: 5em;
   padding: 5em;
 }
+button{
+  border-radius: 2em;
+}
 
 .img-container {
    background-color: #104F5B;
@@ -20,7 +23,10 @@ input {
 
 .horizontal-flex > * {
   margin: .5em;
+
 }
+
+
 
 .warning-button {
   background-color: #900020;
