@@ -1,5 +1,5 @@
 .content{
-    width: 175px;
+    width: 251px;
     height: 100vh;
     transition: all 0.5s ease;
     overflow-y: auto;
@@ -7,6 +7,7 @@
 
 .head{
     background-color: #53A4BD;
+    border: 3px solid #53A4BD;
     padding: 5px;
     color: whitesmoke;
 }
@@ -20,6 +21,7 @@ h2.title{
 
 div.bg-members{
     background-color: #FCE5BA;
+    border-left: 3px solid #FCE5BA;
     height: 85vh;
 }
 
@@ -40,7 +42,7 @@ p.padding:hover{
 
 @media screen and (max-width: 900px) {
     .content{
-        width: 150px;
+        width: 156px;
     }
     p.padding{
         padding: 5px 0;
