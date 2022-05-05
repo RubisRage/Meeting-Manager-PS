@@ -17,20 +17,20 @@
     height: 81px;
     width: 245px;
     line-height: 50px;
-    text-align: center;
-    vertical-align: middle;
-    margin: 0%;
-    /*padding: 0px 25px;*/
+    margin: 0;
 }
 
 .conteiner-profile:hover{
     border-color: whitesmoke;
-    background-color: #22768C95;
-
 }
 
-.style-letter{
-    color: white;
+.style-letter, p{
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+p{
+    padding-left: 10px;
 }
 
 a{
@@ -66,7 +66,7 @@ a{
     height: 47px;
     border-radius: 10px;
     
-  }
+}
 
 @media screen and (max-width: 900px) {
     .conteiner-profile{

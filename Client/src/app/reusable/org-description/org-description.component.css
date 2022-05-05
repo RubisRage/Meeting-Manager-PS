@@ -1,8 +1,7 @@
 .green-bg{
-    width: 245px;
+    width: 251px;
     height: 100vh;
     background-color: #104F5B;
-    border: 3px solid #104F5B;
     margin: 0px;
     transition: all 0.5s ease;
     overflow-y: auto;
@@ -36,7 +35,7 @@ p#description{
 
 @media screen and (max-width: 900px) {
     .green-bg{
-        width: 250px;
+        width: 251px;
     }
 }
 
