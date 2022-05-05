@@ -1,7 +1,13 @@
 <div class="header-display">
     <ul>
-        <li><app-organization-display ></app-organization-display></li>
-        <li class="push-right "><app-profile-display></app-profile-display></li>
+        <div class="horizontal-flex">
+            <li><app-organization-display ></app-organization-display></li>
+            <li><app-commission-display *ngIf="show"></app-commission-display></li>
+        </div>
+        <div class="push-right horizontal-flex">
+            <li><app-user-role-display *ngIf="show"></app-user-role-display></li>
+            <li><app-profile-display></app-profile-display></li>
+        </div>
     </ul>
 
 </div>
