@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthHelperService } from 'src/app/services/auth-helper.service';
 import { environment } from 'src/environments/environment';
 import { HttpHelperService } from '../../services/http-helper.service';
-import { LoggedUserService } from '../../services/logged-user.service';
 
 @Component({
   selector: 'app-pre-org-screen',
@@ -13,7 +13,7 @@ export class PreOrgScreenComponent implements OnInit {
   organizations!: {id:number, name:string}[];
 
   constructor(private http: HttpHelperService,
-    private loggedUser:LoggedUserService) { }
+    private authService:AuthHelperService) { }
 
   ngOnInit(): void {
     /*
@@ -25,7 +25,7 @@ export class PreOrgScreenComponent implements OnInit {
     ];
     */
     
-    this.http.get(environment.backend + "/users/" + this.loggedUser.user?.username + "/organizations")
+    this.http.get(environment.backend + "/users/" + this.authService.user?.username + "/organizations")
       .subscribe(
         (data) => {
           this.organizations = data;

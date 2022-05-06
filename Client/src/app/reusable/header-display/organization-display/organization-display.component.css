@@ -1,11 +1,16 @@
+/* :root{
+    --component-height: 245px;
+    --component-width: 81px;
+} */
+
 .select-one{
     background: #22768C;
     color: white;
     border: 3px solid #22768C;
     cursor: pointer;
     transition: 0.5s;
-    height: 81px;
     width: 245px;
+    height: 81px;
     line-height: 80px;
     text-align: center;
     vertical-align: middle;
@@ -27,8 +32,8 @@
 .vertical-flex > a{
     margin: 5px;
     background-color: #C4C4C4;
-    width: 197.59px;
-    height: 47px;
+    width: 200px;
+    height: 50px;
     border-radius: 10px;
     text-align: center;
     vertical-align: middle;
@@ -48,3 +53,4 @@
 a{
     text-decoration: none; color:black
 }
+

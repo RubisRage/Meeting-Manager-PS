@@ -26,11 +26,16 @@
 
 .invalid-feedback{
     color: #EEE;
+    text-align: center;
     box-shadow: 0px 5px 10px #991E1E25;
     background-color: #991E1E75;
     border-radius: 10px;
     margin-top: 5px;
     padding: 5px;    
+}
+
+.error{
+    margin: 0;
 }
 
 input[type="text"],

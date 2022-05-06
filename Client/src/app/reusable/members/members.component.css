@@ -1,5 +1,5 @@
 .content{
-    width: 175px;
+    width: 251;
     height: 100vh;
     transition: all 0.5s ease;
     overflow-y: auto;
@@ -40,7 +40,7 @@ p.padding:hover{
 
 @media screen and (max-width: 900px) {
     .content{
-        width: 150px;
+        width: 156px;
     }
     p.padding{
         padding: 5px 0;

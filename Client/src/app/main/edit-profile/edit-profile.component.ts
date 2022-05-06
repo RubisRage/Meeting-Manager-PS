@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoggedUserService} from "../../services/logged-user.service";
-import {User} from "../../types/user";
 import {environment} from "../../../environments/environment"
 import {HttpHelperService} from "../../services/http-helper.service";
 import {AuthHelperService} from "../../services/auth-helper.service";
-import {Router} from "@angular/router";
 
 
 @Component({
@@ -26,8 +23,7 @@ export class EditProfileComponent implements OnInit{
   }
 
 
-  constructor(public userService: LoggedUserService,
-              private router: Router,
+  constructor(public authService: AuthHelperService,
               private http: HttpHelperService,
               private AuthHelper:AuthHelperService) { }
 
@@ -46,7 +42,7 @@ export class EditProfileComponent implements OnInit{
 
 }
   ChangePassword(){
-    this.http.put(environment.backend+"/users/"+this.userService.user!.username +"/password",{
+    this.http.put(environment.backend+"/users/"+this.AuthHelper.user!.username +"/password",{
       oldPassword:this.user.oldPassword,
       newPassword:this.user.newPassword
     }).subscribe();
@@ -54,7 +50,7 @@ export class EditProfileComponent implements OnInit{
 
 
   Delete(){
-    this.http.delete(environment.backend+"/users/" + this.userService.user!.username)
+    this.http.delete(environment.backend+"/users/" + this.AuthHelper.user!.username)
   }
 
 
