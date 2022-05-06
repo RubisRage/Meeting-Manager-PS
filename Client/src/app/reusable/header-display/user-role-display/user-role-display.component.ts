@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { CreateOrganizationComponent } from 'src/app/dialog/create-organization/create-organization.component';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
-import { LoggedUserService } from 'src/app/services/logged-user.service';
+
 
 @Component({
   selector: 'app-user-role-display',
@@ -11,17 +9,21 @@ import { LoggedUserService } from 'src/app/services/logged-user.service';
   styleUrls: ['./user-role-display.component.css']
 })
 export class UserRoleDisplayComponent implements OnInit {
-  @Input () userRole = "Supongamos que pone el ROL del usuario";
-  orgs: any;
-  organizations!: {id:number, name:string}[];
-  show: boolean;
+  userRole!: string;
+  show!: boolean;
+  admin!: boolean;
   
 
-  constructor(private dialog: MatDialog) { 
-    this.show = false;
+  constructor(
+    private dialog: MatDialog,
+    private http: HttpHelperService
+    ) { 
+
+      this.admin=false;
   }
 
   ngOnInit(): void {
+    this.isAdmin();
  
   }
 
@@ -36,6 +38,15 @@ export class UserRoleDisplayComponent implements OnInit {
   errorm(){
     console.log("error")
     return "error";
+  }
+
+  isAdmin(){
+    if(this.admin==true){
+      this.show=true;
+      this.userRole='Administrador';
+    }else{
+      this.show=false;
+    }
   }
 
 

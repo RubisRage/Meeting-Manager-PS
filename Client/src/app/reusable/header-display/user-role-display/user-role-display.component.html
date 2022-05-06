@@ -1,10 +1,9 @@
-<div class="organization-display" (mouseenter)="displayOrganization()" (mouseleave)="closeOrganization()">
+<div class="organization-display" (mouseenter)="displayOrganization()" (mouseleave)="closeOrganization()" *ngIf="show">
     <p class="select-one">{{userRole}}</p>
     <div class="select-organization" (mouseleave)="closeOrganization()" *ngIf="show">
-        <div class="vertical-flex" *ngIf="show">
-            <a *ngFor="let o of organizations" 
-                [routerLink]="['/main/organization', o.id]" >
-                {{o.name}}
+        <div class="vertical-flex">
+            <a>
+
             </a>
         </div>
     </div>
