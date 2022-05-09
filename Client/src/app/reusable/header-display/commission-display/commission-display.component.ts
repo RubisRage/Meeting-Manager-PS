@@ -14,15 +14,15 @@ export class CommissionDisplayComponent implements OnInit {
   orgs: any;
   organizations!: {id:number, name:string}[];
   show: boolean;
-  
 
-  constructor(private http: HttpHelperService, 
-    private dialog: MatDialog, private router: ActivatedRoute,) { 
+
+  constructor(private http: HttpHelperService,
+    private dialog: MatDialog, private router: ActivatedRoute) {
     this.show = false;
   }
 
   ngOnInit(): void {
- 
+
   }
 
   displayOrganization(){
