@@ -152,8 +152,45 @@ class OrganizationController{
         res.status(200).json({message: "User added to organization successfully!"});
     }
 
-    private removeMember() {
+    private async removeMember(req: Request, res: Response) {
+        const connection = await appDataSource;
 
+        const requesterBelongEntry = await connection
+                .getRepository(Belongs)
+                .createQueryBuilder('b')
+                .where('b.userId = :userId', {userId: req.userId})
+                .andWhere('b.isAdmin = TRUE')
+                .getOne();
+
+        if(!requesterBelongEntry) {
+            res.status(400).json({
+                message: "Bad request, requester does not have permission to do this operation!"
+            });
+
+            return;
+        }
+
+        const entryToBeRemoved = await connection
+                .getRepository(Belongs)
+                .createQueryBuilder('b')
+                .leftJoinAndSelect('users', 'u', 'b.userId = u.userId')
+                .where('b.id = :id', {id: req.params.id})
+                .andWhere('u.username = :username', {username: req.params.username})
+                .andWhere('b.isAdmin = FALSE')
+                .getOne();
+
+        if(!entryToBeRemoved) {
+            res.status(404).json({
+                message: "The specified user does not exist, does not belong to the specified organization " +
+                    "or is the administrator of the specified organization"
+            });
+
+            return;
+        }
+
+        await connection.getRepository(Belongs).remove(entryToBeRemoved);
+
+        res.status(200).json({message: "User removed from organization!"})
     }
 
     private updateAdmin() {
