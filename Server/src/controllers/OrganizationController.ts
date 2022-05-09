@@ -7,7 +7,7 @@ import Belongs from "../models/Belongs";
 
 class OrganizationController{
 
-    private router: Router;
+    private readonly router: Router;
 
     constructor(){
         this.router = Router();
@@ -55,20 +55,29 @@ class OrganizationController{
         newOrganization.name = name;
         newOrganization.description = description;
         newOrganization.imgURL = imgURL;
-        await ((await appDataSource)
-                .manager
-                .save(newOrganization)
-        );
+
+        try {
+            await ((await appDataSource)
+                    .manager
+                    .save(newOrganization)
+            );
+        } catch(err) {
+            console.log(err)
+        }
 
         const belongs = new Belongs();
         belongs.isAdmin = true;
         belongs.user = user;
         belongs.organization = newOrganization;
 
-        await ((await appDataSource)
-                .manager
-                .save(belongs)
-        );
+        try {
+            await ((await appDataSource)
+                    .manager
+                    .save(belongs)
+            );
+        } catch(err) {
+            console.log(err);
+        }
 
         res.status(200).json(newOrganization);
     }
@@ -92,7 +101,7 @@ class OrganizationController{
         const members = await ((await appDataSource)
             .getRepository(User)
             .createQueryBuilder('users')
-            .leftJoin('belongs', 'b', 'b.username = users.username')
+            .leftJoin('belongs', 'b', 'b.userId = users.userId')
             .where("b.id = :id", {id: req.params.id})
             .leftJoinAndSelect('organization', 'organization', 'organization.id = b.id')
             .getMany()
