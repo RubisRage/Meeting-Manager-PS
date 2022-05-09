@@ -50,7 +50,7 @@ class UserController{
         bcrypt.compare(password, user.pwhash, (err, result) => {
             if(result) {
                 res.status(200).json({
-                    token: generateToken(user.username)
+                    token: generateToken(user.userId)
                 });
             } else {
                 res.status(400).json({
@@ -135,7 +135,7 @@ class UserController{
         }
 
 
-        const result = await ((await appDataSource)
+        await ((await appDataSource)
                 .createQueryBuilder()
                 .update(User)
                 .set({
@@ -147,20 +147,11 @@ class UserController{
                 .execute()
         );
 
-        if(username !== req.username) {
-            res.status(200).json({
-                username: username,
-                fullname: fullname,
-                imgURL: imgURL,
-                token: generateToken(username)
-            });
-        } else {
-            res.status(200).json({
-                username: username,
-                fullname: fullname,
-                imgURL: imgURL
-            });
-        }
+        res.status(200).json({
+            username: username,
+            fullname: fullname,
+            imgURL: imgURL
+        });
     }
 
     private async deleteUser(req: Request, res: Response){

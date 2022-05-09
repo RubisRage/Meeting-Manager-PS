@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { CreateOrganizationComponent } from 'src/app/dialog/create-organization/create-organization.component';
-import { HttpHelperService } from 'src/app/services/http-helper.service';
-import { LoggedUserService } from 'src/app/services/logged-user.service';
 
 @Component({
   selector: 'app-user-role-display',
@@ -15,14 +11,14 @@ export class UserRoleDisplayComponent implements OnInit {
   orgs: any;
   organizations!: {id:number, name:string}[];
   show: boolean;
-  
 
-  constructor(private dialog: MatDialog) { 
+
+  constructor(private dialog: MatDialog) {
     this.show = false;
   }
 
   ngOnInit(): void {
- 
+
   }
 
   displayOrganization(){

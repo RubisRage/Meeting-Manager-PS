@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {TokenResponse} from "../types/token-response";
-import {Observable, concat} from "rxjs";
+import {Observable, concat, firstValueFrom} from "rxjs";
 import {environment} from "../../environments/environment";
 import {User} from "../types/user";
 
@@ -46,6 +46,30 @@ export class AuthHelperService {
           subscriber.error(err);
         }
       });
+    });
+  }
+
+  public updateUser(username?: string, fullname?: string) {
+    const data: any = {};
+
+    if(username !== undefined)
+      data.username = username;
+    else
+      data.username = this._user.username;
+
+    if(fullname !== undefined)
+      data.fullname = fullname;
+    else
+      data.fullname = this._user.fullname;
+
+    data.imgURL = this._user.imgURL;
+
+    const headers = new HttpHeaders({"Authorization": `Bearer ${this._token}`});
+
+    this.http.put<User>(`${environment.backend}/users/${this._user.username}`, data, {headers: headers})
+      .subscribe(async (res) => {
+      this._user = res;
+      localStorage.setItem(this.USER_ID, JSON.stringify(this._user));
     });
   }
 

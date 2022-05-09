@@ -4,6 +4,7 @@ import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { CreateOrganizationComponent } from 'src/app/dialog/create-organization/create-organization.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-organization-display',
