@@ -25,24 +25,15 @@ export class EditProfileComponent implements OnInit{
 
 
   constructor(public authService: AuthHelperService,
-              private http: HttpHelperService) { }
+              private http: HttpHelperService,
+              private auth: AuthHelperService) { }
 
   ChangeUsername(){
-    this.http.put(environment.backend +"/users/" + this.authService.user!.username , {
-      username: this.user.username,
-      fullname: this.authService.user!.fullname,  //change
-      imgURL: this.authService.user!.imgURL,
-      token:this.authService.token
-    }).subscribe(() => {
-      this.http.get<User>(environment.backend + `/users/${this.authService}`)
-        .subscribe(user => {
-          this.authService.user.username = user.username;
-        })
-    });
+    this.auth.updateUser(this.user.username);
   }
 
   ChangePassword(){
-    this.http.put(environment.backend+"/users/"+this.authService.user!.username +"/password",{
+    this.http.put(environment.backend+"/users/"+this.auth.user!.username +"/password",{
       oldPassword:this.user.oldPassword,
       newPassword:this.user.newPassword
     }).subscribe();
@@ -50,7 +41,7 @@ export class EditProfileComponent implements OnInit{
 
 
   Delete(){
-    this.http.delete(environment.backend+"/users/" + this.authService.user!.username)
+    this.http.delete(environment.backend+"/users/" + this.auth.user!.username)
   }
 
 

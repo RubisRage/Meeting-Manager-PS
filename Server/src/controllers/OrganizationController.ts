@@ -21,11 +21,10 @@ class OrganizationController{
 
     private routes(){
         this.router.post("/", AuthMiddleware.check, this.createOrganization);
-        this.router.route("/:id")
-            .get(AuthMiddleware.check, this.getOrganization)
-            .delete(AuthMiddleware.check, this.deleteOrganization);
+        this.router.delete("/:id", AuthMiddleware.check, this.deleteOrganization);
         this.router.get("/:id/users", this.getMembers);
         this.router.route("/:id/users/:username")
+            .get(AuthMiddleware.check, this.getOrganization)
             .post(AuthMiddleware.check, this.addMember)
             .delete(AuthMiddleware.check, this.removeMember)
             .put(AuthMiddleware.check, this.updateAdmin);
@@ -42,7 +41,7 @@ class OrganizationController{
         const user = await ((await appDataSource)
                 .manager
                 .findOneBy(User, {
-                    username: req.username
+                    userId: req.userId
                 })
         );
 
@@ -83,14 +82,23 @@ class OrganizationController{
     }
 
     private async getOrganization(req: Request, res: Response) {
-        const org = await ((await appDataSource)
-            .manager
-            .findOneBy(Organization, {
-                id: req.params.id
-            })
-        );
+        // const org = await ((await appDataSource)
+        //     .manager
+        //     .findOneBy(Organization, {
+        //         id: req.params.id
+        //     })
+        // );
+        const resBody: any = {};
 
-        res.status(200).json(org);
+        const var1 = await ((await appDataSource)
+                .createQueryBuilder(Belongs, 'b')
+                .leftJoinAndSelect('organization', 'org', 'org.id = b.id' )
+                .getMany()
+        )
+
+        console.log(var1);
+
+        res.status(200).json(resBody);
     }
 
     private deleteOrganization() {
@@ -111,8 +119,20 @@ class OrganizationController{
     }
 
     private async addMember(req: Request, res: Response) {
+        const newMember = await ((await appDataSource)
+                .manager
+                .findOneBy(User, {
+                    username: req.params.username
+                })
+        )
+
+        if(!newMember) {
+            res.status(404).json({message: "Specified user does not exist"})
+            return;
+        }
+
         const belongs = new Belongs();
-        belongs.userId = req.params.username;
+        belongs.userId = newMember.userId;
         belongs.id = req.params.id;
         belongs.isAdmin = false;
 

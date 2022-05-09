@@ -6,7 +6,7 @@ import User from "../models/User";
 declare global {
     namespace Express {
         interface Request {
-            username: any
+            userId: any
         }
     }
 }
@@ -52,7 +52,7 @@ class AuthMiddleware{
             }
 
 
-            req.username = decoded.username;
+            req.userId = decoded.userId;
 
             next();
         }else{
