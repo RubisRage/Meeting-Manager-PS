@@ -22,7 +22,8 @@ export class Belongs{
     user!: User
 
     @ManyToOne(() => Organization, (organization: Organization) => organization.belongsToOrganizations, {
-        createForeignKeyConstraints: true
+        createForeignKeyConstraints: true,
+        onDelete: "CASCADE"
     })
     @JoinColumn({name: 'id'})
     organization!: Organization
