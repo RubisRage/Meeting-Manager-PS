@@ -3,8 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CreateOrganizationComponent } from 'src/app/dialog/create-organization/create-organization.component';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
-import { LoggedUserService } from 'src/app/services/logged-user.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-commission-display',
@@ -19,8 +17,7 @@ export class CommissionDisplayComponent implements OnInit {
   
 
   constructor(private http: HttpHelperService, 
-    private dialog: MatDialog, private router: ActivatedRoute,
-    private loggedUser: LoggedUserService) { 
+    private dialog: MatDialog, private router: ActivatedRoute,) { 
     this.show = false;
   }
 
