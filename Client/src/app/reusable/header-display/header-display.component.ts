@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-display',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderDisplayComponent implements OnInit {
 
-  constructor() { }
+  show!: boolean ;
 
-  ngOnInit(): void {
+  constructor(private router: Router) { 
   }
 
+  ngOnInit(): void {
+    this.showCommission();
+    this.router.events.subscribe(()=>this.showCommission());
+  }
+
+  async showCommission(){
+      const url = this.router.url;
+      let segments: string[] = url.split("/");
+      this.show = segments[2] === "organization"
+                  && segments[3] !== undefined;
+  }
 }

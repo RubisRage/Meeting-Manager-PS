@@ -106,11 +106,13 @@ class UserController{
 
     private async getUser(req: Request, res: Response){
         const user = await ((await appDataSource)
-                .manager
-                .findOneBy(User, {
-                    username: req.params.username
-                })
+                .getRepository(User)
+                .createQueryBuilder()
+                .select()
+                .where("username = :username", {username: req.params.username})
+                .getOne()
         );
+
 
         if(user === null) {
             res.status(404).json({message: "User not found!"})
@@ -221,8 +223,8 @@ class UserController{
                 .getRepository(Organization)
                 .createQueryBuilder('organization')
                 .leftJoin('belongs', 'b', 'b.id = organization.id')
-                .where("b.username = :username", {username: req.params.username})
-                .leftJoinAndSelect('users', 'user', 'user.username = b.username')
+                .leftJoinAndSelect('users', 'user', 'user.userId = b.userId')
+                .where("user.username = :username", {username: req.params.username})
                 .getMany()
         );
 

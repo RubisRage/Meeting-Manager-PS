@@ -5,7 +5,7 @@ import User from "./User";
 @Entity({ name: "belongs" })
 export class Belongs{
     @PrimaryColumn()
-    username!: string
+    userId!: string
 
     @PrimaryColumn()
     id!: string
@@ -18,7 +18,7 @@ export class Belongs{
     @ManyToOne(() => User, (user: User) => user.belongsToOrganizations, {
         createForeignKeyConstraints: true
     })
-    @JoinColumn({name: 'username'})
+    @JoinColumn({name: 'userId'})
     user!: User
 
     @ManyToOne(() => Organization, (organization: Organization) => organization.belongsToOrganizations, {

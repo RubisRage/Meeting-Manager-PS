@@ -1,10 +1,14 @@
-import {Entity, PrimaryColumn, Column, OneToMany, ManyToMany} from "typeorm";
+import {Entity, PrimaryColumn, Column, OneToMany, ManyToMany, PrimaryGeneratedColumn} from "typeorm";
 import Organization from "./Organization";
 import Belongs from "./Belongs";
 
 @Entity({ name: "users", synchronize: true})
 export class User{
-    @PrimaryColumn()
+
+    @PrimaryGeneratedColumn("uuid")
+    userId!: string;
+
+    @Column({unique: true, nullable: false})
     username!: string;
 
     @Column() 

@@ -22,6 +22,8 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { PreOrgScreenComponent } from './main/pre-org-screen/pre-org-screen.component';
 import { ErrorPageComponent } from './main/error-page/error-page.component';
 import { MainComponent } from './main/main.component';
+import { CommissionDisplayComponent } from './reusable/header-display/commission-display/commission-display.component';
+import { UserRoleDisplayComponent } from './reusable/header-display/user-role-display/user-role-display.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { MainComponent } from './main/main.component';
     PreOrgScreenComponent,
     ErrorPageComponent,
     MainComponent,
+    CommissionDisplayComponent,
+    UserRoleDisplayComponent,
   ],
   imports: [
     BrowserModule,

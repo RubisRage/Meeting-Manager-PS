@@ -1,0 +1,12 @@
+<div class="organization-display" (mouseenter)="displayOrganization()" (mouseleave)="closeOrganization()">
+    <p class="select-one">{{commissionSelection}}</p>
+    <div class="select-organization" (mouseleave)="closeOrganization()" *ngIf="show">
+        <div class="vertical-flex" *ngIf="show">
+            <a *ngFor="let o of organizations" 
+                [routerLink]="['/main/organization', o.id]" >
+                {{o.name}}
+            </a>
+            <img src="../../../../assets/pictures/MAS.png" alt="Añadir Orga0nización" (click)="openCreateOrganizationDialog()" style="cursor: pointer;">
+        </div>
+    </div>
+</div>

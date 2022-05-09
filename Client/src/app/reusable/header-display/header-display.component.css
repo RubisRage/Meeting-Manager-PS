@@ -14,4 +14,12 @@
 }
 .header-display > li {
     margin: 0 10px;
+
 }
+
+.horizontal-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
