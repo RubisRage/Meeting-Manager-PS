@@ -42,10 +42,16 @@ export class SignUpComponent{
       next: () => {
         this.router.navigate(["/login"]);
       },
-    
-      error: (error) => {
+      error: err => {
         this.show_error = true;
-        this.error_message = error.error.message.split(',')[1].trim()/*.toUpperCase()*/;
+        let e = "";
+        switch(err.error.message.split(',')[1].trim()){
+          case "user already exists!":
+            e = "Ya existe un usuario con ese nombre de usuario"; break;
+          default:
+            e = "Hubo un error inesperado"; break;
+        }
+        this.error_message = e;
       }
     });
   }

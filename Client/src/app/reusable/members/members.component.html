@@ -3,19 +3,21 @@
         <h2 class="title">MIEMBROS</h2>
     </div>
     <div class="bg-members">
-        <div *ngIf="isAdmin; else cont" class="flex">
-            <a *ngFor="let member of members" 
-                class="admin" (click)="onClick();">
-                <img src="../../../assets/pictures/delete.png" width="25px" height="25px">
-                <!-- {{member.username}}<br/> -->
-                <p>{{member}}</p><br/>
+        <div *ngIf="orgInfo.isAdmin; else cont" class="flex">
+            <a *ngFor="let member of members"  (click)="onClick();">
+                <div *ngIf="member.username !== auth.user!.username; else user" class="admin">
+                    <img src="../../../assets/pictures/delete.png" width="25px" height="25px">
+                    <p >{{member.username}}</p><br/>
+                </div>
+                <ng-template #user>
+                    <p class="user">{{member.username}}</p><br/>
+                </ng-template>
             </a>
         </div>
 
         <ng-template #cont>
             <p *ngFor="let member of members" class="user">
-                <!-- {{member.username}}<br/> -->
-                {{member}}<br/>
+                 {{member.username}}<br/>
             </p>
         </ng-template>
     </div>
