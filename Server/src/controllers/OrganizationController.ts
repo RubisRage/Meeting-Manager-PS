@@ -110,7 +110,33 @@ class OrganizationController{
         }
     }
 
-    private deleteOrganization() {
+    private async deleteOrganization(req: Request, res: Response) {
+        const connection = await appDataSource;
+
+        const admin = await connection
+            .getRepository(Belongs)
+            .createQueryBuilder('b')
+            .where('b.id = :id', {id: req.params.id})
+            .andWhere('b.isAdmin = TRUE')
+            .getOne();
+
+        if(!admin){
+            res.status(500).json({message: "Server error."})
+            return;
+        }
+
+        if(admin.userId === req.userId) {
+            await connection
+                .getRepository(Organization)
+                .createQueryBuilder()
+                .delete()
+                .where('organization.id = :id', {id: req.params.id})
+                .execute();
+
+            res.status(200).json({message: "Organization deleted succesfully!"});
+        } else {
+            res.status(403).json({message: "Permission denied."});
+        }
 
     }
 
@@ -152,12 +178,89 @@ class OrganizationController{
         res.status(200).json({message: "User added to organization successfully!"});
     }
 
-    private removeMember() {
+    private async removeMember(req: Request, res: Response) {
+        const connection = await appDataSource;
 
+        const requesterBelongEntry = await connection
+                .getRepository(Belongs)
+                .createQueryBuilder('b')
+                .where('b.userId = :userId', {userId: req.userId})
+                .andWhere('b.isAdmin = TRUE')
+                .getOne();
+
+        if(!requesterBelongEntry) {
+            res.status(400).json({
+                message: "Bad request, requester does not have permission to do this operation!"
+            });
+
+            return;
+        }
+
+        const entryToBeRemoved = await connection
+                .getRepository(Belongs)
+                .createQueryBuilder('b')
+                .leftJoinAndSelect('users', 'u', 'b.userId = u.userId')
+                .where('b.id = :id', {id: req.params.id})
+                .andWhere('u.username = :username', {username: req.params.username})
+                .andWhere('b.isAdmin = FALSE')
+                .getOne();
+
+        if(!entryToBeRemoved) {
+            res.status(404).json({
+                message: "The specified user does not exist, does not belong to the specified organization " +
+                    "or is the administrator of the specified organization"
+            });
+
+            return;
+        }
+
+        await connection.getRepository(Belongs).remove(entryToBeRemoved);
+
+        res.status(200).json({message: "User removed from organization!"})
     }
 
-    private updateAdmin() {
+    private async updateAdmin(req: Request, res: Response) {
+        const connection = await appDataSource;
 
+        const originalAdmin = await connection
+            .getRepository(Belongs)
+            .createQueryBuilder('b')
+            .where('b.id = :id', {id: req.params.id})
+            .andWhere('b.isAdmin = TRUE')
+            .andWhere('b.userId = :userId', {userId: req.userId})
+            .getOne();
+
+        if(!originalAdmin) {
+            res.status(403).json({
+                message: "Requester is not admin of the specified organization!"
+            })
+
+            return;
+        }
+
+        const newAdmin = await connection
+            .getRepository(Belongs)
+            .createQueryBuilder('b')
+            .leftJoinAndSelect('users', 'u', 'b.userId = u.userId')
+            .where('b.id = :id', {id: req.params.id})
+            .andWhere('u.username = :username', {username: req.params.username})
+            .getOne()
+
+        if(!newAdmin) {
+            res.status(404).json({
+                message: "Specified user does not belong to the specified organization!"
+            })
+
+            return;
+        }
+
+        originalAdmin.isAdmin = false;
+        newAdmin.isAdmin = true;
+
+        connection.manager.save(originalAdmin);
+        connection.manager.save(newAdmin);
+
+        res.status(200).json({message: "Administrator updated succesfully!"})
     }
 }
 

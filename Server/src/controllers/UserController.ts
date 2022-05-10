@@ -155,15 +155,36 @@ class UserController{
     }
 
     private async deleteUser(req: Request, res: Response){
-        await ((await appDataSource)
-            .createQueryBuilder()
-            .delete()
-            .from(User)
-            .where("username = :username", {username: req.params.username})
-            .execute()
-        );
+        const connection = await appDataSource;
 
-        res.status(200).json({ message: 'User deleted successfully!'});
+        const memberOf = await connection
+            .getRepository(Belongs)
+            .createQueryBuilder('b')
+            .leftJoinAndSelect('users', 'u', 'u.userId = b.userId')
+            .where('u.username = :username', {username: req.params.username})
+            .getMany();
+
+        if(memberOf.length > 0) {
+            res.status(400).json({
+                message: "Bad request, a user cannot be removed before abandoning all organizations"
+            })
+        } else {
+            const toBeRemoved = await connection
+                .getRepository(User)
+                .createQueryBuilder('u')
+                .where('u.userId = :userId', {userId: req.userId})
+                .getOne();
+
+            if(!toBeRemoved) {
+                res.status(500).json({message: "Server error!"})
+                return;
+            }
+
+            await connection.getRepository(User).remove(toBeRemoved);
+
+            res.status(200).json({ message: 'User deleted successfully!'});
+        }
+
     }
 
     private async updatePassword(req: Request, res: Response) {

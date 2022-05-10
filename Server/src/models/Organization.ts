@@ -20,7 +20,8 @@ class Organization {
     })
     imgURL!: string;
 
-    @OneToMany(() => Belongs, belongsToOrganizations => belongsToOrganizations.user)
+    @OneToMany(() => Belongs,
+     belongsToOrganizations => belongsToOrganizations.user)
     belongsToOrganizations!: Belongs[];
 }
 
