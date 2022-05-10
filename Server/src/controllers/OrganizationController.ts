@@ -31,6 +31,7 @@ class OrganizationController{
     }
 
     private async createOrganization(req: Request, res: Response) {
+        const connection = await appDataSource;
         const {name, description, imgURL} = req.body;
 
         if(name === undefined || description === undefined || imgURL === undefined) {
@@ -38,12 +39,12 @@ class OrganizationController{
             return;
         }
 
-        const user = await ((await appDataSource)
-                .manager
-                .findOneBy(User, {
-                    userId: req.userId
-                })
-        );
+        const user = await connection
+            .manager
+            .findOneBy(User, {
+                userId: req.userId
+            })
+
 
         if(!user) {
             res.status(400).json({message: "Bad request, user not found!"});
@@ -56,10 +57,9 @@ class OrganizationController{
         newOrganization.imgURL = imgURL;
 
         try {
-            await ((await appDataSource)
-                    .manager
-                    .save(newOrganization)
-            );
+            await connection
+                .manager
+                .save(newOrganization)
         } catch(err) {
             console.log(err)
         }
@@ -70,10 +70,9 @@ class OrganizationController{
         belongs.organization = newOrganization;
 
         try {
-            await ((await appDataSource)
-                    .manager
-                    .save(belongs)
-            );
+            await connection
+                .manager
+                .save(belongs)
         } catch(err) {
             console.log(err);
         }
@@ -82,22 +81,22 @@ class OrganizationController{
     }
 
     private async getOrganization(req: Request, res: Response) {
+        const connection = await appDataSource;
+        
         try {
-            const belongsEntry = await ((await appDataSource)
-                    .createQueryBuilder(Belongs, 'b')
-                    .leftJoinAndSelect('organization', 'org', 'org.id = b.id' )
-                    .leftJoinAndSelect('users', 'u', 'u.userId = b.userId')
-                    .where('u.username = :username', {username: req.params.username})
-                    .andWhere('b.id = :id', {id: req.params.id})
-                    .getOneOrFail()
-            );
+            const belongsEntry = await connection
+                .createQueryBuilder(Belongs, 'b')
+                .leftJoinAndSelect('organization', 'org', 'org.id = b.id' )
+                .leftJoinAndSelect('users', 'u', 'u.userId = b.userId')
+                .where('u.username = :username', {username: req.params.username})
+                .andWhere('b.id = :id', {id: req.params.id})
+                .getOneOrFail()
 
-            const org = await ((await appDataSource)
-                    .manager
-                    .findOneBy(Organization, {
-                        id: belongsEntry.id
-                    })
-            );
+            const org = await connection
+                .manager
+                .findOneBy(Organization, {
+                    id: belongsEntry.id
+                })
 
             const resBody: any = {...org};
             resBody.isAdmin = belongsEntry.isAdmin;
@@ -153,12 +152,13 @@ class OrganizationController{
     }
 
     private async addMember(req: Request, res: Response) {
-        const newMember = await ((await appDataSource)
-                .manager
-                .findOneBy(User, {
-                    username: req.params.username
-                })
-        )
+        const connection = await appDataSource;
+        
+        const newMember = await connection
+            .manager
+            .findOneBy(User, {
+                username: req.params.username
+            })
 
         if(!newMember) {
             res.status(404).json({message: "Specified user does not exist"})
@@ -170,9 +170,8 @@ class OrganizationController{
         belongs.id = req.params.id;
         belongs.isAdmin = false;
 
-        await ((await appDataSource)
+        await connection
             .manager.save(belongs)
-        );
 
         res.status(200).json({message: "User added to organization successfully!"});
     }
