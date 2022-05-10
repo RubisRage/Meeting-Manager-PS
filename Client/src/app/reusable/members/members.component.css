@@ -1,8 +1,7 @@
 .content{
-    width: 251;
+    width: 251px;
     height: 100vh;
     transition: all 0.5s ease;
-    overflow-y: auto;
 }
 
 .head{
@@ -19,11 +18,52 @@ h2.title{
 }
 
 div.bg-members{
+    background:linear-gradient(to bottom, #FCE5BA 5%, #f3d399 100%);
     background-color: #FCE5BA;
-    height: 85vh;
+    height:85vh;
+    overflow-y: auto;
 }
 
-p.padding{
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+
+a.admin{
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.5s;
+}
+a.admin:hover{
+    background-color: rgb;
+    background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+	background-color:#bc3315;
+    cursor: pointer;
+}
+
+a.admin:hover p{
+    transform: translateX(10px);
+}
+
+p{
+    padding: 0;
+    margin: 0;
+    transition: all 0.5s;
+}
+
+a img{
+    transform: scale(0);
+    transition: all 0.5s;
+    float: left;
+}
+
+a.admin:hover img{
+    transform: scale(1);
+}
+
+p.user{
     margin: 0;
     padding: 10px 0;
     margin-bottom: 10px;
@@ -32,17 +72,22 @@ p.padding{
     transition: all 0.5s ease;
 }
 
-p.padding:hover{
+p.padding:hover,
+a.user:hover{
+    border-radius: 5px;
+}
+
+p.user:hover{
     font-size: x-large;
     background-color: #fff5;
-    border-radius: 30px;
 }
 
 @media screen and (max-width: 900px) {
     .content{
         width: 156px;
     }
-    p.padding{
+    p.user,
+    a.admin{
         padding: 5px 0;
     }
 }
@@ -55,10 +100,12 @@ p.padding:hover{
     h2.title{
         font-size: medium;
     }
-    p.padding{
+    p.user,
+    a.admin{
         font-size: medium;
     }
-    p.padding:hover{
+    p.user:hover,
+    a.admin:hover{
         font-size: large;
     }
 }
