@@ -5,7 +5,7 @@
             <li><app-commission-display *ngIf="show"></app-commission-display></li>
         </div>
         <div class="push-right horizontal-flex">
-            <li><app-user-role-display *ngIf="show"></app-user-role-display></li>
+            <li><app-user-role-display [id]="id" *ngIf="show"></app-user-role-display></li>
             <li><app-profile-display></app-profile-display></li>
         </div>
     </ul>

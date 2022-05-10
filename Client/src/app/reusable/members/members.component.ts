@@ -25,7 +25,7 @@ export class MembersComponent implements OnInit, OnDestroy {
   constructor(
     private activeRoute: ActivatedRoute,
     private orgService: OrganizationService,
-    private auth: AuthHelperService,
+    public auth: AuthHelperService,
     private http:HttpHelperService,
     public dialog: MatDialog
   ) { }
@@ -65,17 +65,18 @@ export class MembersComponent implements OnInit, OnDestroy {
   }
 
   onClick(): void{
-    this.dialog.open(DeleteConfirmComponent,{
-      data: '¿Deseas eliminar a este usuario?'
-    })
-      .afterClosed()
-      .subscribe((confirm:boolean) =>{
-        if (confirm){
-          this.http.delete(environment.backend+"/organization/"+this.orgInfo.id+"/users/" +
-                            this.auth.user!.username)
-            .subscribe()
-        }
+    if(!this.orgInfo.isAdmin){
+      this.dialog.open(DeleteConfirmComponent,{
+        data: '¿Deseas eliminar a este usuario?'
       })
+        .afterClosed()
+        .subscribe((confirm:boolean) =>{
+          if (confirm){
+            this.http.delete(environment.backend+"/organizations/" + this.orgInfo.id + "/users/" +
+                              this.auth.user!.username)
+              .subscribe()
+          }
+        });
+    }
   }
-
 }
