@@ -88,6 +88,7 @@ class OrganizationController{
                     .leftJoinAndSelect('organization', 'org', 'org.id = b.id' )
                     .leftJoinAndSelect('users', 'u', 'u.userId = b.userId')
                     .where('u.username = :username', {username: req.params.username})
+                    .andWhere('b.id = :id', {id: req.params.id})
                     .getOneOrFail()
             );
 
@@ -100,8 +101,6 @@ class OrganizationController{
 
             const resBody: any = {...org};
             resBody.isAdmin = belongsEntry.isAdmin;
-
-            console.log(resBody);
 
             res.status(200).json(resBody);
         } catch(err) {
