@@ -15,3 +15,6 @@
 <div>
   <input required [(ngModel)]="username" name="Username" #Username = "ngModel">
 </div>
+<div *ngIf="show_error">
+  <p> El usuario introducido no es correcto </p>
+</div>

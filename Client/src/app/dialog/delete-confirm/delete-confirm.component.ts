@@ -11,6 +11,7 @@ import {AuthHelperService} from "../../services/auth-helper.service";
 export class DeleteConfirmComponent implements OnInit {
 
   username="";
+  show_error!: boolean;
 
   constructor(public dialogRef: MatDialogRef<DeleteConfirmComponent>,
               private auth: AuthHelperService,
@@ -23,11 +24,13 @@ export class DeleteConfirmComponent implements OnInit {
     if (this.username == this.auth.user!.username){
       this.dialogRef.close(true);
     }else{
-      this.dialogRef.close(false);
+      this.show_error = true;
+
     }
   }
 
   ngOnInit(): void {
+    this.show_error = false;
   }
 
 }
