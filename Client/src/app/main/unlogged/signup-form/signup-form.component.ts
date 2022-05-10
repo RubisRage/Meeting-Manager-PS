@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { User } from '../../../types/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['../styles.css']
 })
 export class SignUpComponent{
-
-  //Direccion a la que se redirigirá
+  show_error=false;
+  error_message:any="";
 
   register = {
     username:"",
@@ -38,8 +38,14 @@ export class SignUpComponent{
       fullname: this.register.fullname,
       imgURL: "assets/pictures/profile.jpeg",
       password: this.register.password
-    }).subscribe(() => {
+    }).subscribe(
+      () => {
       this.router.navigate(["/login"]);
-    });
+      },
+      (error) => {
+        this.show_error = true;
+        this.error_message = error.error.message.split(',')[1].trim()/*.toUpperCase()*/;
+      }
+    );
   }
 }

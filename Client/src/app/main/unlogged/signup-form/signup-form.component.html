@@ -77,7 +77,12 @@
                 <div class="formGroup buttonGroup">
                     <button type="submit" [disabled]="forma.invalid">Registrarse</button>
                     <br/><span class="space">Or</span><br/>
-                    <button type="submit" (click)="goToPage('/login')">LogIn</button>
+                    <button type="submit" (click)="goToPage('/login')">Iniciar Sesión</button>
+                </div>
+                <div *ngIf="show_error" class="invalid-feedback">
+                    <div>
+                        <p>{{error_message}}</p>
+                    </div>
                 </div>
             </div>
         </form>

@@ -30,6 +30,11 @@
           <button (click)="router.navigate(['/signup'])">Sign Up</button>
         </div>
       </div>
+      <div *ngIf="show_error" class="invalid-feedback">
+        <div>
+            <p class="error">{{error_message}}</p>
+        </div>
+    </div>
     </form>
   </div>
 

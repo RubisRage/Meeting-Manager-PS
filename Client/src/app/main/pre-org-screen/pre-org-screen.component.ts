@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
-import { environment } from 'src/environments/environment';
+import { OrganizationService } from 'src/app/services/organization.service';
+import { Organization } from 'src/app/types/organization';
 import { HttpHelperService } from '../../services/http-helper.service';
 
 @Component({
@@ -10,29 +12,34 @@ import { HttpHelperService } from '../../services/http-helper.service';
 })
 export class PreOrgScreenComponent implements OnInit {
 
-  organizations!: {id:number, name:string}[];
+
+  organizations!: Organization[];
+  subscription!: Subscription;
+
 
   constructor(private http: HttpHelperService,
-    private authService:AuthHelperService) { }
+    private authService:AuthHelperService, private orgService: OrganizationService) { }
 
   ngOnInit(): void {
-    /*
-    this.organizations = [
-      {id:1, name:"Padel"},
-      {id:2, name:"Boxeo"},
-      {id:3, name:"Produccion de Software"},
-      {id:4, name:"Clase"},
-    ];
-    */
-    
-    this.http.get(environment.backend + "/users/" + this.authService.user?.username + "/organizations")
-      .subscribe(
-        (data) => {
-          this.organizations = data;
-        }
-      );
+    this.subscription = this.orgService.getAllOrganizations(this.authService.user.username)
+        .subscribe(orgs => {
+          this.organizations = orgs;
+        });;
   }
 
-  
 
+/*   equalsOrganization(e1: {id:number, name:string}[], p2: any): Boolean{
+    if(e1===undefined)return true;
+    if (e1.length === p2.length){
+      let i = 0;
+      for(let p of p2){
+        if(e1[i].id !== p.id || e1[i].name !== p.name) {return true;}
+        i++;
+      }
+      return false;
+    }
+    return true;
+  }
+
+ */
 }
