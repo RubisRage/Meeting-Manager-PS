@@ -72,7 +72,9 @@ class UserController{
             return;
         }
 
-        const user = await (await appDataSource)
+        const connection = await appDataSource;
+
+        const user = await connection
             .manager.findOneBy(User, {
                 username: username
             });
@@ -85,7 +87,7 @@ class UserController{
             return;
         }
 
-        await ((await appDataSource)
+        await connection
                 .createQueryBuilder()
                 .insert()
                 .into(User)
@@ -95,8 +97,7 @@ class UserController{
                     fullname: fullname,
                     imgURL: imgURL
                 })
-                .execute()
-        );
+                .execute();
 
         res.status(200).json({
             message: 'User created successfully',
@@ -195,12 +196,13 @@ class UserController{
             return;
         }
 
-        const user = await ((await appDataSource)
+        const connection = await appDataSource
+
+        const user = await connection
                 .manager
                 .findOneBy(User, {
                     username: req.params.username
-                })
-        );
+                });
 
         if(user === null) {
             res.status(400).json({
@@ -212,15 +214,14 @@ class UserController{
 
         bcrypt.compare(oldPassword, user.pwhash, async (err, result) => {
             if(result) {
-                await ((await appDataSource)
+                await connection
                     .createQueryBuilder()
                     .update(User)
                     .set({
                         pwhash: generateHash(newPassword)
                     })
                     .where("username = :username", {username: req.params.username})
-                    .execute()
-                );
+                    .execute();
 
                 res.status(200).json({message: "Password updated succesfully!"});
             } else {
