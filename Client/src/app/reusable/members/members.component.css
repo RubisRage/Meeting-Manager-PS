@@ -1,10 +1,11 @@
 .content{
     width: 251px;
-    height: 100vh;
+    height: 100px;
     transition: all 0.5s ease;
 }
 
 .head{
+    background:linear-gradient(to bottom, #53A4BD 5%, #478ca1 100%);
     background-color: #53A4BD;
     padding: 5px;
     color: whitesmoke;
@@ -15,6 +16,8 @@ h2.title{
     font-weight: bold;
     transition: all 0.5s ease;
     text-align: center;
+    padding: 10px;
+    margin: 0;
 }
 
 div.bg-members{
@@ -79,7 +82,8 @@ a.user:hover{
 
 p.user:hover{
     font-size: x-large;
-    background-color: #fff5;
+    background:linear-gradient(to bottom, #f8dfb1 5%, #fddb9d 100%);
+    background-color: #f8dfb1
 }
 
 @media screen and (max-width: 900px) {

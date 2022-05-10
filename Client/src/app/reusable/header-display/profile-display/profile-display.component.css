@@ -21,6 +21,8 @@
 }
 
 .conteiner-profile:hover{
+    background:linear-gradient(to bottom, #22768C 5%, white 100%);
+    background: #22768C;
     border-color: whitesmoke;
 }
 

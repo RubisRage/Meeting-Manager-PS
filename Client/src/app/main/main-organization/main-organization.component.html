@@ -3,7 +3,7 @@
         <img [src]="bg_src"/>
     </div>
     <div class="flex">
-        <org-description class="desc" ></org-description>
-        <members class="members"></members>
+        <org-description [organization]="organization" class="desc" ></org-description>
+        <members [organization]="organization"  class="members"></members>
     </div>
 </div>

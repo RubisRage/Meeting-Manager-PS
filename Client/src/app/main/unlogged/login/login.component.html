@@ -25,9 +25,9 @@
       </div>
       <div class="cent">
         <div class="formGroup buttonGroup">
-          <button [disabled]="!loginForm.valid" type="submit">Login</button>
+          <button [disabled]="!loginForm.valid" type="submit">Iniciar Sesión</button>
           <br/><span class="space">Or</span><br/>
-          <button (click)="router.navigate(['/signup'])">Sign Up</button>
+          <button (click)="router.navigate(['/signup'])">Registrarse</button>
         </div>
       </div>
       <div *ngIf="show_error" class="invalid-feedback">
