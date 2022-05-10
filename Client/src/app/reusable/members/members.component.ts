@@ -5,6 +5,10 @@ import {OrganizationService} from "../../services/organization.service";
 import {Subscription} from "rxjs";
 import {OrganizationInfo} from "../../types/organizationInfo";
 import {AuthHelperService} from "../../services/auth-helper.service";
+import {DeleteConfirmComponent} from "../../dialog/delete-confirm/delete-confirm.component";
+import {environment} from "../../../environments/environment";
+import { HttpHelperService } from 'src/app/services/http-helper.service';
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'members',
@@ -21,7 +25,9 @@ export class MembersComponent implements OnInit, OnDestroy {
   constructor(
     private activeRoute: ActivatedRoute,
     private orgService: OrganizationService,
-    private auth: AuthHelperService
+    private auth: AuthHelperService,
+    private http:HttpHelperService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -58,8 +64,18 @@ export class MembersComponent implements OnInit, OnDestroy {
     }
   }
 
-  onClick(){
-
+  onClick(): void{
+    this.dialog.open(DeleteConfirmComponent,{
+      data: '¿Deseas eliminar a este usuario?'
+    })
+      .afterClosed()
+      .subscribe((confirm:boolean) =>{
+        if (confirm){
+          this.http.delete(environment.backend+"/organization/"+this.id+"/users/" +
+                            this.auth.user!.username)
+            .subscribe()
+        }
+      })
   }
 
 }

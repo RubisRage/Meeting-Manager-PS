@@ -10,7 +10,7 @@
     cursor: pointer;
     transition: 0.5s;
     width: 245px;
-    height: 81px;
+    height: 100%;
     line-height: 80px;
     text-align: center;
     vertical-align: middle;
@@ -31,17 +31,28 @@
 
 .vertical-flex > a{
     margin: 5px;
+    background:linear-gradient(to bottom left, #C4C4C4 5%, #a09f9f 100%);
     background-color: #C4C4C4;
     width: 200px;
     height: 50px;
+    font-weight: bolder;
     border-radius: 10px;
     text-align: center;
     vertical-align: middle;
     line-height: 50px;
+    border: 2px #c4c4c4 solid;
+    transition: all 0.5s;
+}
 
+.vertical-flex > a:hover{
+    background:linear-gradient(to bottom left, #a09f9f 5%, #C4C4C4 100%);
+    background-color: #a09f9f;
+    color: #104F5B;
+    border-color: #8b8b8b;
 }
 
 .select-organization{
+    background:linear-gradient(to bottom left, #CFD8DC 5%, #b9c2c6 100%);
     background-color: #CFD8DC;
     position: absolute;
     width: 245px;
