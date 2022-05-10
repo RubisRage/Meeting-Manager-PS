@@ -1,38 +1,65 @@
-<div class="main-content horizontal-flex">
-
-
-  <div class="vertical-flex" style="height:100px">
-
-    <div class="horizontal-flex">
-      <p>Username</p>
-      <input [placeholder]="authService.user?.username"
-      required [(ngModel)]="user.username">
-      <button (click)="ChangeUsername()"> Guardar </button>
+<div class="align">
+  <div class="main-content">
+    <!-- Imagen -->
+    <div class=" img-flex img-container">
+      <img [src]="authService.user?.imgURL" >
+      <label class="custom-file-upload">
+        <input type="file" style="display: none;"/>
+        Cambiar foto
+      </label>
     </div>
-    <div class="horizontal-flex">
-      <p>Fullname</p>
-      <input [placeholder]="authService.user?.fullname"
-      required [(ngModel)]="user.fullname">
-    </div>
-    <div class="horizontal-flex">
-      <p>Password</p>
-      <input type="password"
-      required [(ngModel)]="user.oldPassword">
-    </div>
-    <div class="horizontal-flex">
-      <p>New Pass</p>
-      <input type="password"
-             required [(ngModel)]="user.newPassword">
-      <button (click)="ChangePassword()"> Change </button>
+
+    <!-- USername -->
+    <div class="inputs">
+      <div class="horizontal-flex">
+        <div class="flex">
+          <label for="username">Nombre de Usuario</label>
+          <input [placeholder]="authService.user?.username"
+            id="username"
+            required [(ngModel)]="user.username">
+            <button (click)="ChangeUsername()"> Cambiar </button>
+          </div>
+      </div>
+      
+      <!-- Nombre real -->      
+      <div class="horizontal-flex">        
+        <div class="flex">          
+          <label for="fullname">Nombre completo</label>          
+          <input [placeholder]="authService.user?.fullname"            
+            id="fullname"            
+            required [(ngModel)]="user.fullname">
+          <button (click)="ChangeRealname()"> Cambiar </button>
+        </div>      
+      </div>
+      <!-- COntraseñas -->
+      <div class="horizontal-flex">
+        <div class="flex">
+          <label for="password">Contraseña antigua</label>
+          <input type="password"
+            id="password"
+            required [(ngModel)]="user.oldPassword">
+          </div>
+      </div>
+      <div class="horizontal-flex">
+        <div class="flex">
+          <label for="repPassword">Nueva contraseña</label>
+          <input type="password"
+            id="repPassword"
+            required [(ngModel)]="user.newPassword">
+          <button (click)="ChangePassword()"> Cambiar </button>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="vertical-flex img-container">
-    <img [src]="authService.user?.imgURL" >
-    <input style="display:none" type="file">
-    <button>Cambiar imagen</button>
+  <!-- Boton de eliminar usuario -->
+  <div class="btn">
+    <button (click)="Delete()" 
+      [routerLink]="['/login']" 
+      class="warning-button"> 
+      Eliminar Cuenta 
+    </button>
   </div>
 </div>
 <div class="horizontal-flex">
-  <button (click)="Delete()" class="warning-button"> Eliminar Cuenta </button>
+  <button (click)="Delete()" [routerLink]="['/login']" class="warning-button"> Eliminar Cuenta </button>
 </div>

@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./user-role-display.component.css']
 })
 export class UserRoleDisplayComponent implements OnInit {
-  @Input () userRole = "Supongamos que pone el ROL del usuario";
+  @Input () userRole = "Administrador";
   orgs: any;
   organizations!: {id:number, name:string}[];
   show: boolean;

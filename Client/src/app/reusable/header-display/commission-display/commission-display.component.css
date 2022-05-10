@@ -37,6 +37,7 @@
 }
 
 .select-organization{
+    background:linear-gradient(to bottom left, #CFD8DC 5%, #b9c2c6 100%);
     background-color: #CFD8DC;
     position: absolute;
     width: 245px;

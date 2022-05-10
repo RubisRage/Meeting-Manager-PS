@@ -38,6 +38,10 @@ export class EditProfileComponent implements OnInit{
     this.auth.updateUser(this.user.username);
   }
 
+  ChangeRealname(){
+    this.auth.updateUser(this.user.fullname);
+  }
+
   ChangePassword(){
     this.http.put(environment.backend+"/users/"+this.auth.user!.username +"/password",{
       oldPassword:this.user.oldPassword,

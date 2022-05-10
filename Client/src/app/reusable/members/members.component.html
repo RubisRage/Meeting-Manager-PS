@@ -6,7 +6,7 @@
         <div *ngIf="isAdmin; else cont" class="flex">
             <a *ngFor="let member of members" 
                 class="admin" (click)="onClick();">
-                <img src="../../assets/images.png" width="25px" height="25px">
+                <img src="../../../assets/pictures/delete.png" width="25px" height="25px">
                 <!-- {{member.username}}<br/> -->
                 <p>{{member}}</p><br/>
             </a>

@@ -5,7 +5,7 @@
     cursor: pointer;
     transition: 0.5s;
     height: 81px;
-    width: 245px;
+    width: 150px;
     line-height: 80px;
     text-align: center;
     vertical-align: middle;
@@ -37,9 +37,10 @@
 }
 
 .select-organization{
+    background:linear-gradient(to bottom left, #CFD8DC 5%, #b9c2c6 100%);
     background-color: #CFD8DC;
     position: absolute;
-    width: 245px;
+    width: 150px;
     border-style: solid;
     border-color: #CFD8DC;
     z-index: 2;
