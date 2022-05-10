@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
-import { organization } from 'src/app/types/organization';
-import { environment } from 'src/environments/environment';
+import { OrganizationService } from 'src/app/services/organization.service';
+import { Organization } from 'src/app/types/organization';
 import { HttpHelperService } from '../../services/http-helper.service';
 
 @Component({
@@ -11,43 +12,23 @@ import { HttpHelperService } from '../../services/http-helper.service';
 })
 export class PreOrgScreenComponent implements OnInit {
 
-  organizations!: organization[];
-  guardarorg!: organization[];
+
+  organizations!: Organization[];
+  subscription!: Subscription;
+
 
   constructor(private http: HttpHelperService,
-    private authService:AuthHelperService, private ref: ChangeDetectorRef) { }
+    private authService:AuthHelperService, private orgService: OrganizationService) { }
 
   ngOnInit(): void {
-    /*
-    this.organizations = [
-      {id:1, name:"Padel"},
-      {id:2, name:"Boxeo"},
-      {id:3, name:"Produccion de Software"},
-      {id:4, name:"Clase"},
-    ];
-    */
-
-    /* this.http.get(environment.backend + "/users/" + this.authService.user?.username + "/organizations")
-      .subscribe(
-        (data) => {
-            this.organizations = data;
-            this.guardarorg = this.organizations;
-        }); */
-      
-    setInterval( () => {
-    this.http.get(environment.backend + "/users/" + this.authService.user?.username + "/organizations")
-      .subscribe(
-        (data) => {
-          if(this.equalsOrganization(this.guardarorg, data)){
-            this.organizations = data;
-            this.guardarorg = this.organizations;
-            
-          }
-        }
-      );},1000);
+    this.subscription = this.orgService.getAllOrganizations(this.authService.user.username)
+        .subscribe(orgs => {
+          this.organizations = orgs;
+        });;
   }
 
-  equalsOrganization(e1: {id:number, name:string}[], p2: any): Boolean{
+
+/*   equalsOrganization(e1: {id:number, name:string}[], p2: any): Boolean{
     if(e1===undefined)return true;
     if (e1.length === p2.length){
       let i = 0;
@@ -60,5 +41,5 @@ export class PreOrgScreenComponent implements OnInit {
     return true;
   }
 
-
+ */
 }
