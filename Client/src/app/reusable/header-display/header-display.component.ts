@@ -10,18 +10,20 @@ export class HeaderDisplayComponent implements OnInit {
 
   show!: boolean ;
 
+  id!: string;
   constructor(private router: Router) { 
   }
 
   ngOnInit(): void {
-    this.showCommission();
+    this.id = this.showCommission();
     this.router.events.subscribe(()=>this.showCommission());
   }
 
-  async showCommission(){
+  showCommission(): string{
       const url = this.router.url;
       let segments: string[] = url.split("/");
       this.show = segments[2] === "organization"
                   && segments[3] !== undefined;
+      return segments[3];
   }
 }
