@@ -21,8 +21,7 @@
 }
 
 .conteiner-profile:hover{
-    background:linear-gradient(to bottom, #22768C 5%, white 100%);
-    background: #22768C;
+    background-color: #22768C95;
     border-color: whitesmoke;
 }
 
@@ -32,7 +31,7 @@
 }
 
 p{
-    padding-left: 10px;
+    padding-left: 70px;
 }
 
 a{
@@ -41,17 +40,22 @@ a{
     grid-template-rows: auto auto;
     margin-left: 27px;
     margin-right: 27px;
+    text-decoration: none;
 }
 
 .select-organization{
     background-color: #CFD8DC;
     position: absolute;
     width: 245px;
-    padding: 0px 25px;
     border-style: solid;
     border-color: #CFD8DC;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+
 
 .vertical-flex{
     padding-top: 10px;
@@ -63,11 +67,17 @@ a{
     align-items: center;
     justify-content: space-around;
     margin: 5px;
-    background-color: #ff0000;
-    width: 197.59px;
-    height: 47px;
+    box-shadow: 0px 7px #666;
+    background:linear-gradient(to bottom, #d53930 5%, #ba362f 100%);
+	background-color:#d53930;
+    width: 150px;
+    height: 50px;
     border-radius: 10px;
-    
+}
+
+.horizontal-flex:active{
+    transform: translateY(5px);
+    box-shadow: 0px 4px #666;
 }
 
 @media screen and (max-width: 900px) {

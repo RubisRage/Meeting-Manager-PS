@@ -40,20 +40,20 @@ a.admin{
     transition: all 0.5s;
 }
 a.admin:hover{
-    background-color: rgb;
-    background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
-	background-color:#bc3315;
+    color: whitesmoke;
+    background:linear-gradient(to bottom, #d53930 5%, #ba362f 100%);
+	background-color:#d53930;
     cursor: pointer;
-}
-
-a.admin:hover p{
-    transform: translateX(10px);
 }
 
 p{
     padding: 0;
     margin: 0;
-    transition: all 0.5s;
+    transition: all 0.2s;
+}
+
+a.admin:hover p{
+    transform: translateX(-20px);
 }
 
 a img{
