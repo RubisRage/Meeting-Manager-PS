@@ -71,7 +71,7 @@ export class MembersComponent implements OnInit, OnDestroy {
       .afterClosed()
       .subscribe((confirm:boolean) =>{
         if (confirm){
-          this.http.delete(environment.backend+"/organization/"+this.id+"/users/" +
+          this.http.delete(environment.backend+"/organization/"+this.orgInfo.id+"/users/" +
                             this.auth.user!.username)
             .subscribe()
         }
