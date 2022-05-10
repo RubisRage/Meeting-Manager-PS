@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import {AuthHelperService} from "../../../services/auth-helper.service";
-import {environment} from "../../../../environments/environment";
+import { AuthHelperService } from "../../../services/auth-helper.service";
 
 @Component({
   selector: 'app-login',
@@ -35,7 +34,18 @@ export class LoginComponent implements OnInit {
         },
         error: err => {
           this.show_error = true;
-          this.error_message = err.error.message.split(',')[1].trim()/*.toUpperCase()*/;
+          let e = "";
+          switch(err.error.message.split(',')[1].trim()){
+            case "user does not exist!":
+              e = "No existe el usuario"; break;
+            case "bad credentials!":
+              e = "Los credenciales no son correctos"; break;
+            case "username or password missing!":
+              e = "Falta usuario o contraseña"; break;
+            default:
+              e = "Hubo un error inesperado"; break;
+          }
+          this.error_message = e;
         }
       });
   }
