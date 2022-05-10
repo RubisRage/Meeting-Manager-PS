@@ -23,7 +23,7 @@ export class PreOrgScreenComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.orgService.getAllOrganizations(this.authService.user.username)
         .subscribe(orgs => {
-          if(this.equalsOrganization(this.organizations, this.guardar)){
+          if(this.equalsOrganization(this.organizations, orgs)){
             this.organizations = orgs;
             this.guardar=this.organizations; 
           }
@@ -43,9 +43,4 @@ export class PreOrgScreenComponent implements OnInit {
     }
     return true;
   }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
 }
