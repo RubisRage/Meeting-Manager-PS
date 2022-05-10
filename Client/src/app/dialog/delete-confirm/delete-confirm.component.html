@@ -1,0 +1,17 @@
+<div>
+  <p> {{message}}</p>
+</div>
+
+<div>
+
+  <button (click)="confirmDialog()"> Si </button>
+  <button (click)=" closeDialog()"> No </button>
+</div>
+
+<div>
+  <p> Escriba su nombre de usuario</p>
+</div>
+
+<div>
+  <input required [(ngModel)]="this.user.username">
+</div>

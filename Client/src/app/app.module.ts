@@ -24,6 +24,7 @@ import { ErrorPageComponent } from './main/error-page/error-page.component';
 import { MainComponent } from './main/main.component';
 import { CommissionDisplayComponent } from './reusable/header-display/commission-display/commission-display.component';
 import { UserRoleDisplayComponent } from './reusable/header-display/user-role-display/user-role-display.component';
+import { DeleteConfirmComponent } from './dialog/delete-confirm/delete-confirm.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { UserRoleDisplayComponent } from './reusable/header-display/user-role-di
     MainComponent,
     CommissionDisplayComponent,
     UserRoleDisplayComponent,
+    DeleteConfirmComponent,
   ],
   imports: [
     BrowserModule,
