@@ -1,5 +1,5 @@
 <div class="organization-display" (mouseenter)="displayOrganization()" (mouseleave)="closeOrganization()">
-    <p class="select-one">{{userRole}}</p>
+    <p class="select-one">Administrador</p>
     <div class="select-organization" (mouseleave)="closeOrganization()" *ngIf="show">
         <div class="vertical-flex" *ngIf="show">
             <a *ngFor="let o of organizations" 
