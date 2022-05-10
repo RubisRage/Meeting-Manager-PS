@@ -1,5 +1,5 @@
 .green-bg{
-    width: 300px;
+    width: 251px;
     height: 100vh;
     background-color: #104F5B;
     margin: 0px;
@@ -35,14 +35,13 @@ p#description{
 
 @media screen and (max-width: 900px) {
     .green-bg{
-        width: 250px;
+        width: 251px;
     }
 }
 
 @media screen and (max-width: 500px) {
     .green-bg{
-        width: 100vw;
-        height: 45vh;
+        width: 200px;
     }
     p#organization{
         font-size: large;
