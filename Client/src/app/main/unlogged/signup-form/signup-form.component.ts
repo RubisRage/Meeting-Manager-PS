@@ -38,14 +38,15 @@ export class SignUpComponent{
       fullname: this.register.fullname,
       imgURL: "assets/pictures/profile.jpeg",
       password: this.register.password
-    }).subscribe(
-      () => {
-      this.router.navigate(["/login"]);
+    }).subscribe({
+      next: () => {
+        this.router.navigate(["/login"]);
       },
-      (error) => {
+    
+      error: (error) => {
         this.show_error = true;
         this.error_message = error.error.message.split(',')[1].trim()/*.toUpperCase()*/;
       }
-    );
+    });
   }
 }
