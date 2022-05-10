@@ -4,7 +4,7 @@
 
 <div>
 
-  <button (click)="confirmDialog()"> Si </button>
+  <button (click)="confirmDialog()" [disabled]="Username.invalid"> Si </button>
   <button (click)=" closeDialog()"> No </button>
 </div>
 
@@ -13,5 +13,5 @@
 </div>
 
 <div>
-  <input required [(ngModel)]="this.user.username">
+  <input required [(ngModel)]="username" name="Username" #Username = "ngModel">
 </div>

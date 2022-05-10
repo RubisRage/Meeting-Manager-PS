@@ -9,9 +9,8 @@ import {AuthHelperService} from "../../services/auth-helper.service";
   styleUrls: ['./delete-confirm.component.css']
 })
 export class DeleteConfirmComponent implements OnInit {
-  user={
-    username:""
-  }
+
+  username="";
 
   constructor(public dialogRef: MatDialogRef<DeleteConfirmComponent>,
               private auth: AuthHelperService,
@@ -21,7 +20,7 @@ export class DeleteConfirmComponent implements OnInit {
     this.dialogRef.close(false);
   }
   confirmDialog(): void{
-    if (this.user.username == this.auth.user!.username){
+    if (this.username == this.auth.user!.username){
       this.dialogRef.close(true);
     }else{
       this.dialogRef.close(false);

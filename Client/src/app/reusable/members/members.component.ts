@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-//import { HttpHelperService } from 'src/app/services/http-helper.service';
+import {DeleteConfirmComponent} from "../../dialog/delete-confirm/delete-confirm.component";
+import {environment} from "../../../environments/environment";
+import { HttpHelperService } from 'src/app/services/http-helper.service';
+import {AuthHelperService} from "../../services/auth-helper.service";
+import { MatDialog } from "@angular/material/dialog";
 //import { userInfo } from 'src/app/types/userInfo';
 //import {environment} from "../../../environments/environment";
 
@@ -10,8 +14,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  
-  isAdmin!:boolean;    
+
+  isAdmin!:boolean;
   /* members:userInfo[] = []; */
   members = ["Sonic", "Tails", "Knucles",
         "Shadow", "Eggman", "Amy", "Luffy",
@@ -20,8 +24,10 @@ export class MembersComponent implements OnInit {
         "NanoJJG"];
   id!: string;
 
-  constructor(/* private http:HttpHelperService,  */
-    private router: ActivatedRoute) { }
+  constructor(  public dialog: MatDialog,
+                private auth: AuthHelperService,
+                private http:HttpHelperService,
+               private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.isAdmin = true;
@@ -34,7 +40,18 @@ export class MembersComponent implements OnInit {
     });  */
   }
 
-  onClick(){
+  onClick(): void{
+    this.dialog.open(DeleteConfirmComponent,{
+      data: '¿Deseas eliminar a este usuario?'
+    })
+      .afterClosed()
+      .subscribe((confirm:boolean) =>{
+        if (confirm){
+          this.http.delete(environment.backend+"/organization/"+this.id+"/users/" +
+                            this.auth.user!.username)
+            .subscribe()
+        }
+      })
     //Llamar al diálogo de "estás seguro que quieres eliminar a x"
   }
 
