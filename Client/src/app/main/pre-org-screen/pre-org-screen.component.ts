@@ -44,5 +44,8 @@ export class PreOrgScreenComponent implements OnInit {
     return true;
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
 }
