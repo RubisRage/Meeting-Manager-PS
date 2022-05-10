@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
+import { organization } from 'src/app/types/organization';
 import { environment } from 'src/environments/environment';
 import { HttpHelperService } from '../../services/http-helper.service';
 
@@ -10,8 +11,8 @@ import { HttpHelperService } from '../../services/http-helper.service';
 })
 export class PreOrgScreenComponent implements OnInit {
 
-  organizations!: {id:number, name:string}[];
-  guardarorg!: {id:number, name:string}[];
+  organizations!: organization[];
+  guardarorg!: organization[];
 
   constructor(private http: HttpHelperService,
     private authService:AuthHelperService, private ref: ChangeDetectorRef) { }
