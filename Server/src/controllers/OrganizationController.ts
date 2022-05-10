@@ -82,23 +82,32 @@ class OrganizationController{
     }
 
     private async getOrganization(req: Request, res: Response) {
-        // const org = await ((await appDataSource)
-        //     .manager
-        //     .findOneBy(Organization, {
-        //         id: req.params.id
-        //     })
-        // );
-        const resBody: any = {};
+        try {
+            const belongsEntry = await ((await appDataSource)
+                    .createQueryBuilder(Belongs, 'b')
+                    .leftJoinAndSelect('organization', 'org', 'org.id = b.id' )
+                    .leftJoinAndSelect('users', 'u', 'u.userId = b.userId')
+                    .where('u.username = :username', {username: req.params.username})
+                    .getOneOrFail()
+            );
 
-        const var1 = await ((await appDataSource)
-                .createQueryBuilder(Belongs, 'b')
-                .leftJoinAndSelect('organization', 'org', 'org.id = b.id' )
-                .getMany()
-        )
+            const org = await ((await appDataSource)
+                    .manager
+                    .findOneBy(Organization, {
+                        id: belongsEntry.id
+                    })
+            );
 
-        console.log(var1);
+            const resBody: any = {...org};
+            resBody.isAdmin = belongsEntry.isAdmin;
 
-        res.status(200).json(resBody);
+            console.log(resBody);
+
+            res.status(200).json(resBody);
+        } catch(err) {
+            console.log(err);
+            res.status(404).json({message: "Specified user does not exist!"})
+        }
     }
 
     private deleteOrganization() {

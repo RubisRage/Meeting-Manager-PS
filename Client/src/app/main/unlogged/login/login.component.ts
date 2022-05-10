@@ -10,6 +10,9 @@ import {environment} from "../../../../environments/environment";
 })
 export class LoginComponent implements OnInit {
 
+  show_error=false;
+  error_message:any="";
+
   loginInformation = {
     username: "",
     password: ""
@@ -31,7 +34,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/main/pre-org"]);
         },
         error: err => {
-          console.log(err);
+          this.show_error = true;
+          this.error_message = err.error.message.split(',')[1].trim()/*.toUpperCase()*/;
         }
       });
   }
