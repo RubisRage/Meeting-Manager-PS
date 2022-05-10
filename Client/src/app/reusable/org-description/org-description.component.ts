@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import {firstValueFrom, map, mergeMap, Observable, Subscription, switchMap} from 'rxjs';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { OrganizationService } from 'src/app/services/organization.service';
 import { OrganizationInfo } from 'src/app/types/organizationInfo';
 import { environment } from "../../../environments/environment";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'org-description',
@@ -15,32 +16,61 @@ import { environment } from "../../../environments/environment";
 export class OrgDescriptionComponent implements OnInit, OnDestroy {
 
   organization!: OrganizationInfo;
-  currentUid!: string;
   subscription!: Subscription;
 
-  constructor(private http:HttpHelperService, 
+  constructor(private http:HttpHelperService,
     private router: ActivatedRoute,
     private auth: AuthHelperService,
-    private orgService: OrganizationService) { 
-  }
+    private userService: UserService,
+    private orgService: OrganizationService
+  ) {}
 
   ngOnInit(): void {
-    this.router.paramMap.subscribe(params => {
-      if(this.subscription) {
-        this.subscription.unsubscribe();
-      }
 
-      const id = params.get('id');
-      console.log(id);
+    const organizationInfo$ = this.userService.user$.pipe(
+      mergeMap(
+        user => this.router.paramMap.pipe(
+          map(params => {
+            const id = params.get('id');
 
-      if(id) {
-        this.currentUid = id;
-        this.subscription = this.orgService.getOrganization(this.currentUid, this.auth.user.username)
-          .subscribe(org => {
-            this.organization = org;
-          });
+            if(id) {
+              return this.orgService.getOrganization(id, user.username)
+            }
+
+            return null;
+          })
+        )
+      ),
+      switchMap(async org$ => {
+        if(org$) {
+          return await firstValueFrom(org$);
+        }
+        return null;
+      })
+    )
+
+    organizationInfo$.subscribe(org => {
+      if(org) {
+        this.organization = org;
       }
     })
+
+    // this.router.paramMap.subscribe(params => {
+    //   if(this.subscription) {
+    //     this.subscription.unsubscribe();
+    //   }
+    //
+    //   const id = params.get('id');
+    //   console.log(id);
+    //
+    //   if(id) {
+    //     this.currentUid = id;
+    //     this.subscription = this.orgService.getOrganization(this.currentUid, this.auth.user.username)
+    //       .subscribe(org => {
+    //         this.organization = org;
+    //       });
+    //   }
+    // })
   }
 
   ngOnDestroy() {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {TokenResponse} from "../types/token-response";
-import {Observable, concat, firstValueFrom} from "rxjs";
+import {Observable, concat, firstValueFrom, map} from "rxjs";
 import {environment} from "../../environments/environment";
 import {User} from "../types/user";
 
@@ -10,21 +10,21 @@ import {User} from "../types/user";
 })
 export class AuthHelperService {
 
-  private readonly USER_ID = "user"
+  readonly USER_ID = "user"
   private readonly TOKEN_ID = "token"
 
   private _token: string | null = null;
-  private _user!: User;
+  private _username!: string;
 
   constructor(private http: HttpClient) {
 
     this._token = localStorage.getItem(this.TOKEN_ID);
 
-    const userJson = localStorage.getItem(this.USER_ID);
-    if(userJson !== null) {
-      this._user = JSON.parse(userJson);
-    }
+    const username = localStorage.getItem(this.USER_ID);
 
+    if(username) {
+      this._username = username;
+    }
   }
 
   public login(loginInformation: {username: string, password: string}): Observable<void> {
@@ -32,46 +32,18 @@ export class AuthHelperService {
       this.http.post<TokenResponse>(environment.backend + "/users/login", loginInformation).subscribe({
         next: tokenResponse => {
           this._token = tokenResponse.token;
+          this._username = loginInformation.username;
           localStorage.setItem(this.TOKEN_ID, this._token);
-
-          this.http.get<User>(environment.backend + `/users/${loginInformation.username}`, {
-            headers: new HttpHeaders({"Authorization": `Bearer ${this._token}`})
-          }).subscribe((user) => {
-            this._user = user;
-            localStorage.setItem(this.USER_ID, JSON.stringify(this._user));
-            subscriber.next();
-          });
+          localStorage.setItem(this.USER_ID, this._username);
+          subscriber.next();
         },
         error: err => {
           subscriber.error(err);
         }
       });
-    });
+    })
   }
 
-  public updateUser(username?: string, fullname?: string) {
-    const data: any = {};
-
-    if(username !== undefined)
-      data.username = username;
-    else
-      data.username = this._user.username;
-
-    if(fullname !== undefined)
-      data.fullname = fullname;
-    else
-      data.fullname = this._user.fullname;
-
-    data.imgURL = this._user.imgURL;
-
-    const headers = new HttpHeaders({"Authorization": `Bearer ${this._token}`});
-
-    this.http.put<User>(`${environment.backend}/users/${this._user.username}`, data, {headers: headers})
-      .subscribe(async (res) => {
-      this._user = res;
-      localStorage.setItem(this.USER_ID, JSON.stringify(this._user));
-    });
-  }
 
   public logout(): boolean {
     if(!this.logged) return false;
@@ -90,7 +62,12 @@ export class AuthHelperService {
     return this.token !== null;
   }
 
-  get user(): User {
-    return this._user;
+  get username(): string {
+    return this._username;
+  }
+
+  set username(username) {
+    localStorage.setItem(this.USER_ID, this._username);
+    this._username = username;
   }
 }

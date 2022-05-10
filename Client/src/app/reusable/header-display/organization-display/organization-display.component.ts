@@ -5,6 +5,9 @@ import { CreateOrganizationComponent } from 'src/app/dialog/create-organization/
 import { MatDialog } from '@angular/material/dialog';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
 import { ActivatedRoute } from '@angular/router';
+import {UserService} from "../../../services/user.service";
+import {OrganizationService} from "../../../services/organization.service";
+import {Subscription, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-organization-display',
@@ -20,29 +23,33 @@ export class OrganizationDisplayComponent implements OnInit {
   organization!:any;
   guardarorg!: {id:number, name:string}[];
 
+  private subscription!: Subscription;
+
   constructor(
     private http: HttpHelperService,
     private dialog: MatDialog,
     private router: ActivatedRoute,
-    private authService: AuthHelperService
-  ) {
+    private userService: UserService,
+    private orgService: OrganizationService
+  )
+  {
     this.organizationSelection = this.chooseOrganization();
     this.show = false;
   }
 
   ngOnInit(): void {
-  
-    setInterval( () => {
-    this.http.get(environment.backend + "/users/" + this.authService.user?.username + "/organizations")
-      .subscribe(
-        (data) => {
-          if(this.equalsOrganization(this.guardarorg, data)){
-            this.organizations = data;
-            this.guardarorg = this.organizations;
-            
-          }
+
+    this.subscription = this.userService.user$.pipe(
+      switchMap(user => {
+          return this.orgService.getAllOrganizations(user.username);
+      })
+    ).subscribe(
+      (data) => {
+        if (this.equalsOrganization(this.guardarorg, data)) {
+          this.organizations = data;
+          this.guardarorg = this.organizations;
         }
-      );},1000);
+      })
   }
 
 
@@ -58,7 +65,7 @@ export class OrganizationDisplayComponent implements OnInit {
     }
     return true;
   }
-  
+
 
   chooseOrganization(): string {
     if (this.id==null){

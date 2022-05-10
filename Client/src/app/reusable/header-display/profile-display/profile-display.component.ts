@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
 import { environment } from "../../../../environments/environment";
+import {UserService} from "../../../services/user.service";
+import {User} from "../../../types/user";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-profile-display',
@@ -9,16 +12,22 @@ import { environment } from "../../../../environments/environment";
   styleUrls: ['./profile-display.component.css']
 })
 export class ProfileDisplayComponent implements OnInit {
-
   username: string;
-  userlogin!: {username:string, fullname:string, imgURL:string};
+  userlogin!: User;
   fullname: string;
   imgURL: string;
   @Input() showAdd!: boolean;
   show: boolean;
 
-  constructor(private http: HttpHelperService, 
-    public auth: AuthHelperService, private authService:AuthHelperService) { 
+  private user!: User;
+  private subscription!: Subscription;
+
+  constructor(
+    private http: HttpHelperService,
+    private userService: UserService,
+    private auth: AuthHelperService
+  )
+  {
     this.username = "";
     this.fullname = "";
     this.imgURL = "";
@@ -26,14 +35,13 @@ export class ProfileDisplayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get(environment.backend + "/users/" + this.authService.user?.username)
-    .subscribe(
-      (data) => {
-        this.userlogin = data;
-        this.username = this.userlogin.username;
+    this.subscription = this.userService.user$.subscribe(user => {
+      this.userlogin = user;
+      this.username = this.userlogin.username;
+      if(this.userlogin.imgURL) {
         this.imgURL = this.userlogin.imgURL;
       }
-    );
+    });
   }
 
   changeShowAdd(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import { Router } from "@angular/router";
 import {environment} from "../../../environments/environment"
 import {HttpHelperService} from "../../services/http-helper.service";
@@ -6,6 +6,8 @@ import {AuthHelperService} from "../../services/auth-helper.service";
 import { MatDialog } from "@angular/material/dialog";
 import {DeleteConfirmComponent} from "../../dialog/delete-confirm/delete-confirm.component";
 import { User } from 'src/app/types/user';
+import {UserService} from "../../services/user.service";
+import {Subscription} from "rxjs";
 
 
 
@@ -16,36 +18,46 @@ import { User } from 'src/app/types/user';
 })
 
 
-export class EditProfileComponent implements OnInit{
+export class EditProfileComponent implements OnDestroy {
 
+  user!: User;
+  private userSubscription: Subscription;
 
-
-  user={
+  model = {
     username:"",
     fullname:"",
     oldPassword:"",
     newPassword:"",
   }
 
-
   constructor(public router: Router,
               public dialog: MatDialog,
-              public authService: AuthHelperService,
+              public userService: UserService,
               private http: HttpHelperService,
-              private auth: AuthHelperService) { }
+              private auth: AuthHelperService)
+  {
+    this.userSubscription = this.userService.user$.subscribe(user => {
+      this.user = user;
+    });
+  }
+
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+  }
 
   ChangeUsername(){
-    this.auth.updateUser(this.user.username);
+    this.userService.updateUser(this.model.username);
   }
 
   ChangeRealname(){
-    this.auth.updateUser(this.user.fullname);
+    this.userService.updateUser(undefined, this.user.fullname);
   }
 
   ChangePassword(){
-    this.http.put(environment.backend+"/users/"+this.auth.user!.username +"/password",{
-      oldPassword:this.user.oldPassword,
-      newPassword:this.user.newPassword
+    this.http.put(environment.backend+"/users/"+this.user.username +"/password",{
+      oldPassword:this.model.oldPassword,
+      newPassword:this.model.newPassword
     }).subscribe();
   }
 
@@ -57,7 +69,7 @@ export class EditProfileComponent implements OnInit{
       .afterClosed()
       .subscribe((confirm: boolean) =>{
         if(confirm){
-          this.http.delete(environment.backend+"/users/" + this.auth.user!.username)
+          this.http.delete(environment.backend+"/users/" + this.user.username)
             .subscribe()
           this.auth.logout();
           this.router.navigate(['/login'])
@@ -70,12 +82,4 @@ export class EditProfileComponent implements OnInit{
         );
 
   }
-
-
-
-  ngOnInit(): void {
-
-
-  }
-
 }

@@ -2,7 +2,7 @@
   <div class="main-content">
     <!-- Imagen -->
     <div class=" img-flex img-container">
-      <img [src]="authService.user?.imgURL" >
+      <img [src]="user.imgURL" >
       <label class="custom-file-upload">
         <input type="file" style="display: none;"/>
         Cambiar foto
@@ -14,22 +14,22 @@
       <div class="horizontal-flex">
         <div class="flex">
           <label for="username">Nombre de Usuario</label>
-          <input [placeholder]="authService.user?.username"
+          <input [placeholder]="user.username"
             id="username"
-            required [(ngModel)]="user.username">
+            required [(ngModel)]="model.username">
             <button (click)="ChangeUsername()"> Cambiar </button>
           </div>
       </div>
-      
-      <!-- Nombre real -->      
-      <div class="horizontal-flex">        
-        <div class="flex">          
-          <label for="fullname">Nombre completo</label>          
-          <input [placeholder]="authService.user?.fullname"            
-            id="fullname"            
-            required [(ngModel)]="user.fullname">
+
+      <!-- Nombre real -->
+      <div class="horizontal-flex">
+        <div class="flex">
+          <label for="fullname">Nombre completo</label>
+          <input [placeholder]="user.fullname"
+            id="fullname"
+            required [(ngModel)]="model.fullname">
           <button (click)="ChangeRealname()"> Cambiar </button>
-        </div>      
+        </div>
       </div>
       <!-- COntraseñas -->
       <div class="horizontal-flex">
@@ -37,7 +37,7 @@
           <label for="password">Contraseña antigua</label>
           <input type="password"
             id="password"
-            required [(ngModel)]="user.oldPassword">
+            required [(ngModel)]="model.oldPassword">
           </div>
       </div>
       <div class="horizontal-flex">
@@ -45,7 +45,7 @@
           <label for="repPassword">Nueva contraseña</label>
           <input type="password"
             id="repPassword"
-            required [(ngModel)]="user.newPassword">
+            required [(ngModel)]="model.newPassword">
           <button (click)="ChangePassword()"> Cambiar </button>
         </div>
       </div>
@@ -53,10 +53,10 @@
   </div>
   <!-- Boton de eliminar usuario -->
   <div class="btn">
-    <button (click)="Delete()" 
-      [routerLink]="['/login']" 
-      class="warning-button"> 
-      Eliminar Cuenta 
+    <button (click)="Delete()"
+      [routerLink]="['/login']"
+      class="warning-button">
+      Eliminar Cuenta
     </button>
   </div>
 </div>
