@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { AuthHelperService } from 'src/app/services/auth-helper.service';
 import { HttpHelperService } from 'src/app/services/http-helper.service';
-import { organizationInfo } from 'src/app/types/organizationInfo';
+import { OrganizationService } from 'src/app/services/organization.service';
+import { OrganizationInfo } from 'src/app/types/organizationInfo';
 import { environment } from "../../../environments/environment";
 
 @Component({
@@ -10,27 +12,39 @@ import { environment } from "../../../environments/environment";
   templateUrl: './org-description.component.html',
   styleUrls: ['./org-description.component.css']
 })
-export class OrgDescriptionComponent implements OnInit {
+export class OrgDescriptionComponent implements OnInit, OnDestroy {
 
-  organization!:organizationInfo;
+  organization!: OrganizationInfo;
+  currentUid!: string;
+  subscription!: Subscription;
 
   constructor(private http:HttpHelperService, 
-    private router: Router,
-    private auth: AuthHelperService) { 
+    private router: ActivatedRoute,
+    private auth: AuthHelperService,
+    private orgService: OrganizationService) { 
   }
 
   ngOnInit(): void {
-    setInterval( () => {
-      const url = this.router.url;
-        let segments: string[] = url.split("/");
-        let id = segments[3];
-        console.log(id);
-      this.http.get(environment.backend + "/organizations/" + id + "/users/" + this.auth.user.username)
-          .subscribe(data => {
-          this.organization=data;            
-          }
-          );
-    },1000);
+    this.router.paramMap.subscribe(params => {
+      if(this.subscription) {
+        this.subscription.unsubscribe();
+      }
+
+      const id = params.get('id');
+      console.log(id);
+
+      if(id) {
+        this.currentUid = id;
+        this.subscription = this.orgService.getOrganization(this.currentUid, this.auth.user.username)
+          .subscribe(org => {
+            this.organization = org;
+          });
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
  /*  equalsOrganization(e1: {id:number, name:string}[], p2: any): Boolean{
