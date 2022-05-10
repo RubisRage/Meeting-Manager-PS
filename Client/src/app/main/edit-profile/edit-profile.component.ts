@@ -39,7 +39,7 @@ export class EditProfileComponent implements OnInit{
   }
 
   ChangeRealname(){
-    this.auth.updateUser(this.user.fullname);
+    this.auth.updateUser(undefined , this.user.fullname);
   }
 
   ChangePassword(){
