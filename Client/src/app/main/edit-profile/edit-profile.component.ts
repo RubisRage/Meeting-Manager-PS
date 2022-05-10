@@ -19,7 +19,7 @@ import { User } from 'src/app/types/user';
 export class EditProfileComponent implements OnInit{
 
 
-
+  show_error =false;
   user={
     username:"",
     fullname:"",
@@ -47,16 +47,25 @@ export class EditProfileComponent implements OnInit{
 
 
   Delete() : void{
-    this.dialog.open(DeleteConfirmComponent,{
+    this.dialog.open<DeleteConfirmComponent, string, boolean>(DeleteConfirmComponent,{
       data: '¿Deseas borrar la cuenta?'
     })
       .afterClosed()
-      .subscribe((confirm: boolean) =>{
+      .subscribe(confirm =>{
         if(confirm){
           this.http.delete(environment.backend+"/users/" + this.auth.user!.username)
-            .subscribe()
-          this.auth.logout();
-          this.router.navigate(['/login'])
+            .subscribe({
+              next: () => {
+                this.auth.logout();
+                this.router.navigate(['/login'])
+              },
+              error: res => {
+                //console.log(res)
+                this.show_error = true
+
+              }
+            })
+
 
 
         }

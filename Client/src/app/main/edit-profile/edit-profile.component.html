@@ -34,5 +34,8 @@
   </div>
 </div>
 <div class="horizontal-flex">
+  <div *ngIf="show_error" class="mat-error">
+    No puedes eliminar tu cuenta hasta que hayas salido de todas las organizaciones
+  </div>
   <button (click)="Delete()" class="warning-button"> Eliminar Cuenta </button>
 </div>

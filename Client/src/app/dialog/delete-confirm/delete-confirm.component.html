@@ -1,20 +1,22 @@
-<div>
-  <p> {{message}}</p>
-</div>
+<form #deleteConfirmForm="ngForm">
+  <div>
+    <p> {{message}}</p>
+  </div>
 
-<div>
+  <div>
 
-  <button (click)="confirmDialog()" [disabled]="Username.invalid"> Si </button>
-  <button (click)=" closeDialog()"> No </button>
-</div>
+    <button (click)="confirmDialog()" [disabled]="deleteConfirmForm.invalid"> Si </button>
+    <button (click)=" closeDialog()"> No </button>
+  </div>
 
-<div>
-  <p> Escriba su nombre de usuario</p>
-</div>
+  <div>
+    <p> Escriba su nombre de usuario</p>
+  </div>
 
-<div>
-  <input required [(ngModel)]="username" name="Username" #Username = "ngModel">
-</div>
-<div *ngIf="show_error">
-  <p> El usuario introducido no es correcto </p>
-</div>
+  <div>
+    <input required [(ngModel)]="username" name="Username">
+  </div>
+  <div *ngIf="show_error">
+    <p> El usuario introducido no es correcto </p>
+  </div>
+</form>
