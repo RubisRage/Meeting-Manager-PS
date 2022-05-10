@@ -11,33 +11,53 @@ import { HttpHelperService } from '../../services/http-helper.service';
 export class PreOrgScreenComponent implements OnInit {
 
   organizations!: {id:number, name:string}[];
-  seguro!: {id:number, name:string}[];
+  guardarorg!: {id:number, name:string}[];
 
   constructor(private http: HttpHelperService,
     private authService:AuthHelperService, private ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    
+    /*
+    this.organizations = [
+      {id:1, name:"Padel"},
+      {id:2, name:"Boxeo"},
+      {id:3, name:"Produccion de Software"},
+      {id:4, name:"Clase"},
+    ];
+    */
+
+    /* this.http.get(environment.backend + "/users/" + this.authService.user?.username + "/organizations")
+      .subscribe(
+        (data) => {
+            this.organizations = data;
+            this.guardarorg = this.organizations;
+        }); */
+      
     setInterval( () => {
     this.http.get(environment.backend + "/users/" + this.authService.user?.username + "/organizations")
       .subscribe(
         (data) => {
-//          if(this.equeals(this.seguro,data)){
+          if(this.equalsOrganization(this.guardarorg, data)){
             this.organizations = data;
-  //        }
+            this.guardarorg = this.organizations;
+            
+          }
         }
       );},1000);
-      this.organizations = this.seguro;
   }
 
-/*   equeals(e1:{id:number, name:string}[], p2: any): Boolean{
-    if (e1.length != p2.length) return false;
-    
-    for (var i = 0; i < p2.length; i++) {
-      if (e1[i].id !== p2[i].id && e1[i].name === p2[i].name){
-        return false;
+  equalsOrganization(e1: {id:number, name:string}[], p2: any): Boolean{
+    if(e1===undefined)return true;
+    if (e1.length === p2.length){
+      let i = 0;
+      for(let p of p2){
+        if(e1[i].id !== p.id || e1[i].name !== p.name) {return true;}
+        i++;
       }
-    }  
+      return false;
+    }
     return true;
-  };  */   
+  }
+
+
 }
