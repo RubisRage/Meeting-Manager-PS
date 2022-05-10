@@ -25,7 +25,6 @@ import { MainComponent } from './main/main.component';
 import { CommissionDisplayComponent } from './reusable/header-display/commission-display/commission-display.component';
 import { UserRoleDisplayComponent } from './reusable/header-display/user-role-display/user-role-display.component';
 import { DeleteConfirmComponent } from './dialog/delete-confirm/delete-confirm.component';
-import { AddUserComponent } from './dialog/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +46,6 @@ import { AddUserComponent } from './dialog/add-user/add-user.component';
     CommissionDisplayComponent,
     UserRoleDisplayComponent,
     DeleteConfirmComponent,
-    AddUserComponent,
   ],
   imports: [
     BrowserModule,
