@@ -12,30 +12,35 @@ import { environment } from "../../../environments/environment";
 })
 export class OrgDescriptionComponent implements OnInit {
 
-  organization!:any;
+  organization!:organizationInfo;
 
   constructor(private http:HttpHelperService, 
     private router: Router,
     private auth: AuthHelperService) { 
-
   }
 
   ngOnInit(): void {
-    const url = this.router.url;
-      let segments: string[] = url.split("/");
-      let id = segments[3];
-    console.log(id);
-    
-    this.http.get(environment.backend + "/organizations/" + id + "/users/" + this.auth.user.username)
-        .subscribe((data => {
-          console.log(data);
-          this.organization = {
-            id: data.id,
-            name: data.name,
-            description: data.description,
-            imgURL: data.imgURL
-          };
-        }));    
+    setInterval( () => {
+      const url = this.router.url;
+        let segments: string[] = url.split("/");
+        let id = segments[3];
+        console.log(id);
+      this.http.get(environment.backend + "/organizations/" + id + "/users/" + this.auth.user.username)
+          .subscribe(data => {
+          this.organization=data;            
+          }
+          );
+    },1000);
   }
 
+ /*  equalsOrganization(e1: {id:number, name:string}[], p2: any): Boolean{
+    if(e1===undefined)return true;
+    if (e1.length === p2.length){
+      let i = 0;
+      for(let p of p2){
+        if(e1[i].id !== p.id || e1[i].name !== p.name) {return true;}
+        i++;
+      }
+      return false;
+    } */
 }
