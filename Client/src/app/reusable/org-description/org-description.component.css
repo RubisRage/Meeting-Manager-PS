@@ -1,6 +1,7 @@
 .green-bg{
     width: 251px;
     height: 100vh;
+    background:linear-gradient(to bottom, #104F5B 5%, #237d8f 100%);
     background-color: #104F5B;
     margin: 0px;
     transition: all 0.5s ease;

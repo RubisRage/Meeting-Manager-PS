@@ -26,6 +26,7 @@
 
 .vertical-flex > a{
     margin: 5px;
+    background:linear-gradient(to bottom left, #C4C4C4 5%, #a09f9f 100%);
     background-color: #C4C4C4;
     width: 197.59px;
     height: 47px;
@@ -36,7 +37,15 @@
 
 }
 
+.vertical-flex > a:hover{
+    background:linear-gradient(to bottom left, #a09f9f 5%, #C4C4C4 100%);
+    background-color: #a09f9f;
+    color: #104F5B;
+    border-color: #8b8b8b;
+}
+
 .select-organization{
+    background:linear-gradient(to bottom left, #CFD8DC 5%, #b9c2c6 100%);
     background-color: #CFD8DC;
     position: absolute;
     width: 245px;

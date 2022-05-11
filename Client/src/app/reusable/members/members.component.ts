@@ -1,41 +1,82 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-//import { HttpHelperService } from 'src/app/services/http-helper.service';
-//import { userInfo } from 'src/app/types/userInfo';
-//import {environment} from "../../../environments/environment";
+import {UserInfo} from "../../types/userInfo";
+import {OrganizationService} from "../../services/organization.service";
+import {Subscription} from "rxjs";
+import {OrganizationInfo} from "../../types/organizationInfo";
+import {AuthHelperService} from "../../services/auth-helper.service";
+import {DeleteConfirmComponent} from "../../dialog/delete-confirm/delete-confirm.component";
+import {environment} from "../../../environments/environment";
+import { HttpHelperService } from 'src/app/services/http-helper.service';
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.css']
 })
-export class MembersComponent implements OnInit {
-  
-  isAdmin!:boolean;    
-  /* members:userInfo[] = []; */
-  members = ["Sonic", "Tails", "Knucles",
-        "Shadow", "Eggman", "Amy", "Luffy",
-        "Jaime", "Antonio", "Romeo", "Julieta",
-        "Ale", "Alejo", "Jose", "Fran", "Rubén",
-        "NanoJJG"];
-  id!: string;
+export class MembersComponent implements OnInit, OnDestroy {
 
-  constructor(/* private http:HttpHelperService,  */
-    private router: ActivatedRoute) { }
+  orgInfo!: OrganizationInfo;
+  members!: UserInfo[];
+  orgSubscription!: Subscription;
+  memberSubscription!: Subscription;
+
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private orgService: OrganizationService,
+    public auth: AuthHelperService,
+    private http:HttpHelperService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
-    this.isAdmin = true;
-    /* this.router.params.subscribe(params => {
-      this.id = params['id'];
-      this.http.get(environment.backend + "/organizations/" + this.id + "/users")
-        .subscribe(data => {
-          this.members = data;
+    this.activeRoute.paramMap.subscribe(paramMap => {
+      if(this.orgSubscription) {
+        this.orgSubscription.unsubscribe();
+      }
+
+      if(this.memberSubscription) {
+        this.memberSubscription.unsubscribe();
+      }
+
+      const id = paramMap.get('id');
+
+      if(id) {
+        this.orgSubscription = this.orgService.getOrganizationMembers(id).subscribe(members => {
+          this.members  = members;
         });
-    });  */
+
+        this.orgSubscription = this.orgService.getOrganization(id, this.auth.user.username).subscribe(org => {
+          this.orgInfo = org;
+        });
+      }
+    });
   }
 
-  onClick(){
-    //Llamar al diálogo de "estás seguro que quieres eliminar a x"
+  ngOnDestroy() {
+    if(this.orgSubscription) {
+      this.orgSubscription.unsubscribe();
+    }
+
+    if(this.memberSubscription) {
+      this.memberSubscription.unsubscribe();
+    }
   }
 
+  onClick(): void{
+    if(!this.orgInfo.isAdmin){
+      this.dialog.open(DeleteConfirmComponent,{
+        data: '¿Deseas eliminar a este usuario?'
+      })
+        .afterClosed()
+        .subscribe((confirm:boolean) =>{
+          if (confirm){
+            this.http.delete(environment.backend+"/organizations/" + this.orgInfo.id + "/users/" +
+                              this.auth.user!.username)
+              .subscribe()
+          }
+        });
+    }
+  }
 }

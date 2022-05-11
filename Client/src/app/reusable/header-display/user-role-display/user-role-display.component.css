@@ -5,7 +5,7 @@
     cursor: pointer;
     transition: 0.5s;
     height: 81px;
-    width: 245px;
+    width: 200px;
     line-height: 80px;
     text-align: center;
     vertical-align: middle;
@@ -26,25 +26,33 @@
 
 .vertical-flex > a{
     margin: 5px;
+    background:linear-gradient(to bottom left, #C4C4C4 5%, #a09f9f 100%);
     background-color: #C4C4C4;
-    width: 197.59px;
-    height: 47px;
+    width: 150px;
+    height: 80px;
     border-radius: 10px;
+    font-size: medium;
     text-align: center;
     vertical-align: middle;
-    line-height: 50px;
+    text-decoration: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.vertical-flex > a:hover{
+    background:linear-gradient(to bottom left, #a09f9f 5%, #C4C4C4 100%);
+    background-color: #a09f9f;
+    color: #104F5B;
+    border-color: #8b8b8b;
 }
 
 .select-organization{
+    background:linear-gradient(to bottom left, #CFD8DC 5%, #b9c2c6 100%);
     background-color: #CFD8DC;
     position: absolute;
-    width: 245px;
+    width: 200px;
     border-style: solid;
     border-color: #CFD8DC;
     z-index: 2;
-}
-
-a{
-    text-decoration: none; color:black
 }

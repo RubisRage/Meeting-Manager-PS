@@ -15,7 +15,7 @@ export class PreOrgScreenComponent implements OnInit {
 
   organizations!: Organization[];
   subscription!: Subscription;
-
+  guardar!: Organization[];
 
   constructor(private http: HttpHelperService,
     private authService:AuthHelperService, private orgService: OrganizationService) { }
@@ -23,12 +23,15 @@ export class PreOrgScreenComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.orgService.getAllOrganizations(this.authService.user.username)
         .subscribe(orgs => {
-          this.organizations = orgs;
-        });;
+          if(this.equalsOrganization(this.organizations, orgs)){
+            this.organizations = orgs;
+            this.guardar=this.organizations; 
+          }
+        });
   }
 
 
-/*   equalsOrganization(e1: {id:number, name:string}[], p2: any): Boolean{
+  equalsOrganization(e1: {id:number, name:string}[], p2: any): Boolean{
     if(e1===undefined)return true;
     if (e1.length === p2.length){
       let i = 0;
@@ -40,6 +43,4 @@ export class PreOrgScreenComponent implements OnInit {
     }
     return true;
   }
-
- */
 }
